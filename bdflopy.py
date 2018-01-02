@@ -12,6 +12,8 @@ class BDflopy:
         self.indir = indir
         self.modeldir = modeldir
         self.outdir = outdir
+        if not os.path.isdir(self.outdir):
+            os.makedirs(self.outdir)
         self.setVariables(demfilename)
         self.setPaths()
 
@@ -32,29 +34,17 @@ class BDflopy:
             ibound = np.zeros(self.wseData[i].shape, dtype = np.int32)
             ibound[self.wseData[i] > self.zbot] = 1
             ibound[self.headData[i] > 0.0] = -1
-            ibound[self.wseData[i] > 0.0] = 0
+            ibound[self.wseData[i] < 0.0] = 0
             self.iboundData.append(ibound)
             self.iboundds[i].GetRasterBand(1).WriteArray(ibound)
 
     def createMODFLOWDatasets(self):
         #create starting head datasets
         self.sheadds = self.createDatasets(self.sheadPaths)
-        # for file in self.sheadPaths:
-        #     self.sheadds.append(self.driver.Create(file, self.xsize, self.ysize, 1, gdal.GDT_Float32))
-        #     self.sheadds[-1].SetProjection(self.prj)
-        #     self.sheadds[-1].SetGeoTransform(self.geot)
         #create ending head datasets
         self.eheadds = self.createDatasets(self.eheadPaths)
-        # for file in self.eheadPaths:
-        #     self.eheadds.append(self.driver.Create(file, self.xsize, self.ysize, 1, gdal.GDT_Float32))
-        #     self.eheadds[-1].SetProjection(self.prj)
-        #     self.eheadds[-1].SetGeoTransform(self.geot)
         #create ibound datasets
         self.iboundds = self.createDatasets(self.iboundPaths)
-        # for file in self.iboundPaths:
-        #     self.iboundds.append(self.driver.Create(file, self.xsize, self.ysize, 1, gdal.GDT_Float32))
-        #     self.iboundds[-1].SetProjection(self.prj)
-        #     self.iboundds[-1].SetGeoTransform(self.geot)
 
     def createStartingHeadData(self):
         self.sheadData = []
@@ -64,6 +54,7 @@ class BDflopy:
             self.sheadds[i].GetRasterBand(1).WriteArray(data)
             self.sheadds[i].GetRasterBand(1).FlushCache()
             self.sheadData.append(data)
+            self.sheadds[i] = None
 
     def loadData(self, filelist):
         datalist = []
@@ -78,22 +69,10 @@ class BDflopy:
         self.wseData = self.loadData(self.wsePaths)
         #set bottom of the model domain
         self.zbot = self.wseData[0] - 10.0
-        # for file in self.wsePaths:
-        #     ds = gdal.Open(file)
-        #     self.wseData.append(ds.GetRasterBand(1).ReadAsArray())
-        #     ds = None
         # head data from BDSWEA
         self.headData = self.loadData(self.headPaths)
-        # for file in self.headPaths:
-        #     ds = gdal.Open(file)
-        #     self.headData.append(ds.GetRasterBand(1).ReadAsArray())
-        #     ds = None
         # pond depths from BDSWEA
         self.pondData = self.loadData(self.pondPaths)
-        # for file in self.pondPaths:
-        #     ds = gdal.Open(file)
-        #     self.pondData.append(ds.GetRasterBand(1).ReadAsArray())
-        #     ds = None
 
     def setPaths(self):
         self.setWSEPaths()
@@ -125,16 +104,16 @@ class BDflopy:
         #files for ending/modeled head
         self.eheadPaths = []
         for name in self.mfnames:
-            self.headPaths.append(self.modeldir + "/ehead_" + name + ".tif")
+            self.eheadPaths.append(self.outdir + "/ehead_" + name + ".tif")
         #files for starting head
         self.sheadPaths = []
         for name in self.mfnames:
-            self.headPaths.append(self.modeldir + "/shead_" + name + ".tif")
+            self.sheadPaths.append(self.outdir + "/shead_" + name + ".tif")
 
     def setIBoundPaths(self):
         self.iboundPaths = []
         for name in self.mfnames:
-            self.headPaths.append(self.modeldir + "/ibound_" + name + ".tif")
+            self.iboundPaths.append(self.outdir + "/ibound_" + name + ".tif")
 
     def setPondDepthPaths(self):
         self.pondPaths = []
@@ -152,8 +131,5 @@ class BDflopy:
     def run(self):
         self.loadBDSWEAData()
         self.createMODFLOWDatasets()
+        self.createIboundData()
         self.createStartingHeadData()
-
-
-
-
