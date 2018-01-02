@@ -15,9 +15,29 @@ class BDflopy:
         self.setVariables()
         self.setPaths()
 
+    def loadData(self):
+        self.wseData = []
+        for file in self.wsePaths:
+            ds = gdal.Open(file)
+            self.wseData.append(ds.GetRasterBand(1).ReadAsArray())
+        #head data from BDSWEA
+        self.headData = []
+        for file in self.headPaths:
+            ds = gdal.Open(file)
+            self.headData.append(ds.GetRasterBand(1).ReadAsArray())
+        #pond depths from BDSWEA
+        self.pondData = []
+        for file in self.pondPaths:
+            ds = gdal.Open(file)
+            self.pondData.append(ds.GetRasterBand(1).ReadAsArray())
+
+    def createDatasets(self):
+
     def setPaths(self):
         self.setWSEPaths()
         self.setPondDepthPaths()
+        self.setHeadPaths()
+        self.setIBoundPaths()
 
     def setVariables(self, demfilename):
         self.driver = gdal.GetDriverByName('GTiff')
@@ -34,11 +54,23 @@ class BDflopy:
             self.mf.append(flopy.modflow.Modflow(mfname, exe_name = self.modflowexe))
 
     def setHeadPaths(self):
+        #head files from BDSWEA
         self.headPaths = []
-        self.headPaths.append(self.modeldir + "/head_start.tif")
-        self.headPaths.append(self.modeldir + "/head_lo.tif")
-        self.headPaths.append(self.modeldir + "/head_mid.tif")
-        self.headPaths.append(self.modeldir + "/head_hi.tif")
+        for name in self.mfnames:
+            self.headPaths.append(self.modeldir + "/head_" + name + ".tif")
+        #files for ending/modeled head
+        self.eheadPaths = []
+        for name in self.mfnames:
+            self.headPaths.append(self.modeldir + "/ehead_" + name + ".tif")
+        #files for starting head
+        self.sheadPaths = []
+        for name in self.mfnames:
+            self.headPaths.append(self.modeldir + "/shead_" + name + ".tif")
+
+    def setIBoundPaths(self):
+        self.iboundPaths = []
+        for name in self.mfnames:
+            self.headPaths.append(self.modeldir + "/ibound_" + name + ".tif")
 
     def setPondDepthPaths(self):
         self.pondPaths = []
