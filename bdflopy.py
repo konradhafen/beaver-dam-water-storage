@@ -25,17 +25,6 @@ class BDflopy:
         self.setVariables(demfilename)
         self.setPaths()
 
-    def addMODFLOWObjects(self):
-        """
-        Add packages to MODFLOW
-        :return: None
-        """
-        for i in range(0, len(self.mf)):
-            flopy.modflow.ModflowDis(self.mf[i], self.nlay, self.xsize, self.ysize, delr = self.geot[1],
-                                     delc = abs(self.geot[5]), top = self.wseData[i], botm = self.zbot,
-                                     itmuni = 1, lenuni = 2)
-            flopy.modflow.ModflowBas(self.mf[i], ibound = self.iboundData[i], strt = self.sheadData[i])
-
     def createDatasets(self, filelist):
         """
         Create GDAL raster datasets
@@ -66,7 +55,7 @@ class BDflopy:
             self.iboundData.append(ibound)
             self.iboundds[i].GetRasterBand(1).WriteArray(ibound)
 
-    def createMODFLOWDatasets(self):
+    def createModflowDatasets(self):
         """
         Create GDAL raster datasets for MODFLOW inputs and outputs
         :return: None
@@ -105,7 +94,7 @@ class BDflopy:
             ds = None
         return datalist
 
-    def loadBDSWEAData(self):
+    def loadBdsweaData(self):
         """
         Load data from BDSWEA
         :return: None
@@ -124,10 +113,23 @@ class BDflopy:
         Set file paths for input and output data
         :return: None
         """
-        self.setWSEPaths()
+        self.setWsePaths()
         self.setPondDepthPaths()
         self.setHeadPaths()
         self.setIBoundPaths()
+
+    def setLpfVariables(self, hksat, vksat, por, kconv):
+        """
+        Set variables required for MODFLOW LPF package
+        :param khsat: Horizontal hydraulic conductivity.
+        :param kvsat: Vertical hydraulic conductivity.
+        :param por: Porosity.
+        :param kconv: Factor to convert hksat and vksat to meters per second.
+        :return: None
+        """
+        self.hksat = hksat*kconv
+        self.vksat = vksat*kconv
+        self.por = por
 
     def setVariables(self, demfilename):
         """
@@ -187,7 +189,7 @@ class BDflopy:
         self.pondPaths.append(self.modeldir + "/depMid.tif")
         self.pondPaths.append(self.modeldir + "/depHi.tif")
 
-    def setWSEPaths(self):
+    def setWsePaths(self):
         """
         Set file paths for water surface elevation rasters created by BDSWEA
         :return: None
@@ -198,16 +200,45 @@ class BDflopy:
         self.wsePaths.append(self.modeldir + "/WSESurf_mid.tif")
         self.wsePaths.append(self.modeldir + "/WSESurf_hi.tif")
 
-    def run(self, khsat, kvsat, por = 1.0, kconv = 1.0):
+    def writeModflowInput(self):
         """
-        Run MODFLOW to calculate water surface elevation changes from beaver dam construction
-        :param khsat: Horizontal hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
-        :param kvsat: Vertical hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
-        :param por: Porosity value(s). Single value or numpy array concurrent with input DEM. Default = 1.0.
-        :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0
+        Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios
         :return: None
         """
-        self.loadBDSWEAData()
-        self.createMODFLOWDatasets()
+        os.chdir(self.outdir)
+        for i in range(0, len(self.mf)):
+            flopy.modflow.ModflowDis(self.mf[i], self.nlay, self.ysize, self.xsize, delr = self.geot[1],
+                                     delc = abs(self.geot[5]), top = self.wseData[i], botm = self.zbot,
+                                     itmuni = 1, lenuni = 2)
+            flopy.modflow.ModflowBas(self.mf[i], ibound = self.iboundData[i], strt = self.sheadData[i])
+            flopy.modflow.ModflowLpf(self.mf[i], hk = self.hksat, vka = self.vksat)
+            flopy.modflow.ModflowOc(self.mf[i])
+            flopy.modflow.ModflowPcg(self.mf[i])
+            self.mf[i].write_input()
+            print self.mfnames[i] + " input written"
+
+    def runModflow(self):
+        """
+        Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios
+        :return: None
+        """
+        for i in range(0, len(self.mf)):
+            success, buff = self.mf[i].run_model()
+            print self.mfnames[i] + " model done"
+
+    def run(self, hksat, vksat, por = 1.0, kconv = 1.0):
+        """
+        Run MODFLOW to calculate water surface elevation changes from beaver dam construction
+        :param hksat: Horizontal saturated hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
+        :param vksat: Vertical saturated hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
+        :param por: Porosity value(s). Single value or numpy array concurrent with input DEM. Default = 1.0.
+        :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.
+        :return: None
+        """
+        self.setLpfVariables(hksat, vksat, por, kconv)
+        self.loadBdsweaData()
+        self.createModflowDatasets()
         self.createIboundData()
         self.createStartingHeadData()
+        self.writeModflowInput()
+        self.runModflow()
