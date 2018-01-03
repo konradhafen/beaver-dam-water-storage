@@ -17,6 +17,12 @@ class BDflopy:
         self.setVariables(demfilename)
         self.setPaths()
 
+    def addMODFLOWObjects(self):
+        for i in range(0, len(self.mf)):
+            flopy.modflow.ModflowDis(self.mf[i], self.nlay, self.xsize, self.ysize, delr = self.geot[1],
+                                     delc = abs(self.geot[5]), top = self.wseData[i], botm = self.zbot,
+                                     itmuni = 1, lenuni = 2)
+
     def createDatasets(self, filelist):
         datasetlist = []
         for file in filelist:
@@ -90,7 +96,7 @@ class BDflopy:
         self.ysize = demds.RasterYSize
         self.stats = demds.GetRasterBand(1).GetStatistics(0, 1)
         demds = None
-        nlay = 1
+        self.nlay = 1
         self.mf = []
         self.mfnames = ["start", "lo", "mid", "hi"]
         for mfname in self.mfnames:
