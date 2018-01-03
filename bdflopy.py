@@ -66,6 +66,9 @@ class BDflopy:
         self.eheadds = self.createDatasets(self.eheadPaths)
         #create ibound datasets
         self.iboundds = self.createDatasets(self.iboundPaths)
+        #create head change datasets
+        self.hdchds = self.createDatasets(self.hdchPaths)
+        self.hdchFracDs = self.createDatasets(self.hdchFracPaths)
 
     def createStartingHeadData(self):
         """
@@ -118,19 +121,6 @@ class BDflopy:
         self.setHeadPaths()
         self.setIBoundPaths()
 
-    def setLpfVariables(self, hksat, vksat, por, kconv):
-        """
-        Set variables required for MODFLOW LPF package
-        :param khsat: Horizontal hydraulic conductivity.
-        :param kvsat: Vertical hydraulic conductivity.
-        :param por: Porosity.
-        :param kconv: Factor to convert hksat and vksat to meters per second.
-        :return: None
-        """
-        self.hksat = hksat*kconv
-        self.vksat = vksat*kconv
-        self.por = por
-
     def setVariables(self, demfilename):
         """
         Set class variables
@@ -169,6 +159,14 @@ class BDflopy:
         self.sheadPaths = []
         for name in self.mfnames:
             self.sheadPaths.append(self.outdir + "/shead_" + name + ".tif")
+        #files for head change
+        self.hdchPaths = []
+        for i in range(1, len(self.mfnames)):
+            self.hdchPaths.append(self.outdir + "/hdch_" + self.mfnames[i] + ".tif")
+        # files for head change accounting for soil fraction
+        self.hdchFracPaths = []
+        for i in range(1, len(self.mfnames)):
+            self.hdchFracPaths.append(self.outdir + "/hdch_frac_" + self.mfnames[i] + ".tif")
 
     def setIBoundPaths(self):
         """
@@ -200,6 +198,17 @@ class BDflopy:
         self.wsePaths.append(self.modeldir + "/WSESurf_mid.tif")
         self.wsePaths.append(self.modeldir + "/WSESurf_hi.tif")
 
+    def setLpfVariables(self, hksat, vksat, kconv):
+        """
+        Set variables required for MODFLOW LPF package
+        :param khsat: Horizontal hydraulic conductivity.
+        :param kvsat: Vertical hydraulic conductivity.
+        :param kconv: Factor to convert hksat and vksat to meters per second.
+        :return: None
+        """
+        self.hksat = hksat*kconv
+        self.vksat = vksat*kconv
+
     def writeModflowInput(self):
         """
         Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios
@@ -226,19 +235,68 @@ class BDflopy:
             success, buff = self.mf[i].run_model()
             print self.mfnames[i] + " model done"
 
-    def run(self, hksat, vksat, por = 1.0, kconv = 1.0):
+    def saveResultsToRaster(self):
+        """
+        Read modeled head values and write to GDAL rasters
+        :return: None
+        """
+        self.eheadData = []
+        self.ModSuccess = []
+        for i in range(0, len(self.mfnames)):
+            if os.path.getsize(self.mfnames[i] + ".hds") > 1000:
+                hds = bf.HeadFile(self.mfnames[i] + ".hds")
+                head = hds.get_data(totim = 1.0)
+                head = head[0,:,:]
+                head[head < 0.0] = -9999.0
+                self.eheadds[i].GetRasterBand(1).WriteArray(head)
+                self.eheadds[i].GetRasterBand(1).FlushCache()
+                self.eheadds[i].GetRasterBand(1).SetNoDataValue(-9999.0)
+                head[head == np.min(head)] = np.nan
+                self.eheadData.append(head)
+                self.ModSuccess.append(True)
+            else:
+                self.ModSuccess.append(False)
+
+    def calculateHeadDifference(self, frac = 1.0):
+        """
+        Calculate the head difference between MODFLOW runs
+        :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0
+        :return:
+        """
+        if frac == 1.0 or np.shape(frac) != self.wseData[0].shape:
+            frac = np.ones(self.wseData[0].shape, dtype=np.float32)
+        frac[frac < 0.0] = np.nan
+        for i in range(0, len(self.pondData)):
+            self.pondData[i][self.pondData[i] < 0.0] = 0.0
+        for i in range(0, len(self.pondData)):
+            if self.ModSuccess[i] and self.ModSuccess[i+1]:
+                diff = self.eheadData[i+1] - self.eheadData[0]
+                diff = diff - self.pondData[i]
+                diff = np.where(np.isnan(diff), -9999.0, diff)
+                diff[diff < -10.0] = -9999.0
+                diff_frac = np.multiply(frac, diff)
+                self.hdchds[i].GetRasterBand(1).WriteArray(diff)
+                self.hdchds[i].GetRasterBand(1).FlushCache()
+                self.hdchds[i].GetRasterBand(1).SetNoDataValue(-9999.0)
+                self.hdchFracDs[i].GetRasterBand(1).WriteArray(diff_frac)
+                self.hdchFracDs[i].GetRasterBand(1).FlushCache()
+                self.hdchFracDs[i].GetRasterBand(1).SetNoDataValue(-9999.0)
+
+    def run(self, hksat, vksat, kconv = 1.0):
         """
         Run MODFLOW to calculate water surface elevation changes from beaver dam construction
         :param hksat: Horizontal saturated hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
         :param vksat: Vertical saturated hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
-        :param por: Porosity value(s). Single value or numpy array concurrent with input DEM. Default = 1.0.
         :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.
         :return: None
         """
-        self.setLpfVariables(hksat, vksat, por, kconv)
+        self.setLpfVariables(hksat, vksat, kconv)
         self.loadBdsweaData()
         self.createModflowDatasets()
         self.createIboundData()
         self.createStartingHeadData()
         self.writeModflowInput()
         self.runModflow()
+        self.saveResultsToRaster()
+        self.calculateHeadDifference()
+
