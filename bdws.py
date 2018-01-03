@@ -4,6 +4,16 @@ import math
 
 class BDLoG:
     def __init__(self, brat, dem , fac, outDir, bratCap, stat = None):
+        """
+        Initialization of the Beaver Dam Location Generator class
+        :param brat: Path to BRAT shapefile.
+        :param dem: Path to DEM for area of interest.
+        :param fac: Binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).
+        :param outDir: Path to directory where output files will be generated.
+        :param bratCap: Proportion (0 - 1) of capacity for which to generate beaver dams.
+        :param stat: (Optional) Estimated pond volumes and prediction intervals as a function of reach slope and dam height (not yet implemented).
+        """
+
         self.bratPath = brat
         self.demPath = dem
         self.facPath = fac
@@ -12,6 +22,10 @@ class BDLoG:
         self.statPath = stat
 
     def setVariables(self):
+        """
+        Sets class variables for location generation.
+        :return: None
+        """
         self.driverShp = ogr.GetDriverByName("Esri Shapefile")
         self.bratDS = ogr.Open(self.bratPath, 1)
         self.bratLyr = self.bratDS.GetLayer()
@@ -26,6 +40,10 @@ class BDLoG:
         self.capRank = np.empty([self.nFeat,3])
 
     def createFields(self):
+        """
+        Creates fields to be populated for the output dam location shapefile
+        :return: None
+        """
         field = ogr.FieldDefn("brat_ID", ogr.OFTInteger)
         self.outLyr.CreateField(field)
         field.SetName("endx")
@@ -126,6 +144,10 @@ class BDLoG:
         self.outLyr.CreateField(field)
 
     def setBratFields(self):
+        """
+        Set values for fields derived from the input BRAT shapefile
+        :return: None
+        """
         if self.bratLyr.FindFieldIndex("totdams", 1) >= 0:
             self.bratLyr.DeleteField(self.bratLyr.FindFieldIndex("totdams", 1))
         if self.bratLyr.FindFieldIndex("totcomp", 1) >= 0:
@@ -136,6 +158,10 @@ class BDLoG:
         self.bratLyr.CreateField(field)
 
     def sortByCapacity(self):
+        """
+        Sort BRAT reaches by estimated dam capacity
+        :return: None
+        """
         for i in range(0, self.nFeat):
             feature = self.bratLyr.GetFeature(i)
             cap = feature.GetFieldAsDouble("oCC_EX")
@@ -148,6 +174,10 @@ class BDLoG:
         self.modCap = math.ceil(self.bratCap * np.sum(self.capRank[:,2]))
 
     def calculateDamsPerReach(self):
+        """
+        Determine the number of beaver dams and beaver dam complexes to place on each BRAT reach
+        :return: None
+        """
         self.setBratFields()
         go = True
         totalDams = 0
@@ -177,7 +207,10 @@ class BDLoG:
                     go = False
 
     def createDams(self):
-        #place dams on brat lines
+        """
+        Place primary and secondary dams at a specific location on stream reaches
+        :return: None
+        """
         i = 0
         while i < self.nFeat:
             bratFt = self.bratLyr.GetFeature(self.capRank[i, 0])
@@ -221,35 +254,43 @@ class BDLoG:
             bratFt = None
 
     def getCellAddressOfPoint(self, x, y):
+        """
+        Calculate the row and column of a coordinate pair (linear units) based on the input DEM. UTM projections suggested, will not work with degree units
+        :param x: X coordinate (meters).
+        :param y: Y coordinate (meters).
+        :return: Numpy array with row and column address (array[row, col]).
+        """
         col = math.floor((x - self.geot[0]) / self.geot[1])
         row = math.floor((self.geot[3] - y) / abs(self.geot[5]))
         address = np.array([row, col])
         return address
 
     def getCoordinatesOfCellAddress(self, row, col):
+        """
+        Calculate the coordinate pair at the center of a cell address based on the input DEM. UTM projections suggested, will not work with degree units
+        :param row: Row index of raster.
+        :param col: Column index of raster.
+        :return: Numpy array with x and y coordinates (array[x, y]).
+        """
         x = self.geot[0] + (col * self.geot[1]) + (0.5 * self.geot[1])
         y = self.geot[3] + (row * self.geot[5]) + (0.5 * self.geot[5])
         coords = np.array([x, y])
         return coords
 
     def getStreamCellAddresses(self):
-        # example fac layer, where 1 indicates stream cell
-        # fac = np.array([[0, 0, 1, 0, 0],
-        #                 [0, 0, 1, 0, 0],
-        #                 [0, 0, 1, 0, 0],
-        #                 [0, 0, 1, 0, 0],
-        #                 [0, 0, 1, 0, 0]]
-        #                )
-        # get list of all stream cells will be a 2 row by X column array
-        # streamcells = np.where(fac > 0)
-        # swap axes so it becomes a X row by 2 column array with columns being row and column of cell address
-        # streamlist = np.swapaxes(streamcells, 0, 1)
-
+        """
+        List addresses of cells on the stream network
+        :return: Numpy array (2, n) with stream cell addresses (array[[row, col],[row, col],...])
+        """
         fac = self.facDS.GetRasterBand(1).ReadAsArray()
         streamcells = np.swapaxes(np.where(fac > 0), 0, 1)
         return streamcells
 
     def moveDamsToFAC(self):
+        """
+        Set locations of generated dams to the nearest cell on the rasterized stream network. Only one dam can be present on each network cell.
+        :return: None
+        """
         streamcells = self.getStreamCellAddresses()
         nDams = self.outLyr.GetFeatureCount()
         i=0
@@ -261,30 +302,39 @@ class BDLoG:
             damAddress = self.getCellAddressOfPoint(damPt.GetX(), damPt.GetY())
             #distance from stream cells to dam point
             dist = np.sum((streamcells - damAddress)**2, axis = 1)
-            #index of closest stream cell
-            #
             #Maybe put in a check so if distance is too far it deletes the dam
-            #
+            #index of closest stream cell
             index = np.where(dist == min(dist))
             #change cell address of dam to closest stream cell
             damAddress = streamcells[index[0][0]]
             #delete stream cell so each dam is located in a different cell
             streamcells = np.delete(streamcells, index, axis = 0)
             damCoords = self.getCoordinatesOfCellAddress(damAddress[0], damAddress[1])
-            # damPt.SetX(damCoords[0])
-            # damPt.SetY(damCoords[1])
             ptwkt = "POINT(%f %f)" %  (damCoords[0], damCoords[1])
             damPt = ogr.CreateGeometryFromWkt(ptwkt)
-            #damPt.AddPoint(damCoords[0], damCoords[1])
             damFt.SetGeometryDirectly(damPt)
             self.outLyr.SetFeature(damFt)
             i += 1
 
     def setDamFieldValues(self, feat, damType):
+        """
+        Set attribute for dam type
+        :param feat: OGR Feature of dam.
+        :param damType: String describing dam type ('primary' or 'secondary').
+        :return: Updated OGR Feature of dam
+        """
         feat.SetField("damType", damType)
         return feat
 
     def setDamHeights(self, feat, low, mid, high):
+        """
+        Set dam heights to be modeled for a dam
+        :param feat: OGR Feature of dam.
+        :param low: Lower interval of dam height.
+        :param mid: Median dam height.
+        :param high: Upper interval of dam height.
+        :return: Updated OGR Feature of dam
+        """
         feat.SetField("ht_lo", low)
         feat.SetField("ht_mid", mid)
         feat.SetField("ht_hi", high)
@@ -295,6 +345,10 @@ class BDLoG:
         return feat
 
     def generateDamLocationsFromBRAT(self):
+        """
+        Generate dam locations on rasterized stream network
+        :return: None
+        """
         self.setVariables()
         self.createFields()
         self.sortByCapacity()
@@ -303,6 +357,10 @@ class BDLoG:
         self.moveDamsToFAC()
 
     def close(self):
+        """
+        Close all OGR and GDAL layers and datasets
+        :return: None
+        """
         self.bratDS = None
         self.bratLyr = None
         self.demDS = None
@@ -312,12 +370,24 @@ class BDLoG:
 
 class BDSWEA:
     def __init__(self, dem, fdir, id, outDir, modPoints):
+        """
+        Initialization of the Beaver Dam Surface Water Estimation Algorithm class
+        :param dem: Path of DEM for area of interest.
+        :param fdir: Path to flow direction raster, should be concurrent with DEM.
+        :param id: Raster of pond ID, calculated with BDLoG class.
+        :param outDir: Path where output files will be generated.
+        :param modPoints: Path to shapefile of modeled dam locations from BDLoG.
+        """
         self.outDir = outDir
         self.setConstants()
         self.setVars(dem, fdir, id, modPoints)
         self.createOutputArrays()
 
     def setConstants(self):
+        """
+        Set constant variables
+        :return: None
+        """
         self.FLOW_DIR_ESRI = np.array([32, 64, 128, 16, 0, 1, 8, 4, 2])
         self.FLOW_DIR_TAUDEM = np.array([4, 3, 2, 5, 0, 1, 6, 7, 8])
         self.ROW_OFFSET = np.array([-1, -1, -1, 0, 0, 0, 1, 1, 1])
@@ -326,6 +396,14 @@ class BDSWEA:
         self.MAX_HEIGHT = 5.0 #in meters
 
     def setVars(self, dem, fdir, id, shp):
+        """
+        Set class variables
+        :param dem: Path to DEM
+        :param fdir: Path to flow direction raster
+        :param id: Path to dam ID raster
+        :param shp: Path to shapefile of dam locations
+        :return: None
+        """
         self.count = 0
         self.demDS = gdal.Open(dem)
         self.dem = self.demDS.GetRasterBand(1).ReadAsArray()
@@ -346,6 +424,10 @@ class BDSWEA:
             self.FLOW_DIR = self.FLOW_DIR_TAUDEM
 
     def createOutputArrays(self):
+        """
+        Create arrays which will be written to rasters
+        :return: None
+        """
         self.idOut = np.copy(self.id)
         self.htOut = np.empty(shape=[self.dem.shape[0], self.dem.shape[1]])
         self.htOut.fill(-9999.0)
@@ -356,29 +438,48 @@ class BDSWEA:
         self.depHi = np.empty(shape=[self.dem.shape[0], self.dem.shape[1]])
         self.depHi.fill(-9999.0)
 
-    def setArraysTest(self, fdir, dem, id):
-        self.fdir = fdir
-        self.dem = dem
-        self.id = id
-        self.htOut.fill(-9999.0)
-        self.idOut = self.id
-
     def getDamId(self):
+        """
+
+        :return: Numpy array of original dam ID raster
+        """
         return self.id
 
     def getDEM(self):
+        """
+
+        :return: Numpy array of DEM
+        """
         return self.dem
 
     def getFlowDirection(self):
+        """
+
+        :return: Numpy array of flow direction raster
+        """
         return self.fdir
 
     def getHeightAbove(self):
+        """
+
+        :return: Numpy array of the height of cells above a beaver dam
+        """
         return self.htOut
 
     def getPondID(self):
+        """
+
+        :return: Numpy array of the dam ID associated with each beaver pond
+        """
         return self.idOut
 
     def drainsToMe(self, index, fdir):
+        """
+
+        :param index: Location of flow direction value in array.
+        :param fdir: Flow direction value.
+        :return: True if cell drains to center of 3x3, False if it does not
+        """
         if index == 4:
             return False
         elif index == 0 and fdir == self.FLOW_DIR[8]:
@@ -401,6 +502,14 @@ class BDSWEA:
             return False
 
     def backwardHAND(self, startX, startY, startE, pondID):
+        """
+        Recursively identify all cells draining to a dam location and the height of each cell above the dam
+        :param startX: Column of dam location.
+        :param startY: Row of dam location.
+        :param startE: DEM elevation at dam location.
+        :param pondID: ID number of dam.
+        :return: None
+        """
         if startX > 0 and startY > 0 and startX < self.demDS.RasterXSize-1 and startY < self.demDS.RasterYSize-1:
             demWin = self.dem[startY - 1:startY + 2, startX - 1:startX + 2].reshape(1, 9)
             fdirWin = self.fdir[startY - 1:startY + 2, startX - 1:startX + 2].reshape(1, 9)
@@ -422,6 +531,10 @@ class BDSWEA:
                         self.backwardHAND(newX, newY, startE, pondID)
 
     def heightAboveDams(self):
+        """
+        For each cell draining to a beaver dam, calculate the height of cell above the dam location
+        :return: None
+        """
         for i in range(1, self.fdir.shape[0]):
             for j in range(1, self.fdir.shape[1]):
                 idVal = self.id[i,j]
@@ -432,6 +545,10 @@ class BDSWEA:
                     self.backwardHAND(j, i, demVal, idVal)
 
     def calculateWaterDepth(self):
+        """
+        Calculate the depth of each beaver pond cell for each modeled dam height
+        :return: None
+        """
         self.dem[self.dem == -9999.0] = np.nan
         self.htOut[self.htOut == -9999.0] = np.nan
         for i in range(0, self.points.GetFeatureCount()):
@@ -447,6 +564,10 @@ class BDSWEA:
         self.depHi[self.depLo == np.nan] = -9999.0
 
     def saveOutputs(self):
+        """
+        Save results to rasters
+        :return: None
+        """
         self.outIdDS = self.driverTiff.Create(self.outDir + "/pondID.tif", xsize = self.demDS.RasterXSize, ysize = self.demDS.RasterYSize,
                                               bands = 1, eType = gdal.GDT_Float32)
         self.outIdDS.SetGeoTransform(self.geot)
@@ -482,11 +603,19 @@ class BDSWEA:
         self.depHiDS.GetRasterBand(1).SetNoDataValue(-9999.0)
 
     def run(self):
+        """
+        Rum BDSWEA and save outputs
+        :return: None
+        """
         self.heightAboveDams()
         self.calculateWaterDepth()
         self.saveOutputs()
 
     def close(self):
+        """
+        Close all GDAL and OGR datasets
+        :return: None
+        """
         self.demDS = None
         self.fdirDS = None
         self.idDS = None

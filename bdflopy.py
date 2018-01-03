@@ -8,6 +8,14 @@ from scipy import ndimage
 
 class BDflopy:
     def __init__(self, modflowexe, indir, modeldir, outdir, demfilename):
+        """
+        Initialize BDflopy class
+        :param modflowexe: Path to MODFLOW executable file.
+        :param indir: Path to directory of raster inputs for BDSWEA.
+        :param modeldir: Path to directory of outputs from BDSWEA.
+        :param outdir: Path to directory where output files will be genearted.
+        :param demfilename: Name of DEM file in the input directory (e.g. 'dem.tif')
+        """
         self.modflowexe = modflowexe
         self.indir = indir
         self.modeldir = modeldir
@@ -18,12 +26,22 @@ class BDflopy:
         self.setPaths()
 
     def addMODFLOWObjects(self):
+        """
+        Add packages to MODFLOW
+        :return: None
+        """
         for i in range(0, len(self.mf)):
             flopy.modflow.ModflowDis(self.mf[i], self.nlay, self.xsize, self.ysize, delr = self.geot[1],
                                      delc = abs(self.geot[5]), top = self.wseData[i], botm = self.zbot,
                                      itmuni = 1, lenuni = 2)
+            flopy.modflow.ModflowBas(self.mf[i], ibound = self.iboundData[i], strt = self.sheadData[i])
 
     def createDatasets(self, filelist):
+        """
+        Create GDAL raster datasets
+        :param filelist: List of paths where raster datasets will be created.
+        :return: List of GDAL datasets
+        """
         datasetlist = []
         for file in filelist:
             #create raster dataset
@@ -35,6 +53,10 @@ class BDflopy:
         return datasetlist
 
     def createIboundData(self):
+        """
+        Create ibound arrays for MODFLOW parameterization
+        :return: None
+        """
         self.iboundData = []
         for i in range(0, len(self.iboundds)):
             ibound = np.zeros(self.wseData[i].shape, dtype = np.int32)
@@ -45,6 +67,10 @@ class BDflopy:
             self.iboundds[i].GetRasterBand(1).WriteArray(ibound)
 
     def createMODFLOWDatasets(self):
+        """
+        Create GDAL raster datasets for MODFLOW inputs and outputs
+        :return: None
+        """
         #create starting head datasets
         self.sheadds = self.createDatasets(self.sheadPaths)
         #create ending head datasets
@@ -53,6 +79,10 @@ class BDflopy:
         self.iboundds = self.createDatasets(self.iboundPaths)
 
     def createStartingHeadData(self):
+        """
+        Calculate starting head arrays
+        :return: None
+        """
         self.sheadData = []
         for i in range(0, len(self.sheadds)):
             self.headData[i][self.headData[i] <np.nanmin(self.wseData[i])] = self.stats[0]
@@ -63,6 +93,11 @@ class BDflopy:
             self.sheadds[i] = None
 
     def loadData(self, filelist):
+        """
+        Read data from input rasters as numpy arrays
+        :param filelist: List of raster files to read as numpy arrays.
+        :return: List of numpy arrays
+        """
         datalist = []
         for file in filelist:
             ds = gdal.Open(file)
@@ -71,6 +106,10 @@ class BDflopy:
         return datalist
 
     def loadBDSWEAData(self):
+        """
+        Load data from BDSWEA
+        :return: None
+        """
         # initial DEM and water surface elevation from BDSWEA
         self.wseData = self.loadData(self.wsePaths)
         #set bottom of the model domain
@@ -81,12 +120,21 @@ class BDflopy:
         self.pondData = self.loadData(self.pondPaths)
 
     def setPaths(self):
+        """
+        Set file paths for input and output data
+        :return: None
+        """
         self.setWSEPaths()
         self.setPondDepthPaths()
         self.setHeadPaths()
         self.setIBoundPaths()
 
     def setVariables(self, demfilename):
+        """
+        Set class variables
+        :param demfilename: Name of DEM raster file.
+        :return: None
+        """
         self.driver = gdal.GetDriverByName('GTiff')
         self.dempath = self.indir + "/" + demfilename
         demds = gdal.Open(self.dempath)
@@ -103,6 +151,10 @@ class BDflopy:
             self.mf.append(flopy.modflow.Modflow(mfname, exe_name = self.modflowexe))
 
     def setHeadPaths(self):
+        """
+        Set file names for head data to be read and written
+        :return: None
+        """
         #head files from BDSWEA
         self.headPaths = []
         for name in self.mfnames:
@@ -117,24 +169,44 @@ class BDflopy:
             self.sheadPaths.append(self.outdir + "/shead_" + name + ".tif")
 
     def setIBoundPaths(self):
+        """
+        Set file names for output ibound rasters
+        :return: None
+        """
         self.iboundPaths = []
         for name in self.mfnames:
             self.iboundPaths.append(self.outdir + "/ibound_" + name + ".tif")
 
     def setPondDepthPaths(self):
+        """
+        Set file paths for pond depth rasters created by BDSWEA
+        :return: None
+        """
         self.pondPaths = []
         self.pondPaths.append(self.modeldir + "/depLo.tif")
         self.pondPaths.append(self.modeldir + "/depMid.tif")
         self.pondPaths.append(self.modeldir + "/depHi.tif")
 
     def setWSEPaths(self):
+        """
+        Set file paths for water surface elevation rasters created by BDSWEA
+        :return: None
+        """
         self.wsePaths = []
         self.wsePaths.append(self.dempath)
         self.wsePaths.append(self.modeldir + "/WSESurf_lo.tif")
         self.wsePaths.append(self.modeldir + "/WSESurf_mid.tif")
         self.wsePaths.append(self.modeldir + "/WSESurf_hi.tif")
 
-    def run(self):
+    def run(self, khsat, kvsat, por = 1.0, kconv = 1.0):
+        """
+        Run MODFLOW to calculate water surface elevation changes from beaver dam construction
+        :param khsat: Horizontal hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
+        :param kvsat: Vertical hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
+        :param por: Porosity value(s). Single value or numpy array concurrent with input DEM. Default = 1.0.
+        :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0
+        :return: None
+        """
         self.loadBDSWEAData()
         self.createMODFLOWDatasets()
         self.createIboundData()
