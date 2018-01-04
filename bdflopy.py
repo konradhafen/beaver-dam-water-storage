@@ -82,7 +82,6 @@ class BDflopy:
             self.sheadds[i].GetRasterBand(1).WriteArray(data)
             self.sheadds[i].GetRasterBand(1).FlushCache()
             self.sheadData.append(data)
-            self.sheadds[i] = None
 
     def loadData(self, filelist):
         """
@@ -300,3 +299,14 @@ class BDflopy:
         self.saveResultsToRaster()
         self.calculateHeadDifference()
 
+    def close(self):
+        """
+        Close GDAL datasets
+        :return: None
+        """
+
+        self.eheadds = None
+        self.sheadds = None
+        self.iboundds = None
+        self.hdchds = None
+        self.hdchFracDs = None

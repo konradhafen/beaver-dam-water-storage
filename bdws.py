@@ -597,40 +597,6 @@ class BDSWEA:
         self.writeArrayToRaster(self.outDir + "/depMid.tif", self.depMid, 0.0000001, 20.0)
         self.writeArrayToRaster(self.outDir + "/depHi.tif", self.depHi, 0.0000001, 20.0)
 
-        # self.outIdDS = self.driverTiff.Create(self.outDir + "/pondID.tif", xsize = self.demDS.RasterXSize, ysize = self.demDS.RasterYSize,
-        #                                       bands = 1, eType = gdal.GDT_Float32)
-        # self.outIdDS.SetGeoTransform(self.geot)
-        # self.outHtDS = self.driverTiff.Create(self.outDir + "/htAbove.tif", xsize=self.demDS.RasterXSize,
-        #                                       ysize=self.demDS.RasterYSize,
-        #                                       bands=1, eType=gdal.GDT_Float32)
-        # self.outHtDS.SetGeoTransform(self.geot)
-        # self.depLoDS = self.driverTiff.Create(self.outDir + "/depLo.tif", xsize=self.demDS.RasterXSize,
-        #                                       ysize=self.demDS.RasterYSize,
-        #                                       bands=1, eType=gdal.GDT_Float32)
-        # self.depLoDS.SetGeoTransform(self.geot)
-        # self.depMidDS = self.driverTiff.Create(self.outDir + "/depMid.tif", xsize=self.demDS.RasterXSize,
-        #                                       ysize=self.demDS.RasterYSize,
-        #                                       bands=1, eType=gdal.GDT_Float32)
-        # self.depMidDS.SetGeoTransform(self.geot)
-        # self.depHiDS = self.driverTiff.Create(self.outDir + "/depHi.tif", xsize=self.demDS.RasterXSize,
-        #                                       ysize=self.demDS.RasterYSize,
-        #                                       bands=1, eType=gdal.GDT_Float32)
-        # self.depHiDS.SetGeoTransform(self.geot)
-        #
-        # self.outIdDS.GetRasterBand(1).WriteArray(self.idOut)
-        # self.outIdDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        # self.outHtDS.GetRasterBand(1).WriteArray(self.htOut)
-        # self.outHtDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        # self.depLo[self.depLo <= 0.0] = -9999.0
-        # self.depLoDS.GetRasterBand(1).WriteArray(self.depLo)
-        # self.depLoDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        # self.depMid[self.depMid <= 0.0] = -9999.0
-        # self.depMidDS.GetRasterBand(1).WriteArray(self.depLo)
-        # self.depMidDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        # self.depHi[self.depHi <= 0.0] = -9999.0
-        # self.depHiDS.GetRasterBand(1).WriteArray(self.depLo)
-        # self.depHiDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-
     def run(self):
         """
         Rum BDSWEA and save outputs
@@ -650,6 +616,3 @@ class BDSWEA:
         self.idDS = None
         self.pointDS = None
         self.points = None
-        self.depLoDS = None
-        self.depMidDS = None
-        self.depHiDS = None

@@ -29,3 +29,4 @@ print (end - start)
 # demfilename = "dem_vbfac.tif"
 # gwmodel = BDflopy(modflowexe, indir, modeldir, outdir, demfilename)
 # gwmodel.run(0.0001, 0.0001)
+# gwmodel.close()
