@@ -415,7 +415,7 @@ class BDSWEA:
         self.points = self.pointDS.GetLayer()
         self.nPoints = self.points.GetFeatureCount
         self.geot = self.demDS.GetGeoTransform()
-        self.prj = self.demDs.GetProjection()
+        self.prj = self.demDS.GetProjection()
         self.MAX_COUNT = math.ceil(self.MAX_POND_AREA / abs(self.geot[1] * self.geot[5]) / 1)
         self.driverTiff = gdal.GetDriverByName("GTiff")
         max = np.max(self.fdir)
@@ -575,7 +575,7 @@ class BDSWEA:
         """
         if array.shape == self.dem.shape:
             ds = self.driverTiff.Create(file, xsize=self.demDS.RasterXSize, ysize=self.demDS.RasterYSize, bands=1, eType=gdal.GDT_Float32)
-            ds.SetGeoTrasnform(self.geot)
+            ds.SetGeoTransform(self.geot)
             ds.SetProjection(self.prj)
             array[array < lowernd] = -9999.0
             array[array > uppernd] = -9999.0
