@@ -415,6 +415,7 @@ class BDSWEA:
         self.points = self.pointDS.GetLayer()
         self.nPoints = self.points.GetFeatureCount
         self.geot = self.demDS.GetGeoTransform()
+        self.prj = self.demDs.GetProjection()
         self.MAX_COUNT = math.ceil(self.MAX_POND_AREA / abs(self.geot[1] * self.geot[5]) / 1)
         self.driverTiff = gdal.GetDriverByName("GTiff")
         max = np.max(self.fdir)
@@ -475,7 +476,7 @@ class BDSWEA:
 
     def drainsToMe(self, index, fdir):
         """
-
+        Determine if a neighboring cell drains to a target cell
         :param index: Location of flow direction value in array.
         :param fdir: Flow direction value.
         :return: True if cell drains to center of 3x3, False if it does not
@@ -563,44 +564,72 @@ class BDSWEA:
         self.depMid[self.depLo == np.nan] = -9999.0
         self.depHi[self.depLo == np.nan] = -9999.0
 
+    def writeArrayToRaster(self, file, array, lowernd, uppernd):
+        """
+        Save numpy array as a GeoTiff raster concurrent with the input DEM
+        :param file: Path to save file.
+        :param array: Numpy array of data.
+        :param lowernd: Lowest data value.
+        :param uppernd: Highest data value.
+        :return:
+        """
+        if array.shape == self.dem.shape:
+            ds = self.driverTiff.Create(file, xsize=self.demDS.RasterXSize, ysize=self.demDS.RasterYSize, bands=1, eType=gdal.GDT_Float32)
+            ds.SetGeoTrasnform(self.geot)
+            ds.SetProjection(self.prj)
+            array[array < lowernd] = -9999.0
+            array[array > uppernd] = -9999.0
+            ds.GetRasterBand(1).WriteArray(array)
+            ds.GetRasterBand(1).FlushCache()
+            ds.GetRasterBand(1).SetNoDataValue(-9999.0)
+            ds = None
+        else:
+            print "output shape different from input DEM"
+
     def saveOutputs(self):
         """
-        Save results to rasters
+        Save BDSWEA results to rasters
         :return: None
         """
-        self.outIdDS = self.driverTiff.Create(self.outDir + "/pondID.tif", xsize = self.demDS.RasterXSize, ysize = self.demDS.RasterYSize,
-                                              bands = 1, eType = gdal.GDT_Float32)
-        self.outIdDS.SetGeoTransform(self.geot)
-        self.outHtDS = self.driverTiff.Create(self.outDir + "/htAbove.tif", xsize=self.demDS.RasterXSize,
-                                              ysize=self.demDS.RasterYSize,
-                                              bands=1, eType=gdal.GDT_Float32)
-        self.outHtDS.SetGeoTransform(self.geot)
-        self.depLoDS = self.driverTiff.Create(self.outDir + "/depLo.tif", xsize=self.demDS.RasterXSize,
-                                              ysize=self.demDS.RasterYSize,
-                                              bands=1, eType=gdal.GDT_Float32)
-        self.depLoDS.SetGeoTransform(self.geot)
-        self.depMidDS = self.driverTiff.Create(self.outDir + "/depMid.tif", xsize=self.demDS.RasterXSize,
-                                              ysize=self.demDS.RasterYSize,
-                                              bands=1, eType=gdal.GDT_Float32)
-        self.depMidDS.SetGeoTransform(self.geot)
-        self.depHiDS = self.driverTiff.Create(self.outDir + "/depHi.tif", xsize=self.demDS.RasterXSize,
-                                              ysize=self.demDS.RasterYSize,
-                                              bands=1, eType=gdal.GDT_Float32)
-        self.depHiDS.SetGeoTransform(self.geot)
+        self.writeArrayToRaster(self.outDir + "/pondID.tif", self.idOut, 0.0, 50000.0)
+        self.writeArrayToRaster(self.outDir + "/htAbove.tif", self.htOut, -500.0, 5000.0)
+        self.writeArrayToRaster(self.outDir + "/depLo.tif", self.depLo, 0.0000001, 20.0)
+        self.writeArrayToRaster(self.outDir + "/depMid.tif", self.depMid, 0.0000001, 20.0)
+        self.writeArrayToRaster(self.outDir + "/depHi.tif", self.depHi, 0.0000001, 20.0)
 
-        self.outIdDS.GetRasterBand(1).WriteArray(self.idOut)
-        self.outIdDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        self.outHtDS.GetRasterBand(1).WriteArray(self.htOut)
-        self.outHtDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        self.depLo[self.depLo <= 0.0] = -9999.0
-        self.depLoDS.GetRasterBand(1).WriteArray(self.depLo)
-        self.depLoDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        self.depMid[self.depMid <= 0.0] = -9999.0
-        self.depMidDS.GetRasterBand(1).WriteArray(self.depLo)
-        self.depMidDS.GetRasterBand(1).SetNoDataValue(-9999.0)
-        self.depHi[self.depHi <= 0.0] = -9999.0
-        self.depHiDS.GetRasterBand(1).WriteArray(self.depLo)
-        self.depHiDS.GetRasterBand(1).SetNoDataValue(-9999.0)
+        # self.outIdDS = self.driverTiff.Create(self.outDir + "/pondID.tif", xsize = self.demDS.RasterXSize, ysize = self.demDS.RasterYSize,
+        #                                       bands = 1, eType = gdal.GDT_Float32)
+        # self.outIdDS.SetGeoTransform(self.geot)
+        # self.outHtDS = self.driverTiff.Create(self.outDir + "/htAbove.tif", xsize=self.demDS.RasterXSize,
+        #                                       ysize=self.demDS.RasterYSize,
+        #                                       bands=1, eType=gdal.GDT_Float32)
+        # self.outHtDS.SetGeoTransform(self.geot)
+        # self.depLoDS = self.driverTiff.Create(self.outDir + "/depLo.tif", xsize=self.demDS.RasterXSize,
+        #                                       ysize=self.demDS.RasterYSize,
+        #                                       bands=1, eType=gdal.GDT_Float32)
+        # self.depLoDS.SetGeoTransform(self.geot)
+        # self.depMidDS = self.driverTiff.Create(self.outDir + "/depMid.tif", xsize=self.demDS.RasterXSize,
+        #                                       ysize=self.demDS.RasterYSize,
+        #                                       bands=1, eType=gdal.GDT_Float32)
+        # self.depMidDS.SetGeoTransform(self.geot)
+        # self.depHiDS = self.driverTiff.Create(self.outDir + "/depHi.tif", xsize=self.demDS.RasterXSize,
+        #                                       ysize=self.demDS.RasterYSize,
+        #                                       bands=1, eType=gdal.GDT_Float32)
+        # self.depHiDS.SetGeoTransform(self.geot)
+        #
+        # self.outIdDS.GetRasterBand(1).WriteArray(self.idOut)
+        # self.outIdDS.GetRasterBand(1).SetNoDataValue(-9999.0)
+        # self.outHtDS.GetRasterBand(1).WriteArray(self.htOut)
+        # self.outHtDS.GetRasterBand(1).SetNoDataValue(-9999.0)
+        # self.depLo[self.depLo <= 0.0] = -9999.0
+        # self.depLoDS.GetRasterBand(1).WriteArray(self.depLo)
+        # self.depLoDS.GetRasterBand(1).SetNoDataValue(-9999.0)
+        # self.depMid[self.depMid <= 0.0] = -9999.0
+        # self.depMidDS.GetRasterBand(1).WriteArray(self.depLo)
+        # self.depMidDS.GetRasterBand(1).SetNoDataValue(-9999.0)
+        # self.depHi[self.depHi <= 0.0] = -9999.0
+        # self.depHiDS.GetRasterBand(1).WriteArray(self.depLo)
+        # self.depHiDS.GetRasterBand(1).SetNoDataValue(-9999.0)
 
     def run(self):
         """
