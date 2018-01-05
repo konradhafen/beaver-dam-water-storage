@@ -1,5 +1,6 @@
 from osgeo import gdal, ogr
 import numpy as np
+import os
 import math
 
 class BDLoG:
@@ -18,6 +19,8 @@ class BDLoG:
         self.demPath = dem
         self.facPath = fac
         self.outDir = outDir
+        if not os.path.isdir(self.outDir):
+            os.makedirs(self.outDir)
         self.bratCap = bratCap
         self.statPath = stat
 
@@ -34,10 +37,13 @@ class BDLoG:
         self.dem = self.demDS.GetRasterBand(1).ReadAsArray()
         self.facDS = gdal.Open(self.facPath)
         self.fac = self.facDS.GetRasterBand(1).ReadAsArray()
+        self.idOut = np.full(self.dem.shape, -9999.0, dtype=np.float32)
         self.geot = self.demDS.GetGeoTransform()
+        self.prj = self.demDS.GetProjection()
         self.outDS = self.driverShp.CreateDataSource(self.outDir + "/ModeledDamPoints.shp")
         self.outLyr = self.outDS.CreateLayer("ModeledDamPoints",  self.bratLyr.GetSpatialRef(), geom_type=ogr.wkbPoint)
         self.capRank = np.empty([self.nFeat,3])
+        self.driverTiff = gdal.GetDriverByName("GTiff")
 
     def createFields(self):
         """
@@ -242,12 +248,14 @@ class BDLoG:
                 #location of dam on stream segment
                 pointDist = length - (spacing * (j * 1.0))
                 damPoint = bratLine.Value(pointDist)
-                #set any field values here
-                damFeat = self.setDamFieldValues(damFeat, damType)
-                #set dam heights
-                damFeat = self.setDamHeights(damFeat, np.percentile(htDist, 2.5), np.median(htDist), np.percentile(htDist, 97.5))
-                damFeat.SetGeometry(damPoint)
-                self.outLyr.CreateFeature(damFeat)
+                #bratLine.Value will return None if called on multipart line. This will cause a crash later in the code
+                if damPoint is not None:
+                    #set any field values here
+                    damFeat = self.setDamFieldValues(damFeat, damType)
+                    #set dam heights
+                    damFeat = self.setDamHeights(damFeat, np.percentile(htDist, 2.5), np.median(htDist), np.percentile(htDist, 97.5))
+                    damFeat.SetGeometry(damPoint)
+                    self.outLyr.CreateFeature(damFeat)
                 damFeat = None
 
             i += 1
@@ -309,6 +317,7 @@ class BDLoG:
             damAddress = streamcells[index[0][0]]
             #delete stream cell so each dam is located in a different cell
             streamcells = np.delete(streamcells, index, axis = 0)
+            self.idOut[damAddress[0]][damAddress[1]] = float(i*1.0)
             damCoords = self.getCoordinatesOfCellAddress(damAddress[0], damAddress[1])
             ptwkt = "POINT(%f %f)" %  (damCoords[0], damCoords[1])
             damPt = ogr.CreateGeometryFromWkt(ptwkt)
@@ -356,6 +365,28 @@ class BDLoG:
         self.createDams()
         self.moveDamsToFAC()
 
+    def writeDamLocationRaster(self):
+        """
+        Write dam locations to raster
+        :return: None
+        """
+        ds = self.driverTiff.Create(self.outDir + "/damID.tif", xsize=self.demDS.RasterXSize, ysize=self.demDS.RasterYSize, bands=1,
+                                    eType=gdal.GDT_Float32)
+        ds.SetGeoTransform(self.geot)
+        ds.SetProjection(self.prj)
+        ds.GetRasterBand(1).WriteArray(self.idOut)
+        ds.GetRasterBand(1).FlushCache()
+        ds.GetRasterBand(1).SetNoDataValue(-9999.0)
+        ds = None
+
+    def run(self):
+        """
+        Generate dam locations from BRAT and output as shapefile and raster
+        :return: None
+        """
+        self.generateDamLocationsFromBRAT()
+        self.writeDamLocationRaster()
+
     def close(self):
         """
         Close all OGR and GDAL layers and datasets
@@ -367,20 +398,27 @@ class BDLoG:
         self.facDS = None
         self.outDS = None
         self.outLyr = None
+        del self.dem
+        del self.fac
+        del self.idOut
+        del self.capRank
 
 class BDSWEA:
-    def __init__(self, dem, fdir, id, outDir, modPoints):
+    def __init__(self, dem, fdir, fac, id, outDir, modPoints):
         """
         Initialization of the Beaver Dam Surface Water Estimation Algorithm class
         :param dem: Path of DEM for area of interest.
         :param fdir: Path to flow direction raster, should be concurrent with DEM.
-        :param id: Raster of pond ID, calculated with BDLoG class.
+        :param fac: Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).
+        :param id: Path to raster of pond ID, calculated with BDLoG class.
         :param outDir: Path where output files will be generated.
         :param modPoints: Path to shapefile of modeled dam locations from BDLoG.
         """
         self.outDir = outDir
+        if not os.path.isdir(self.outDir):
+            os.makedirs(self.outDir)
         self.setConstants()
-        self.setVars(dem, fdir, id, modPoints)
+        self.setVars(dem, fdir, fac, id, modPoints)
         self.createOutputArrays()
 
     def setConstants(self):
@@ -392,16 +430,17 @@ class BDSWEA:
         self.FLOW_DIR_TAUDEM = np.array([4, 3, 2, 5, 0, 1, 6, 7, 8])
         self.ROW_OFFSET = np.array([-1, -1, -1, 0, 0, 0, 1, 1, 1])
         self.COL_OFFSET = np.array([-1, 0, 1, -1, 0, 1, -1, 0, 1])
-        self.MAX_POND_AREA = 2000000 #in square meters
+        self.MAX_POND_AREA = 200000 #in square meters
         self.MAX_HEIGHT = 5.0 #in meters
 
-    def setVars(self, dem, fdir, id, shp):
+    def setVars(self, dem, fdir, fac, id, shp):
         """
         Set class variables
-        :param dem: Path to DEM
-        :param fdir: Path to flow direction raster
-        :param id: Path to dam ID raster
-        :param shp: Path to shapefile of dam locations
+        :param dem: Path to DEM.
+        :param fdir: Path to flow direction raster.
+        :param fac: Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).
+        :param id: Path to dam ID raster.
+        :param shp: Path to shapefile of dam locations.
         :return: None
         """
         self.count = 0
@@ -409,6 +448,8 @@ class BDSWEA:
         self.dem = self.demDS.GetRasterBand(1).ReadAsArray()
         self.fdirDS = gdal.Open(fdir)
         self.fdir = self.fdirDS.GetRasterBand(1).ReadAsArray()
+        self.facDS = gdal.Open(fac)
+        self.fac = self.facDS.GetRasterBand(1).ReadAsArray()
         self.idDS = gdal.Open(id)
         self.id = self.idDS.GetRasterBand(1).ReadAsArray()
         self.pointDS = ogr.Open(shp)
@@ -577,6 +618,7 @@ class BDSWEA:
             ds = self.driverTiff.Create(file, xsize=self.demDS.RasterXSize, ysize=self.demDS.RasterYSize, bands=1, eType=gdal.GDT_Float32)
             ds.SetGeoTransform(self.geot)
             ds.SetProjection(self.prj)
+            array[np.isnan(array)] = -9999.0
             array[array < lowernd] = -9999.0
             array[array > uppernd] = -9999.0
             ds.GetRasterBand(1).WriteArray(array)
@@ -599,12 +641,66 @@ class BDSWEA:
 
     def run(self):
         """
-        Rum BDSWEA and save outputs
+        Run BDSWEA and save outputs
         :return: None
         """
         self.heightAboveDams()
         self.calculateWaterDepth()
         self.saveOutputs()
+
+    def writeSurfaceWSE(self):
+        """
+        Update DEM to reflect water surface elevation of modeled beaver ponds and save as GeoTiff
+        :return: None
+        """
+        self.depLo[self.depLo < 0.0] = 0.0
+        self.depMid[self.depMid < 0.0] = 0.0
+        self.depHi[self.depHi < 0.0] = 0.0
+        self.wseLo = self.depLo + self.dem
+        self.wseMid = self.depMid + self.dem
+        self.wseHi = self.depHi + self.dem
+        self.writeArrayToRaster(self.outDir + "/WSESurf_lo.tif", self.wseLo, 0.0, 5000.0)
+        self.writeArrayToRaster(self.outDir + "/WSESurf_mid.tif", self.wseMid, 0.0, 5000.0)
+        self.writeArrayToRaster(self.outDir + "/WSESurf_hi.tif", self.wseHi, 0.0, 5000.0)
+
+    def writeHead(self):
+        """
+        Calculate water surface elevation of cells inundated by modeld beaver ponds or represented by the rasterized stream network and save as GeoTiff
+        :return: None
+        """
+        stream = self.fac
+        stream[stream < 1.0] = 0.0
+        stream[stream > 0.0] = 1.0
+        pondlo = self.depLo
+        pondlo[pondlo > 0.0] = 1.0
+        pondlo[pondlo < 0.0] = 0.0
+        pondlo = pondlo + stream
+        pondlo[pondlo > 0.0] = 1.0
+        pondmid = self.depMid
+        pondmid[pondmid > 0.0] = 1.0
+        pondmid[pondmid < 0.0] = 0.0
+        pondmid = pondmid +stream
+        pondmid[pondmid > 0.0] = 1.0
+        pondhi = self.depHi
+        pondhi[pondhi > 0.0] = 1.0
+        pondhi[pondhi < 0.0] = 0.0
+        pondhi = pondhi + stream
+        pondhi[pondhi > 0.0] = 1.0
+        self.writeArrayToRaster(self.outDir + "/head_start.tif", self.dem*stream, 1.0, 5000.0)
+        self.writeArrayToRaster(self.outDir + "/head_lo.tif", self.wseLo*pondlo, 1.0, 5000.0)
+        self.writeArrayToRaster(self.outDir + "/head_mid.tif", self.wseMid*pondmid, 1.0, 5000.0)
+        self.writeArrayToRaster(self.outDir + "/head_hi.tif", self.wseHi*pondhi, 1.0, 5000.0)
+
+    def writeModflowFiles(self):
+        """
+        Save files to be used with BDflopy for MODFLOW parameterization
+        :return: None
+        """
+        self.writeSurfaceWSE()
+        self.writeHead()
+        del self.wseLo
+        del self.wseMid
+        del self.wseHi
 
     def close(self):
         """
@@ -616,3 +712,11 @@ class BDSWEA:
         self.idDS = None
         self.pointDS = None
         self.points = None
+        del self.dem
+        del self.fdir
+        del self.fac
+        del self.depLo
+        del self.depMid
+        del self.depHi
+        del self.htOut
+        del self.idOut
