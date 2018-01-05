@@ -20,14 +20,10 @@ end = time.time()
 print (end - start)
 
 #run surface water storage estimation (BDSWEA)
-# basedir = "/home/konrad/crap"
-basedir = "C:/temp/test"
-demPath = basedir + "/02_rasIn/dem_vbfac.tif"
+# basedir = "/home/konrad/temp"
 fdirPath = basedir + "/02_rasIn/fdird_vbfac.tif"
-facPath = basedir + "/02_rasIn/fac_01km_vbfac.tif"
 idPath = basedir + "/out/damID.tif"
 modPoints = basedir + "/out/ModeledDamPoints.shp"
-outDir = basedir + "/out"
 
 model = BDSWEA(demPath, fdirPath, facPath, idPath, outDir, modPoints)
 model.run()
@@ -43,6 +39,9 @@ indir = basedir + "/02_rasIn"
 modeldir = outDir
 outdir = basedir + "/modflow"
 demfilename = "dem_vbfac.tif"
+hkfn = ""
+vkfn = ""
+fracfn = ""
 gwmodel = BDflopy(modflowexe, indir, modeldir, outdir, demfilename)
 gwmodel.run(0.0001, 0.0001)
 gwmodel.close()

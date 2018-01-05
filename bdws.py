@@ -1,6 +1,7 @@
 from osgeo import gdal, ogr
 import numpy as np
 import os
+import sys
 import math
 
 class BDLoG:
@@ -420,6 +421,12 @@ class BDSWEA:
         self.setConstants()
         self.setVars(dem, fdir, fac, id, modPoints)
         self.createOutputArrays()
+        # self.origrecursion = sys.getrecursionlimit()
+        # if self.origrecursion < 1500:
+        #     sys.setrecursionlimit(1500)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
 
     def setConstants(self):
         """
@@ -430,7 +437,7 @@ class BDSWEA:
         self.FLOW_DIR_TAUDEM = np.array([4, 3, 2, 5, 0, 1, 6, 7, 8])
         self.ROW_OFFSET = np.array([-1, -1, -1, 0, 0, 0, 1, 1, 1])
         self.COL_OFFSET = np.array([-1, 0, 1, -1, 0, 1, -1, 0, 1])
-        self.MAX_POND_AREA = 200000 #in square meters
+        self.MAX_POND_AREA = 100000 #in square meters
         self.MAX_HEIGHT = 5.0 #in meters
 
     def setVars(self, dem, fdir, fac, id, shp):
@@ -707,6 +714,7 @@ class BDSWEA:
         Close all GDAL and OGR datasets
         :return: None
         """
+        # sys.setrecursionlimit(self.origrecursion)
         self.demDS = None
         self.fdirDS = None
         self.idDS = None

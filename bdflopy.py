@@ -24,6 +24,7 @@ class BDflopy:
             os.makedirs(self.outdir)
         self.setVariables(demfilename)
         self.setPaths()
+        self.loadBdsweaData()
 
     def createDatasets(self, filelist):
         """
@@ -199,14 +200,14 @@ class BDflopy:
 
     def setLpfVariables(self, hksat, vksat, kconv):
         """
-        Set variables required for MODFLOW LPF package
+        Set variables required for MODFLOW LPF package. This function is called internally
         :param khsat: Horizontal hydraulic conductivity.
         :param kvsat: Vertical hydraulic conductivity.
         :param kconv: Factor to convert hksat and vksat to meters per second.
         :return: None
         """
-        self.hksat = hksat*kconv
-        self.vksat = vksat*kconv
+        self.hksat = self.loadSoilData(hksat)*kconv
+        self.vksat = self.loadSoilData(vksat)*kconv
 
     def writeModflowInput(self):
         """
@@ -256,15 +257,34 @@ class BDflopy:
             else:
                 self.ModSuccess.append(False)
 
+    def loadSoilData(self, data):
+        """
+        Load/create data for hydraulic conductivity and fraction of soil that holds water. This function is called internally.
+        :param data: Float, numpy.ndarray, or file path to raster
+        :return: Numpy array
+        """
+        if os.path.isfile(self.indir + "/" + str(data)):
+            ds = gdal.Open(self.indir + "/" + str(data))
+            outdata = ds.GetRasterBand(1).ReadAsArray()
+        elif type(data) == float:
+            outdata = np.ones(self.wseData[0].shape, dtype = np.float32)
+            outdata = outdata * data
+        elif type(data) == np.ndarray:
+            outdata = data
+        else:
+            outdata = np.ones(self.wseData[0].shape, dtype=np.float32)
+        if outdata.shape != self.wseData[0].shape:
+            outdata = np.ones(self.wseData[0].shape, dtype=np.float32)
+        outdata[outdata < 0.0] = np.nan
+        return outdata
+
     def calculateHeadDifference(self, frac = 1.0):
         """
         Calculate the head difference between MODFLOW runs
         :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0
-        :return:
+        :return: None
         """
-        if frac == 1.0 or np.shape(frac) != self.wseData[0].shape:
-            frac = np.ones(self.wseData[0].shape, dtype=np.float32)
-        frac[frac < 0.0] = np.nan
+        frac = self.loadSoilData(frac)
         for i in range(0, len(self.pondData)):
             self.pondData[i][self.pondData[i] < 0.0] = 0.0
         for i in range(0, len(self.pondData)):
@@ -281,23 +301,23 @@ class BDflopy:
                 self.hdchFracDs[i].GetRasterBand(1).FlushCache()
                 self.hdchFracDs[i].GetRasterBand(1).SetNoDataValue(-9999.0)
 
-    def run(self, hksat, vksat, kconv = 1.0):
+    def run(self, hksat, vksat, kconv = 1.0, frac = 1.0):
         """
         Run MODFLOW to calculate water surface elevation changes from beaver dam construction
-        :param hksat: Horizontal saturated hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
-        :param vksat: Vertical saturated hydraulic conductivity value(s). Single value or numpy array concurrent with input DEM.
+        :param hksat: Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
+        :param vksat: Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
         :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.
+        :param frac: Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.
         :return: None
         """
         self.setLpfVariables(hksat, vksat, kconv)
-        self.loadBdsweaData()
         self.createModflowDatasets()
         self.createIboundData()
         self.createStartingHeadData()
         self.writeModflowInput()
         self.runModflow()
         self.saveResultsToRaster()
-        self.calculateHeadDifference()
+        self.calculateHeadDifference(frac)
 
     def close(self):
         """
