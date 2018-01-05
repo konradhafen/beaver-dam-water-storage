@@ -1,21 +1,21 @@
 from osgeo import gdal, ogr
 import numpy as np
 import os
-import sys
 import math
 
 class BDLoG:
     def __init__(self, brat, dem , fac, outDir, bratCap, stat = None):
         """
         Initialization of the Beaver Dam Location Generator class
-        :param brat: Path to BRAT shapefile.
-        :param dem: Path to DEM for area of interest.
-        :param fac: Binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).
-        :param outDir: Path to directory where output files will be generated.
-        :param bratCap: Proportion (0 - 1) of capacity for which to generate beaver dams.
-        :param stat: (Optional) Estimated pond volumes and prediction intervals as a function of reach slope and dam height (not yet implemented).
-        """
 
+        Args:
+            brat: Path to BRAT shapefile.
+            dem: Path to DEM for area of interest.
+            fac: Binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).
+            outDir: Path to directory where output files will be generated.
+            bratCap: Proportion (0 - 1) of capacity for which to generate beaver dams.
+            stat: (Optional) Estimated pond volumes and prediction intervals as a function of reach slope and dam height (not yet implemented).
+        """
         self.bratPath = brat
         self.demPath = dem
         self.facPath = fac
@@ -475,6 +475,7 @@ class BDSWEA:
     def createOutputArrays(self):
         """
         Create arrays which will be written to rasters
+
         :return: None
         """
         self.idOut = np.copy(self.id)
@@ -525,8 +526,10 @@ class BDSWEA:
     def drainsToMe(self, index, fdir):
         """
         Determine if a neighboring cell drains to a target cell
+
         :param index: Location of flow direction value in array.
         :param fdir: Flow direction value.
+
         :return: True if cell drains to center of 3x3, False if it does not
         """
         if index == 4:
@@ -553,10 +556,12 @@ class BDSWEA:
     def backwardHAND(self, startX, startY, startE, pondID):
         """
         Recursively identify all cells draining to a dam location and the height of each cell above the dam
+
         :param startX: Column of dam location.
         :param startY: Row of dam location.
         :param startE: DEM elevation at dam location.
         :param pondID: ID number of dam.
+
         :return: None
         """
         if startX > 0 and startY > 0 and startX < self.demDS.RasterXSize-1 and startY < self.demDS.RasterYSize-1:
