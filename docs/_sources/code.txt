@@ -1,0 +1,22 @@
+Code Documentation
+==================
+
+BDLoG Class
+-----------
+
+Generate dam locations along network created by the Beaver Restoration Assessment Tool (BRAT). Information about BRAT is available at http://brat.joewheaton.org/home.
+
+.. autoclass:: bdws.BDLoG
+    :members:
+
+BDSWEA Class
+------------
+
+.. autoclass:: bdws.BDSWEA
+    :members:
+
+BDflopy Class
+-------------
+
+.. autoclass:: bdflopy.BDflopy
+    :members:
