@@ -110,130 +110,262 @@
 <h1>Code Documentation<a class="headerlink" href="#code-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="bdlog-class">
 <h2>BDLoG Class<a class="headerlink" href="#bdlog-class" title="Permalink to this headline">¶</a></h2>
-<p>Generate dam locations along network created by the Beaver Restoration Assessment Tool (BRAT). Information about BRAT is available at <a class="reference external" href="http://brat.joewheaton.org/home">http://brat.joewheaton.org/home</a>.</p>
+<p>Generate beaver dam locations and beaver dam heights along a stream network according to beaver dam capacities estimated by the Beaver Restoration Assessment Tool (BRAT). Information about BRAT is available at <a class="reference external" href="http://brat.joewheaton.org/home">http://brat.joewheaton.org/home</a>.</p>
 <dl class="class">
 <dt id="bdws.BDLoG">
 <em class="property">class </em><code class="descclassname">bdws.</code><code class="descname">BDLoG</code><span class="sig-paren">(</span><em>brat</em>, <em>dem</em>, <em>fac</em>, <em>outDir</em>, <em>bratCap</em>, <em>stat=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="bdws.BDLoG.calculateDamsPerReach">
 <code class="descname">calculateDamsPerReach</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.calculateDamsPerReach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.calculateDamsPerReach" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determine the number of beaver dams and beaver dam complexes to place on each BRAT reach
-:return: None</p>
+<dd><p>Determine the number of beaver dams and beaver dam complexes to place on each BRAT reach.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close all OGR and GDAL layers and datasets
-:return: None</p>
+<dd><p>Close all OGR and GDAL layers and datasets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.createDams">
 <code class="descname">createDams</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.createDams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.createDams" title="Permalink to this definition">¶</a></dt>
-<dd><p>Place primary and secondary dams at a specific location on stream reaches
-:return: None</p>
+<dd><p>Place primary and secondary dams at a specific location on stream reaches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.createFields">
 <code class="descname">createFields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.createFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.createFields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates fields to be populated for the output dam location shapefile
-:return: None</p>
+<dd><p>Creates fields to be populated for the output dam location shapefile</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.generateDamLocationsFromBRAT">
 <code class="descname">generateDamLocationsFromBRAT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.generateDamLocationsFromBRAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.generateDamLocationsFromBRAT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate dam locations on rasterized stream network
-:return: None</p>
+<dd><p>Generate dam locations on rasterized stream network.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.getCellAddressOfPoint">
 <code class="descname">getCellAddressOfPoint</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.getCellAddressOfPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.getCellAddressOfPoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the row and column of a coordinate pair (linear units) based on the input DEM. UTM projections suggested, will not work with degree units
-:param x: X coordinate (meters).
-:param y: Y coordinate (meters).
-:return: Numpy array with row and column address (array[row, col]).</p>
+<dd><p>Calculate the row and column of a coordinate pair (linear units) based on the input DEM. UTM projections suggested, will not work with degree units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; X coordinate (meters).</li>
+<li><strong>y</strong> &#8211; Y coordinate (meters).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Numpy array with row and column address (array[row, col]).</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.getCoordinatesOfCellAddress">
 <code class="descname">getCoordinatesOfCellAddress</code><span class="sig-paren">(</span><em>row</em>, <em>col</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.getCoordinatesOfCellAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.getCoordinatesOfCellAddress" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the coordinate pair at the center of a cell address based on the input DEM. UTM projections suggested, will not work with degree units
-:param row: Row index of raster.
-:param col: Column index of raster.
-:return: Numpy array with x and y coordinates (array[x, y]).</p>
+<dd><p>Calculate the coordinate pair at the center of a cell address based on the input DEM. UTM projections suggested, will not work with degree units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>row</strong> &#8211; Row index of raster.</li>
+<li><strong>col</strong> &#8211; Column index of raster.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Numpy array with x and y coordinates (array[x, y]).</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.getStreamCellAddresses">
 <code class="descname">getStreamCellAddresses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.getStreamCellAddresses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.getStreamCellAddresses" title="Permalink to this definition">¶</a></dt>
-<dd><p>List addresses of cells on the stream network
-:return: Numpy array (2, n) with stream cell addresses (array[[row, col],[row, col],...])</p>
+<dd><p>List addresses of cells on the stream network.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array (2, n) with stream cell addresses (array[[row, col],[row, col],...]).</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.moveDamsToFAC">
 <code class="descname">moveDamsToFAC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.moveDamsToFAC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.moveDamsToFAC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set locations of generated dams to the nearest cell on the rasterized stream network. Only one dam can be present on each network cell.
-:return: None</p>
+<dd><p>Set locations of generated dams to the nearest cell on the rasterized stream network. Only one dam can be present on each network cell.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate dam locations from BRAT and output as shapefile and raster
-:return: None</p>
+<dd><p>Generate dam locations from BRAT and output as shapefile and raster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.setBratFields">
 <code class="descname">setBratFields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.setBratFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.setBratFields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set values for fields derived from the input BRAT shapefile
-:return: None</p>
+<dd><p>Set values for fields derived from the input BRAT shapefile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.setDamFieldValues">
 <code class="descname">setDamFieldValues</code><span class="sig-paren">(</span><em>feat</em>, <em>damType</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.setDamFieldValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.setDamFieldValues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set attribute for dam type
-:param feat: OGR Feature of dam.
-:param damType: String describing dam type (&#8216;primary&#8217; or &#8216;secondary&#8217;).
-:return: Updated OGR Feature of dam</p>
+<dd><p>Set attribute for dam type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>feat</strong> &#8211; OGR Feature of dam.</li>
+<li><strong>damType</strong> &#8211; String describing dam type (&#8216;primary&#8217; or &#8216;secondary&#8217;).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Updated OGR Feature of dam.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.setDamHeights">
 <code class="descname">setDamHeights</code><span class="sig-paren">(</span><em>feat</em>, <em>low</em>, <em>mid</em>, <em>high</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.setDamHeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.setDamHeights" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set dam heights to be modeled for a dam
-:param feat: OGR Feature of dam.
-:param low: Lower interval of dam height.
-:param mid: Median dam height.
-:param high: Upper interval of dam height.
-:return: Updated OGR Feature of dam</p>
+<dd><p>Set dam heights to be modeled for a dam.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>feat</strong> &#8211; OGR Feature of dam.</li>
+<li><strong>low</strong> &#8211; Lower interval of dam height.</li>
+<li><strong>mid</strong> &#8211; Median dam height.</li>
+<li><strong>high</strong> &#8211; Upper interval of dam height.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Updated OGR Feature of dam.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.setVariables">
 <code class="descname">setVariables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.setVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.setVariables" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets class variables for location generation.
-:return: None</p>
+<dd><p>Sets class variables for location generation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.sortByCapacity">
 <code class="descname">sortByCapacity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.sortByCapacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.sortByCapacity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sort BRAT reaches by estimated dam capacity
-:return: None</p>
+<dd><p>Sort BRAT reaches by estimated dam capacity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDLoG.writeDamLocationRaster">
 <code class="descname">writeDamLocationRaster</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.writeDamLocationRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.writeDamLocationRaster" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write dam locations to raster
-:return: None</p>
+<dd><p>Write dam locations to raster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -241,13 +373,14 @@
 </div>
 <div class="section" id="bdswea-class">
 <h2>BDSWEA Class<a class="headerlink" href="#bdswea-class" title="Permalink to this headline">¶</a></h2>
+<p>Estimate the surface storage of beaver ponds at locations created from the BDLoG class.</p>
 <dl class="class">
 <dt id="bdws.BDSWEA">
 <em class="property">class </em><code class="descclassname">bdws.</code><code class="descname">BDSWEA</code><span class="sig-paren">(</span><em>dem</em>, <em>fdir</em>, <em>fac</em>, <em>id</em>, <em>outDir</em>, <em>modPoints</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="bdws.BDSWEA.backwardHAND">
 <code class="descname">backwardHAND</code><span class="sig-paren">(</span><em>startX</em>, <em>startY</em>, <em>startE</em>, <em>pondID</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.backwardHAND"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.backwardHAND" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recursively identify all cells draining to a dam location and the height of each cell above the dam</p>
+<dd><p>Recursively identify all cells draining to a dam location and the height of each cell above the dam.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -270,21 +403,35 @@
 <dl class="method">
 <dt id="bdws.BDSWEA.calculateWaterDepth">
 <code class="descname">calculateWaterDepth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.calculateWaterDepth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.calculateWaterDepth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the depth of each beaver pond cell for each modeled dam height
-:return: None</p>
+<dd><p>Calculate the depth of each beaver pond cell for each modeled dam height.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close all GDAL and OGR datasets
-:return: None</p>
+<dd><p>Close all GDAL and OGR datasets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.createOutputArrays">
 <code class="descname">createOutputArrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.createOutputArrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.createOutputArrays" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create arrays which will be written to rasters</p>
+<dd><p>Create arrays which will be written to rasters.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -298,7 +445,7 @@
 <dl class="method">
 <dt id="bdws.BDSWEA.drainsToMe">
 <code class="descname">drainsToMe</code><span class="sig-paren">(</span><em>index</em>, <em>fdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.drainsToMe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.drainsToMe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determine if a neighboring cell drains to a target cell</p>
+<dd><p>Determine if a neighboring cell drains to a target cell.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -323,7 +470,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of DEM</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of DEM.</td>
 </tr>
 </tbody>
 </table>
@@ -336,7 +483,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of original dam ID raster</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of original dam ID raster.</td>
 </tr>
 </tbody>
 </table>
@@ -349,7 +496,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of flow direction raster</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of flow direction raster.</td>
 </tr>
 </tbody>
 </table>
@@ -362,7 +509,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of the height of cells above a beaver dam</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of the height of cells above a beaver dam.</td>
 </tr>
 </tbody>
 </table>
@@ -375,7 +522,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of the dam ID associated with each beaver pond</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array of the dam ID associated with each beaver pond.</td>
 </tr>
 </tbody>
 </table>
@@ -384,73 +531,146 @@
 <dl class="method">
 <dt id="bdws.BDSWEA.heightAboveDams">
 <code class="descname">heightAboveDams</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.heightAboveDams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.heightAboveDams" title="Permalink to this definition">¶</a></dt>
-<dd><p>For each cell draining to a beaver dam, calculate the height of cell above the dam location
-:return: None</p>
+<dd><p>For each cell draining to a beaver dam, calculate the height of cell above the dam location.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run BDSWEA and save outputs
-:return: None</p>
+<dd><p>Run BDSWEA and save outputs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.saveOutputs">
 <code class="descname">saveOutputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.saveOutputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.saveOutputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save BDSWEA results to rasters
-:return: None</p>
+<dd><p>Save BDSWEA results to rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.setConstants">
 <code class="descname">setConstants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.setConstants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.setConstants" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set constant variables
-:return: None</p>
+<dd><p>Set constant variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.setVars">
 <code class="descname">setVars</code><span class="sig-paren">(</span><em>dem</em>, <em>fdir</em>, <em>fac</em>, <em>id</em>, <em>shp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.setVars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.setVars" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set class variables
-:param dem: Path to DEM.
-:param fdir: Path to flow direction raster.
-:param fac: Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).
-:param id: Path to dam ID raster.
-:param shp: Path to shapefile of dam locations.
-:return: None</p>
+<dd><p>Set class variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dem</strong> &#8211; Path to DEM.</li>
+<li><strong>fdir</strong> &#8211; Path to flow direction raster.</li>
+<li><strong>fac</strong> &#8211; Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).</li>
+<li><strong>id</strong> &#8211; Path to dam ID raster.</li>
+<li><strong>shp</strong> &#8211; Path to shapefile of dam locations.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.writeArrayToRaster">
 <code class="descname">writeArrayToRaster</code><span class="sig-paren">(</span><em>file</em>, <em>array</em>, <em>lowernd</em>, <em>uppernd</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.writeArrayToRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.writeArrayToRaster" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save numpy array as a GeoTiff raster concurrent with the input DEM
-:param file: Path to save file.
-:param array: Numpy array of data.
-:param lowernd: Lowest data value.
-:param uppernd: Highest data value.
-:return:</p>
+<dd><p>Save numpy array as a GeoTiff raster concurrent with the input DEM.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file</strong> &#8211; Path to save file.</li>
+<li><strong>array</strong> &#8211; Numpy array of data.</li>
+<li><strong>lowernd</strong> &#8211; Lowest data value.</li>
+<li><strong>uppernd</strong> &#8211; Highest data value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.writeHead">
 <code class="descname">writeHead</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.writeHead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.writeHead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate water surface elevation of cells inundated by modeld beaver ponds or represented by the rasterized stream network and save as GeoTiff
-:return: None</p>
+<dd><p>Calculate water surface elevation of cells inundated by modeld beaver ponds or represented by the rasterized stream network and save as GeoTiff.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.writeModflowFiles">
 <code class="descname">writeModflowFiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.writeModflowFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.writeModflowFiles" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save files to be used with BDflopy for MODFLOW parameterization
-:return: None</p>
+<dd><p>Save files to be used with BDflopy for MODFLOW parameterization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdws.BDSWEA.writeSurfaceWSE">
 <code class="descname">writeSurfaceWSE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.writeSurfaceWSE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.writeSurfaceWSE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update DEM to reflect water surface elevation of modeled beaver ponds and save as GeoTiff
-:return: None</p>
+<dd><p>Update DEM to reflect water surface elevation of modeled beaver ponds and save as GeoTiff.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -458,159 +678,315 @@
 </div>
 <div class="section" id="bdflopy-class">
 <h2>BDflopy Class<a class="headerlink" href="#bdflopy-class" title="Permalink to this headline">¶</a></h2>
+<p>Use MODFLOW-2005 to estimate the change in groundwater storage resulting from the construction of beaver dams.</p>
 <dl class="class">
 <dt id="bdflopy.BDflopy">
 <em class="property">class </em><code class="descclassname">bdflopy.</code><code class="descname">BDflopy</code><span class="sig-paren">(</span><em>modflowexe</em>, <em>indir</em>, <em>modeldir</em>, <em>outdir</em>, <em>demfilename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="bdflopy.BDflopy.calculateHeadDifference">
 <code class="descname">calculateHeadDifference</code><span class="sig-paren">(</span><em>frac=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.calculateHeadDifference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.calculateHeadDifference" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the head difference between MODFLOW runs
-:param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0
-:return: None</p>
+<dd><p>Calculate the head difference between MODFLOW runs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frac</strong> &#8211; Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close GDAL datasets
-:return: None</p>
+<dd><p>Close GDAL datasets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.createDatasets">
 <code class="descname">createDatasets</code><span class="sig-paren">(</span><em>filelist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.createDatasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.createDatasets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create GDAL raster datasets
-:param filelist: List of paths where raster datasets will be created.
-:return: List of GDAL datasets</p>
+<dd><p>Create GDAL raster datasets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> &#8211; List of paths where raster datasets will be created.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of GDAL datasets</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.createIboundData">
 <code class="descname">createIboundData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.createIboundData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.createIboundData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create ibound arrays for MODFLOW parameterization
-:return: None</p>
+<dd><p>Create ibound arrays for MODFLOW parameterization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.createModflowDatasets">
 <code class="descname">createModflowDatasets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.createModflowDatasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.createModflowDatasets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create GDAL raster datasets for MODFLOW inputs and outputs
-:return: None</p>
+<dd><p>Create GDAL raster datasets for MODFLOW inputs and outputs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.createStartingHeadData">
 <code class="descname">createStartingHeadData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.createStartingHeadData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.createStartingHeadData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate starting head arrays
-:return: None</p>
+<dd><p>Calculate starting head arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.loadBdsweaData">
 <code class="descname">loadBdsweaData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.loadBdsweaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.loadBdsweaData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load data from BDSWEA
-:return: None</p>
+<dd><p>Load data from BDSWEA.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.loadData">
 <code class="descname">loadData</code><span class="sig-paren">(</span><em>filelist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.loadData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.loadData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read data from input rasters as numpy arrays
-:param filelist: List of raster files to read as numpy arrays.
-:return: List of numpy arrays</p>
+<dd><p>Read data from input rasters as numpy arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> &#8211; List of raster files to read as numpy arrays.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of numpy arrays</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.loadSoilData">
 <code class="descname">loadSoilData</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.loadSoilData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.loadSoilData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load/create data for hydraulic conductivity and fraction of soil that holds water. This function is called internally.
-:param data: Float, numpy.ndarray, or file path to raster
-:return: Numpy array</p>
+<dd><p>Load/create data for hydraulic conductivity and fraction of soil that holds water. This function is called internally.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; Float, numpy.ndarray, or file path to raster.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Numpy array</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>hksat</em>, <em>vksat</em>, <em>kconv=1.0</em>, <em>frac=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run MODFLOW to calculate water surface elevation changes from beaver dam construction
-:param hksat: Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
-:param vksat: Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
-:param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.
-:param frac: Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.
-:return: None</p>
+<dd><p>Run MODFLOW to calculate water surface elevation changes from beaver dam construction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hksat</strong> &#8211; Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
+<li><strong>vksat</strong> &#8211; Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
+<li><strong>kconv</strong> &#8211; Factor to convert khsat and kvsat to meters per second. Default = 1.0.</li>
+<li><strong>frac</strong> &#8211; Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.runModflow">
 <code class="descname">runModflow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.runModflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.runModflow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios
-:return: None</p>
+<dd><p>Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.saveResultsToRaster">
 <code class="descname">saveResultsToRaster</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.saveResultsToRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.saveResultsToRaster" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read modeled head values and write to GDAL rasters
-:return: None</p>
+<dd><p>Read modeled head values and write to GDAL rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setHeadPaths">
 <code class="descname">setHeadPaths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setHeadPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setHeadPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set file names for head data to be read and written
-:return: None</p>
+<dd><p>Set file names for head data to be read and written.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setIBoundPaths">
 <code class="descname">setIBoundPaths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setIBoundPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setIBoundPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set file names for output ibound rasters
-:return: None</p>
+<dd><p>Set file names for output ibound rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setLpfVariables">
 <code class="descname">setLpfVariables</code><span class="sig-paren">(</span><em>hksat</em>, <em>vksat</em>, <em>kconv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setLpfVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setLpfVariables" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set variables required for MODFLOW LPF package. This function is called internally
-:param khsat: Horizontal hydraulic conductivity.
-:param kvsat: Vertical hydraulic conductivity.
-:param kconv: Factor to convert hksat and vksat to meters per second.
-:return: None</p>
+<dd><p>Set variables required for MODFLOW LPF package. This function is called internally.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>khsat</strong> &#8211; Horizontal hydraulic conductivity.</li>
+<li><strong>kvsat</strong> &#8211; Vertical hydraulic conductivity.</li>
+<li><strong>kconv</strong> &#8211; Factor to convert hksat and vksat to meters per second.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setPaths">
 <code class="descname">setPaths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set file paths for input and output data
-:return: None</p>
+<dd><p>Set file paths for input and output data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setPondDepthPaths">
 <code class="descname">setPondDepthPaths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setPondDepthPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setPondDepthPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set file paths for pond depth rasters created by BDSWEA
-:return: None</p>
+<dd><p>Set file paths for pond depth rasters created by BDSWEA.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setVariables">
 <code class="descname">setVariables</code><span class="sig-paren">(</span><em>demfilename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setVariables" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set class variables
-:param demfilename: Name of DEM raster file.
-:return: None</p>
+<dd><p>Set class variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>demfilename</strong> &#8211; Name of DEM raster file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.setWsePaths">
 <code class="descname">setWsePaths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.setWsePaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.setWsePaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set file paths for water surface elevation rasters created by BDSWEA
-:return: None</p>
+<dd><p>Set file paths for water surface elevation rasters created by BDSWEA.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.writeModflowInput">
 <code class="descname">writeModflowInput</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.writeModflowInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.writeModflowInput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios
-:return: None</p>
+<dd><p>Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

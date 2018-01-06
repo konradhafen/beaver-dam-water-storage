@@ -118,7 +118,8 @@
 <div class="viewcode-block" id="BDflopy"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy">[docs]</a><span class="k">class</span> <span class="nc">BDflopy</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modflowexe</span><span class="p">,</span> <span class="n">indir</span><span class="p">,</span> <span class="n">modeldir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">demfilename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize BDflopy class</span>
+<span class="sd">        Initialize BDflopy class.</span>
+
 <span class="sd">        :param modflowexe: Path to MODFLOW executable file.</span>
 <span class="sd">        :param indir: Path to directory of raster inputs for BDSWEA.</span>
 <span class="sd">        :param modeldir: Path to directory of outputs from BDSWEA.</span>
@@ -137,8 +138,10 @@
 
 <div class="viewcode-block" id="BDflopy.createDatasets"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.createDatasets">[docs]</a>    <span class="k">def</span> <span class="nf">createDatasets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filelist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create GDAL raster datasets</span>
+<span class="sd">        Create GDAL raster datasets.</span>
+
 <span class="sd">        :param filelist: List of paths where raster datasets will be created.</span>
+
 <span class="sd">        :return: List of GDAL datasets</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">datasetlist</span> <span class="o">=</span> <span class="p">[]</span>
@@ -153,7 +156,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.createIboundData"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.createIboundData">[docs]</a>    <span class="k">def</span> <span class="nf">createIboundData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create ibound arrays for MODFLOW parameterization</span>
+<span class="sd">        Create ibound arrays for MODFLOW parameterization.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iboundData</span> <span class="o">=</span> <span class="p">[]</span>
@@ -167,7 +171,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.createModflowDatasets"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.createModflowDatasets">[docs]</a>    <span class="k">def</span> <span class="nf">createModflowDatasets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create GDAL raster datasets for MODFLOW inputs and outputs</span>
+<span class="sd">        Create GDAL raster datasets for MODFLOW inputs and outputs.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c">#create starting head datasets</span>
@@ -182,7 +187,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.createStartingHeadData"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.createStartingHeadData">[docs]</a>    <span class="k">def</span> <span class="nf">createStartingHeadData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate starting head arrays</span>
+<span class="sd">        Calculate starting head arrays.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sheadData</span> <span class="o">=</span> <span class="p">[]</span>
@@ -195,8 +201,10 @@
 </div>
 <div class="viewcode-block" id="BDflopy.loadData"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.loadData">[docs]</a>    <span class="k">def</span> <span class="nf">loadData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filelist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Read data from input rasters as numpy arrays</span>
+<span class="sd">        Read data from input rasters as numpy arrays.</span>
+
 <span class="sd">        :param filelist: List of raster files to read as numpy arrays.</span>
+
 <span class="sd">        :return: List of numpy arrays</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">datalist</span> <span class="o">=</span> <span class="p">[]</span>
@@ -208,21 +216,19 @@
 </div>
 <div class="viewcode-block" id="BDflopy.loadBdsweaData"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.loadBdsweaData">[docs]</a>    <span class="k">def</span> <span class="nf">loadBdsweaData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Load data from BDSWEA</span>
+<span class="sd">        Load data from BDSWEA.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># initial DEM and water surface elevation from BDSWEA</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wseData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsePaths</span><span class="p">)</span>
-        <span class="c">#set bottom of the model domain</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">zbot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">10.0</span>
-        <span class="c"># head data from BDSWEA</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">headData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headPaths</span><span class="p">)</span>
-        <span class="c"># pond depths from BDSWEA</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pondData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pondPaths</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wseData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsePaths</span><span class="p">)</span> <span class="c"># initial DEM and water surface elevation from BDSWEA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zbot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">10.0</span> <span class="c"># set bottom of the model domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headPaths</span><span class="p">)</span> <span class="c"># head data from BDSWEA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pondData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pondPaths</span><span class="p">)</span> <span class="c"># pond depths from BDSWEA</span>
 </div>
 <div class="viewcode-block" id="BDflopy.setPaths"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setPaths">[docs]</a>    <span class="k">def</span> <span class="nf">setPaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set file paths for input and output data</span>
+<span class="sd">        Set file paths for input and output data.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWsePaths</span><span class="p">()</span>
@@ -232,8 +238,10 @@
 </div>
 <div class="viewcode-block" id="BDflopy.setVariables"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setVariables">[docs]</a>    <span class="k">def</span> <span class="nf">setVariables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">demfilename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set class variables</span>
+<span class="sd">        Set class variables.</span>
+
 <span class="sd">        :param demfilename: Name of DEM raster file.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&#39;GTiff&#39;</span><span class="p">)</span>
@@ -253,7 +261,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.setHeadPaths"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setHeadPaths">[docs]</a>    <span class="k">def</span> <span class="nf">setHeadPaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set file names for head data to be read and written</span>
+<span class="sd">        Set file names for head data to be read and written.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c">#head files from BDSWEA</span>
@@ -279,7 +288,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.setIBoundPaths"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setIBoundPaths">[docs]</a>    <span class="k">def</span> <span class="nf">setIBoundPaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set file names for output ibound rasters</span>
+<span class="sd">        Set file names for output ibound rasters.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iboundPaths</span> <span class="o">=</span> <span class="p">[]</span>
@@ -288,7 +298,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.setPondDepthPaths"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setPondDepthPaths">[docs]</a>    <span class="k">def</span> <span class="nf">setPondDepthPaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set file paths for pond depth rasters created by BDSWEA</span>
+<span class="sd">        Set file paths for pond depth rasters created by BDSWEA.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pondPaths</span> <span class="o">=</span> <span class="p">[]</span>
@@ -298,7 +309,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.setWsePaths"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setWsePaths">[docs]</a>    <span class="k">def</span> <span class="nf">setWsePaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set file paths for water surface elevation rasters created by BDSWEA</span>
+<span class="sd">        Set file paths for water surface elevation rasters created by BDSWEA.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wsePaths</span> <span class="o">=</span> <span class="p">[]</span>
@@ -309,10 +321,12 @@
 </div>
 <div class="viewcode-block" id="BDflopy.setLpfVariables"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.setLpfVariables">[docs]</a>    <span class="k">def</span> <span class="nf">setLpfVariables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hksat</span><span class="p">,</span> <span class="n">vksat</span><span class="p">,</span> <span class="n">kconv</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set variables required for MODFLOW LPF package. This function is called internally</span>
+<span class="sd">        Set variables required for MODFLOW LPF package. This function is called internally.</span>
+
 <span class="sd">        :param khsat: Horizontal hydraulic conductivity.</span>
 <span class="sd">        :param kvsat: Vertical hydraulic conductivity.</span>
 <span class="sd">        :param kconv: Factor to convert hksat and vksat to meters per second.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hksat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadSoilData</span><span class="p">(</span><span class="n">hksat</span><span class="p">)</span><span class="o">*</span><span class="n">kconv</span>
@@ -320,7 +334,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.writeModflowInput"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.writeModflowInput">[docs]</a>    <span class="k">def</span> <span class="nf">writeModflowInput</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios</span>
+<span class="sd">        Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="p">)</span>
@@ -337,7 +352,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.runModflow"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.runModflow">[docs]</a>    <span class="k">def</span> <span class="nf">runModflow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios</span>
+<span class="sd">        Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mf</span><span class="p">)):</span>
@@ -346,7 +362,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.saveResultsToRaster"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.saveResultsToRaster">[docs]</a>    <span class="k">def</span> <span class="nf">saveResultsToRaster</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Read modeled head values and write to GDAL rasters</span>
+<span class="sd">        Read modeled head values and write to GDAL rasters.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eheadData</span> <span class="o">=</span> <span class="p">[]</span>
@@ -369,7 +386,9 @@
 <div class="viewcode-block" id="BDflopy.loadSoilData"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.loadSoilData">[docs]</a>    <span class="k">def</span> <span class="nf">loadSoilData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load/create data for hydraulic conductivity and fraction of soil that holds water. This function is called internally.</span>
-<span class="sd">        :param data: Float, numpy.ndarray, or file path to raster</span>
+
+<span class="sd">        :param data: Float, numpy.ndarray, or file path to raster.</span>
+
 <span class="sd">        :return: Numpy array</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indir</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
@@ -389,8 +408,10 @@
 </div>
 <div class="viewcode-block" id="BDflopy.calculateHeadDifference"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.calculateHeadDifference">[docs]</a>    <span class="k">def</span> <span class="nf">calculateHeadDifference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frac</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the head difference between MODFLOW runs</span>
-<span class="sd">        :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0</span>
+<span class="sd">        Calculate the head difference between MODFLOW runs.</span>
+
+<span class="sd">        :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">frac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadSoilData</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span>
@@ -412,11 +433,13 @@
 </div>
 <div class="viewcode-block" id="BDflopy.run"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hksat</span><span class="p">,</span> <span class="n">vksat</span><span class="p">,</span> <span class="n">kconv</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">frac</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Run MODFLOW to calculate water surface elevation changes from beaver dam construction</span>
+<span class="sd">        Run MODFLOW to calculate water surface elevation changes from beaver dam construction.</span>
+
 <span class="sd">        :param hksat: Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</span>
 <span class="sd">        :param vksat: Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</span>
 <span class="sd">        :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.</span>
 <span class="sd">        :param frac: Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.</span>
+
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setLpfVariables</span><span class="p">(</span><span class="n">hksat</span><span class="p">,</span> <span class="n">vksat</span><span class="p">,</span> <span class="n">kconv</span><span class="p">)</span>
@@ -430,7 +453,8 @@
 </div>
 <div class="viewcode-block" id="BDflopy.close"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Close GDAL datasets</span>
+<span class="sd">        Close GDAL datasets.</span>
+<span class="sd">        </span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
