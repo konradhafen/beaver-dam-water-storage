@@ -9,7 +9,8 @@ from scipy import ndimage
 class BDflopy:
     def __init__(self, modflowexe, indir, modeldir, outdir, demfilename):
         """
-        Initialize BDflopy class
+        Initialize BDflopy class.
+
         :param modflowexe: Path to MODFLOW executable file.
         :param indir: Path to directory of raster inputs for BDSWEA.
         :param modeldir: Path to directory of outputs from BDSWEA.
@@ -28,8 +29,10 @@ class BDflopy:
 
     def createDatasets(self, filelist):
         """
-        Create GDAL raster datasets
+        Create GDAL raster datasets.
+
         :param filelist: List of paths where raster datasets will be created.
+
         :return: List of GDAL datasets
         """
         datasetlist = []
@@ -44,7 +47,8 @@ class BDflopy:
 
     def createIboundData(self):
         """
-        Create ibound arrays for MODFLOW parameterization
+        Create ibound arrays for MODFLOW parameterization.
+
         :return: None
         """
         self.iboundData = []
@@ -58,7 +62,8 @@ class BDflopy:
 
     def createModflowDatasets(self):
         """
-        Create GDAL raster datasets for MODFLOW inputs and outputs
+        Create GDAL raster datasets for MODFLOW inputs and outputs.
+
         :return: None
         """
         #create starting head datasets
@@ -73,7 +78,8 @@ class BDflopy:
 
     def createStartingHeadData(self):
         """
-        Calculate starting head arrays
+        Calculate starting head arrays.
+
         :return: None
         """
         self.sheadData = []
@@ -86,8 +92,10 @@ class BDflopy:
 
     def loadData(self, filelist):
         """
-        Read data from input rasters as numpy arrays
+        Read data from input rasters as numpy arrays.
+
         :param filelist: List of raster files to read as numpy arrays.
+
         :return: List of numpy arrays
         """
         datalist = []
@@ -99,21 +107,19 @@ class BDflopy:
 
     def loadBdsweaData(self):
         """
-        Load data from BDSWEA
+        Load data from BDSWEA.
+
         :return: None
         """
-        # initial DEM and water surface elevation from BDSWEA
-        self.wseData = self.loadData(self.wsePaths)
-        #set bottom of the model domain
-        self.zbot = self.wseData[0] - 10.0
-        # head data from BDSWEA
-        self.headData = self.loadData(self.headPaths)
-        # pond depths from BDSWEA
-        self.pondData = self.loadData(self.pondPaths)
+        self.wseData = self.loadData(self.wsePaths) # initial DEM and water surface elevation from BDSWEA
+        self.zbot = self.wseData[0] - 10.0 # set bottom of the model domain
+        self.headData = self.loadData(self.headPaths) # head data from BDSWEA
+        self.pondData = self.loadData(self.pondPaths) # pond depths from BDSWEA
 
     def setPaths(self):
         """
-        Set file paths for input and output data
+        Set file paths for input and output data.
+
         :return: None
         """
         self.setWsePaths()
@@ -123,8 +129,10 @@ class BDflopy:
 
     def setVariables(self, demfilename):
         """
-        Set class variables
+        Set class variables.
+
         :param demfilename: Name of DEM raster file.
+
         :return: None
         """
         self.driver = gdal.GetDriverByName('GTiff')
@@ -144,7 +152,8 @@ class BDflopy:
 
     def setHeadPaths(self):
         """
-        Set file names for head data to be read and written
+        Set file names for head data to be read and written.
+
         :return: None
         """
         #head files from BDSWEA
@@ -170,7 +179,8 @@ class BDflopy:
 
     def setIBoundPaths(self):
         """
-        Set file names for output ibound rasters
+        Set file names for output ibound rasters.
+
         :return: None
         """
         self.iboundPaths = []
@@ -179,7 +189,8 @@ class BDflopy:
 
     def setPondDepthPaths(self):
         """
-        Set file paths for pond depth rasters created by BDSWEA
+        Set file paths for pond depth rasters created by BDSWEA.
+
         :return: None
         """
         self.pondPaths = []
@@ -189,7 +200,8 @@ class BDflopy:
 
     def setWsePaths(self):
         """
-        Set file paths for water surface elevation rasters created by BDSWEA
+        Set file paths for water surface elevation rasters created by BDSWEA.
+
         :return: None
         """
         self.wsePaths = []
@@ -200,10 +212,12 @@ class BDflopy:
 
     def setLpfVariables(self, hksat, vksat, kconv):
         """
-        Set variables required for MODFLOW LPF package. This function is called internally
+        Set variables required for MODFLOW LPF package. This function is called internally.
+
         :param khsat: Horizontal hydraulic conductivity.
         :param kvsat: Vertical hydraulic conductivity.
         :param kconv: Factor to convert hksat and vksat to meters per second.
+
         :return: None
         """
         self.hksat = self.loadSoilData(hksat)*kconv
@@ -211,7 +225,8 @@ class BDflopy:
 
     def writeModflowInput(self):
         """
-        Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios
+        Add MODFLOW packages and write input files for baseline, low dam height, median dam height, and high dam height scenarios.
+
         :return: None
         """
         os.chdir(self.outdir)
@@ -228,7 +243,8 @@ class BDflopy:
 
     def runModflow(self):
         """
-        Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios
+        Run MODFLOW for baseline, low dam height, median dam height, and high dam height scenarios.
+
         :return: None
         """
         for i in range(0, len(self.mf)):
@@ -237,7 +253,8 @@ class BDflopy:
 
     def saveResultsToRaster(self):
         """
-        Read modeled head values and write to GDAL rasters
+        Read modeled head values and write to GDAL rasters.
+
         :return: None
         """
         self.eheadData = []
@@ -260,7 +277,9 @@ class BDflopy:
     def loadSoilData(self, data):
         """
         Load/create data for hydraulic conductivity and fraction of soil that holds water. This function is called internally.
-        :param data: Float, numpy.ndarray, or file path to raster
+
+        :param data: Float, numpy.ndarray, or file path to raster.
+
         :return: Numpy array
         """
         if os.path.isfile(self.indir + "/" + str(data)):
@@ -280,8 +299,10 @@ class BDflopy:
 
     def calculateHeadDifference(self, frac = 1.0):
         """
-        Calculate the head difference between MODFLOW runs
-        :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0
+        Calculate the head difference between MODFLOW runs.
+
+        :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.
+
         :return: None
         """
         frac = self.loadSoilData(frac)
@@ -303,11 +324,13 @@ class BDflopy:
 
     def run(self, hksat, vksat, kconv = 1.0, frac = 1.0):
         """
-        Run MODFLOW to calculate water surface elevation changes from beaver dam construction
+        Run MODFLOW to calculate water surface elevation changes from beaver dam construction.
+
         :param hksat: Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
         :param vksat: Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
         :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.
         :param frac: Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.
+
         :return: None
         """
         self.setLpfVariables(hksat, vksat, kconv)
@@ -321,7 +344,8 @@ class BDflopy:
 
     def close(self):
         """
-        Close GDAL datasets
+        Close GDAL datasets.
+        
         :return: None
         """
 
