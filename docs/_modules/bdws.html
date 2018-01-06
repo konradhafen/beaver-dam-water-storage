@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>bdws &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
@@ -12,9 +13,10 @@
 
   
   
+  
+  
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -30,25 +32,45 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Beaver Dam Water Storage 0.0.1 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
-          <a href="../index.html" class="fa fa-home"> Beaver Dam Water Storage</a>
-        
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Beaver Dam Water Storage
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -56,64 +78,92 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
           
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+            
+            
+              
+            
+            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example.html">Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inputs.html">Input Prep</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../code.html">Code Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../code.html#bdlog-class">BDLoG Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../code.html#bdswea-class">BDSWEA Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../code.html#bdflopy-class">BDflopy Class</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../code.html">Code Documentation</a></li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">Beaver Dam Water Storage</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Beaver Dam Water Storage</a>
+        
       </nav>
 
 
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Module code</a> &raquo;</li>
-      
-    <li>bdws</li>
+        
+      <li>bdws</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
+            
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <h1>Source code for bdws</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span><span class="p">,</span> <span class="n">ogr</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="k">import</span> <span class="n">gdal</span><span class="p">,</span> <span class="n">ogr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">math</span>
 
 <div class="viewcode-block" id="BDLoG"><a class="viewcode-back" href="../code.html#bdws.BDLoG">[docs]</a><span class="k">class</span> <span class="nc">BDLoG</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brat</span><span class="p">,</span> <span class="n">dem</span> <span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">bratCap</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brat</span><span class="p">,</span> <span class="n">dem</span> <span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">bratCap</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialization of the Beaver Dam Location Generator class.</span>
 
@@ -139,7 +189,7 @@
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">driverShp</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&quot;Esri Shapefile&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driverShp</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;Esri Shapefile&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bratDS</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratPath</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratDS</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nFeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">GetFeatureCount</span><span class="p">()</span>
@@ -150,131 +200,131 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">geot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">GetGeoTransform</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">GetProjection</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outDS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driverShp</span><span class="o">.</span><span class="n">CreateDataSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/ModeledDamPoints.shp&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outDS</span><span class="o">.</span><span class="n">CreateLayer</span><span class="p">(</span><span class="s">&quot;ModeledDamPoints&quot;</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">(),</span> <span class="n">geom_type</span><span class="o">=</span><span class="n">ogr</span><span class="o">.</span><span class="n">wkbPoint</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outDS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driverShp</span><span class="o">.</span><span class="n">CreateDataSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/ModeledDamPoints.shp&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outDS</span><span class="o">.</span><span class="n">CreateLayer</span><span class="p">(</span><span class="s2">&quot;ModeledDamPoints&quot;</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">(),</span> <span class="n">geom_type</span><span class="o">=</span><span class="n">ogr</span><span class="o">.</span><span class="n">wkbPoint</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">nFeat</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&quot;GTiff&quot;</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;GTiff&quot;</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDLoG.createFields"><a class="viewcode-back" href="../code.html#bdws.BDLoG.createFields">[docs]</a>    <span class="k">def</span> <span class="nf">createFields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates fields to be populated for the output dam location shapefile</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s">&quot;brat_ID&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s2">&quot;brat_ID&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;endx&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;endx&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;endy&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;endy&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;az_us&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;az_us&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;g_elev&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;g_elev&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;slope&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;slope&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_max&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_max&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;damType&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;damType&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTString</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_lo&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_lo&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_mid&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_mid&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_hi&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_hi&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_lo_mod&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_lo_mod&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_mid_mod&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_mid_mod&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;ht_hi_mod&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;ht_hi_mod&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;area_lo&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;area_lo&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;area_mid&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;area_mid&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;area_hi&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;area_hi&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_lo&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_lo&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_mid&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_mid&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_hi&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_hi&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_lo_lp&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_lo_lp&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_mid_lp&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_mid_lp&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_hi_lp&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_hi_lp&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_lo_mp&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_lo_mp&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_mid_mp&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_mid_mp&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_hi_mp&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_hi_mp&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_lo_up&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_lo_up&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_mid_up&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_mid_up&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;vol_hi_up&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;vol_hi_up&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;diff_lo&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;diff_lo&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;diff_mid&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;diff_mid&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;diff_hi&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;diff_hi&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
         <span class="n">field</span><span class="o">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDLoG.setBratFields"><a class="viewcode-back" href="../code.html#bdws.BDLoG.setBratFields">[docs]</a>    <span class="k">def</span> <span class="nf">setBratFields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set values for fields derived from the input BRAT shapefile.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s">&quot;totdams&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">DeleteField</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s">&quot;totdams&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s">&quot;totcomp&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">DeleteField</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s">&quot;totcomp&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="n">field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s">&quot;totdams&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s2">&quot;totdams&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">DeleteField</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s2">&quot;totdams&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s2">&quot;totcomp&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">DeleteField</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">FindFieldIndex</span><span class="p">(</span><span class="s2">&quot;totcomp&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s2">&quot;totdams&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-        <span class="n">field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s">&quot;totcomp&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-</div>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s2">&quot;totcomp&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDLoG.sortByCapacity"><a class="viewcode-back" href="../code.html#bdws.BDLoG.sortByCapacity">[docs]</a>    <span class="k">def</span> <span class="nf">sortByCapacity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sort BRAT reaches by estimated dam capacity.</span>
@@ -284,15 +334,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nFeat</span><span class="p">):</span>
             <span class="n">feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">GetFeature</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="n">cap</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s">&quot;oCC_EX&quot;</span><span class="p">)</span>
+            <span class="n">cap</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s2">&quot;oCC_EX&quot;</span><span class="p">)</span>
             <span class="n">geom</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetGeometryRef</span><span class="p">()</span>
-            <span class="c">#self.capRank holds 3 variables: FID, BRAT capacity (dams/km), and number of dams to be modeled for scenario(capacity scenario * BRAT capacity)</span>
+            <span class="c1">#self.capRank holds 3 variables: FID, BRAT capacity (dams/km), and number of dams to be modeled for scenario(capacity scenario * BRAT capacity)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFID</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cap</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">Length</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">cap</span><span class="o">/</span><span class="mf">1000.0</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">modCap</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratCap</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]))</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modCap</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bratCap</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]))</span></div>
+
 <div class="viewcode-block" id="BDLoG.calculateDamsPerReach"><a class="viewcode-back" href="../code.html#bdws.BDLoG.calculateDamsPerReach">[docs]</a>    <span class="k">def</span> <span class="nf">calculateDamsPerReach</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Determine the number of beaver dams and beaver dam complexes to place on each BRAT reach.</span>
@@ -300,33 +350,33 @@
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setBratFields</span><span class="p">()</span>
-        <span class="n">go</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">go</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">totalDams</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">while</span> <span class="n">go</span><span class="p">:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">nFeat</span> <span class="ow">and</span> <span class="n">go</span><span class="p">:</span>
                 <span class="n">bratFeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">GetFeature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">exDams</span> <span class="o">=</span> <span class="n">bratFeat</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s">&quot;totdams&quot;</span><span class="p">)</span>
-                <span class="n">exComp</span> <span class="o">=</span> <span class="n">bratFeat</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s">&quot;totcomp&quot;</span><span class="p">)</span>
+                <span class="n">exDams</span> <span class="o">=</span> <span class="n">bratFeat</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s2">&quot;totdams&quot;</span><span class="p">)</span>
+                <span class="n">exComp</span> <span class="o">=</span> <span class="n">bratFeat</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s2">&quot;totcomp&quot;</span><span class="p">)</span>
 
-                <span class="c">#number of dams for BRAT segment randomly selected from empricial complex size distribution</span>
+                <span class="c1">#number of dams for BRAT segment randomly selected from empricial complex size distribution</span>
                 <span class="n">damCount</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mf">1.5515</span><span class="p">,</span> <span class="mf">0.724</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">damCount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">damCount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
                         <span class="n">damCount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
                     <span class="k">if</span> <span class="p">(</span><span class="n">totalDams</span> <span class="o">+</span> <span class="n">damCount</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">modCap</span><span class="p">:</span>
                         <span class="n">damCount</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modCap</span> <span class="o">-</span> <span class="n">totalDams</span><span class="p">)</span>
-                    <span class="n">bratFeat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;totdams&quot;</span><span class="p">,</span> <span class="n">exDams</span> <span class="o">+</span> <span class="n">damCount</span><span class="p">)</span>
+                    <span class="n">bratFeat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;totdams&quot;</span><span class="p">,</span> <span class="n">exDams</span> <span class="o">+</span> <span class="n">damCount</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">damCount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">bratFeat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;totcomp&quot;</span><span class="p">,</span> <span class="n">exComp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">bratFeat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;totcomp&quot;</span><span class="p">,</span> <span class="n">exComp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">SetFeature</span><span class="p">(</span><span class="n">bratFeat</span><span class="p">)</span>
                 <span class="n">totalDams</span> <span class="o">+=</span> <span class="n">damCount</span>
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
                 <span class="k">if</span> <span class="n">totalDams</span> <span class="o">&gt;=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modCap</span><span class="p">):</span>
-                    <span class="n">go</span> <span class="o">=</span> <span class="bp">False</span>
-</div>
+                    <span class="n">go</span> <span class="o">=</span> <span class="kc">False</span></div>
+
 <div class="viewcode-block" id="BDLoG.createDams"><a class="viewcode-back" href="../code.html#bdws.BDLoG.createDams">[docs]</a>    <span class="k">def</span> <span class="nf">createDams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Place primary and secondary dams at a specific location on stream reaches.</span>
@@ -338,45 +388,45 @@
             <span class="n">bratFt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span><span class="o">.</span><span class="n">GetFeature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capRank</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
             <span class="n">bratLine</span> <span class="o">=</span> <span class="n">bratFt</span><span class="o">.</span><span class="n">GetGeometryRef</span><span class="p">()</span>
             <span class="n">length</span> <span class="o">=</span> <span class="n">bratLine</span><span class="o">.</span><span class="n">Length</span><span class="p">()</span>
-            <span class="c">#read number of dams and dam complexes from shapefile field</span>
-            <span class="n">nDamCt</span> <span class="o">=</span> <span class="n">bratFt</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s">&quot;totdams&quot;</span><span class="p">)</span>
-            <span class="n">nCompCt</span> <span class="o">=</span> <span class="n">bratFt</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s">&quot;totcomp&quot;</span><span class="p">)</span>
+            <span class="c1">#read number of dams and dam complexes from shapefile field</span>
+            <span class="n">nDamCt</span> <span class="o">=</span> <span class="n">bratFt</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s2">&quot;totdams&quot;</span><span class="p">)</span>
+            <span class="n">nCompCt</span> <span class="o">=</span> <span class="n">bratFt</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s2">&quot;totcomp&quot;</span><span class="p">)</span>
             <span class="n">spacing</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="k">if</span> <span class="n">nDamCt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">spacing</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="p">(</span><span class="n">nDamCt</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">)</span>
 
-            <span class="c">#create a point for each dam to be modeled</span>
+            <span class="c1">#create a point for each dam to be modeled</span>
             <span class="n">nDamRm</span> <span class="o">=</span> <span class="n">nDamCt</span>
             <span class="n">nCompRm</span> <span class="o">=</span> <span class="n">nCompCt</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nDamCt</span><span class="p">):</span>
-                <span class="c">#determine if dam is primary or secondary and create height distribution</span>
+                <span class="c1">#determine if dam is primary or secondary and create height distribution</span>
                 <span class="n">damFeat</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">())</span>
                 <span class="n">rnum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">rnum</span> <span class="o">&lt;</span> <span class="p">((</span><span class="n">nCompRm</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nDamRm</span><span class="o">*</span><span class="mf">1.0</span><span class="p">))</span> <span class="ow">or</span> <span class="n">nDamCt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">htDist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.36</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-                    <span class="n">damType</span> <span class="o">=</span> <span class="s">&quot;primary&quot;</span>
+                    <span class="n">damType</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span>
                     <span class="n">nCompRm</span> <span class="o">-=</span> <span class="mi">1</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">htDist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="o">-</span><span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.39</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-                    <span class="n">damType</span> <span class="o">=</span> <span class="s">&quot;secondary&quot;</span>
+                    <span class="n">damType</span> <span class="o">=</span> <span class="s2">&quot;secondary&quot;</span>
 
                 <span class="n">nDamRm</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="c">#location of dam on stream segment</span>
+                <span class="c1">#location of dam on stream segment</span>
                 <span class="n">pointDist</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="p">(</span><span class="n">spacing</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">))</span>
                 <span class="n">damPoint</span> <span class="o">=</span> <span class="n">bratLine</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">pointDist</span><span class="p">)</span>
-                <span class="c">#bratLine.Value will return None if called on multipart line. This will cause a crash later in the code</span>
-                <span class="k">if</span> <span class="n">damPoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="c">#set any field values here</span>
+                <span class="c1">#bratLine.Value will return None if called on multipart line. This will cause a crash later in the code</span>
+                <span class="k">if</span> <span class="n">damPoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1">#set any field values here</span>
                     <span class="n">damFeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setDamFieldValues</span><span class="p">(</span><span class="n">damFeat</span><span class="p">,</span> <span class="n">damType</span><span class="p">)</span>
-                    <span class="c">#set dam heights</span>
+                    <span class="c1">#set dam heights</span>
                     <span class="n">damFeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setDamHeights</span><span class="p">(</span><span class="n">damFeat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">htDist</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">htDist</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">htDist</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">))</span>
                     <span class="n">damFeat</span><span class="o">.</span><span class="n">SetGeometry</span><span class="p">(</span><span class="n">damPoint</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">CreateFeature</span><span class="p">(</span><span class="n">damFeat</span><span class="p">)</span>
-                <span class="n">damFeat</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">damFeat</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">bratFt</span> <span class="o">=</span> <span class="bp">None</span>
-</div>
+            <span class="n">bratFt</span> <span class="o">=</span> <span class="kc">None</span></div>
+
 <div class="viewcode-block" id="BDLoG.getCellAddressOfPoint"><a class="viewcode-back" href="../code.html#bdws.BDLoG.getCellAddressOfPoint">[docs]</a>    <span class="k">def</span> <span class="nf">getCellAddressOfPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the row and column of a coordinate pair (linear units) based on the input DEM. UTM projections suggested, will not work with degree units.</span>
@@ -389,8 +439,8 @@
         <span class="n">col</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">row</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
         <span class="n">address</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">address</span>
-</div>
+        <span class="k">return</span> <span class="n">address</span></div>
+
 <div class="viewcode-block" id="BDLoG.getCoordinatesOfCellAddress"><a class="viewcode-back" href="../code.html#bdws.BDLoG.getCoordinatesOfCellAddress">[docs]</a>    <span class="k">def</span> <span class="nf">getCoordinatesOfCellAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the coordinate pair at the center of a cell address based on the input DEM. UTM projections suggested, will not work with degree units.</span>
@@ -403,8 +453,8 @@
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">col</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">row</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">coords</span>
-</div>
+        <span class="k">return</span> <span class="n">coords</span></div>
+
 <div class="viewcode-block" id="BDLoG.getStreamCellAddresses"><a class="viewcode-back" href="../code.html#bdws.BDLoG.getStreamCellAddresses">[docs]</a>    <span class="k">def</span> <span class="nf">getStreamCellAddresses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List addresses of cells on the stream network.</span>
@@ -413,8 +463,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">facDS</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span>
         <span class="n">streamcells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">fac</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">streamcells</span>
-</div>
+        <span class="k">return</span> <span class="n">streamcells</span></div>
+
 <div class="viewcode-block" id="BDLoG.moveDamsToFAC"><a class="viewcode-back" href="../code.html#bdws.BDLoG.moveDamsToFAC">[docs]</a>    <span class="k">def</span> <span class="nf">moveDamsToFAC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set locations of generated dams to the nearest cell on the rasterized stream network. Only one dam can be present on each network cell.</span>
@@ -426,23 +476,23 @@
         <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
 
         <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nDams</span><span class="p">:</span>
-            <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nDams</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nDams</span><span class="p">)</span>
             <span class="n">damFt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">GetFeature</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="n">damPt</span> <span class="o">=</span> <span class="n">damFt</span><span class="o">.</span><span class="n">GetGeometryRef</span><span class="p">()</span>
             <span class="n">damAddress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCellAddressOfPoint</span><span class="p">(</span><span class="n">damPt</span><span class="o">.</span><span class="n">GetX</span><span class="p">(),</span> <span class="n">damPt</span><span class="o">.</span><span class="n">GetY</span><span class="p">())</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">streamcells</span> <span class="o">-</span> <span class="n">damAddress</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c">#distance from stream cells to dam point</span>
-            <span class="c">#Maybe put in a check so if distance is too far it deletes the dam</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dist</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span> <span class="c">#index of closest stream cell</span>
-            <span class="n">damAddress</span> <span class="o">=</span> <span class="n">streamcells</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="c">#change cell address of dam to closest stream cell</span>
-            <span class="n">streamcells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">streamcells</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c">#delete stream cell so each dam is located in a different cell</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">streamcells</span> <span class="o">-</span> <span class="n">damAddress</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#distance from stream cells to dam point</span>
+            <span class="c1">#Maybe put in a check so if distance is too far it deletes the dam</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dist</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span> <span class="c1">#index of closest stream cell</span>
+            <span class="n">damAddress</span> <span class="o">=</span> <span class="n">streamcells</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="c1">#change cell address of dam to closest stream cell</span>
+            <span class="n">streamcells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">streamcells</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#delete stream cell so each dam is located in a different cell</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span><span class="p">[</span><span class="n">damAddress</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">damAddress</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span>
             <span class="n">damCoords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCoordinatesOfCellAddress</span><span class="p">(</span><span class="n">damAddress</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">damAddress</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">ptwkt</span> <span class="o">=</span> <span class="s">&quot;POINT(</span><span class="si">%f</span><span class="s"> </span><span class="si">%f</span><span class="s">)&quot;</span> <span class="o">%</span>  <span class="p">(</span><span class="n">damCoords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">damCoords</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">ptwkt</span> <span class="o">=</span> <span class="s2">&quot;POINT(</span><span class="si">%f</span><span class="s2"> </span><span class="si">%f</span><span class="s2">)&quot;</span> <span class="o">%</span>  <span class="p">(</span><span class="n">damCoords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">damCoords</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">damPt</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">CreateGeometryFromWkt</span><span class="p">(</span><span class="n">ptwkt</span><span class="p">)</span>
             <span class="n">damFt</span><span class="o">.</span><span class="n">SetGeometryDirectly</span><span class="p">(</span><span class="n">damPt</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span><span class="o">.</span><span class="n">SetFeature</span><span class="p">(</span><span class="n">damFt</span><span class="p">)</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-</div>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
 <div class="viewcode-block" id="BDLoG.setDamFieldValues"><a class="viewcode-back" href="../code.html#bdws.BDLoG.setDamFieldValues">[docs]</a>    <span class="k">def</span> <span class="nf">setDamFieldValues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">damType</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set attribute for dam type.</span>
@@ -452,9 +502,9 @@
 
 <span class="sd">        :return: Updated OGR Feature of dam.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;damType&quot;</span><span class="p">,</span> <span class="n">damType</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">feat</span>
-</div>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;damType&quot;</span><span class="p">,</span> <span class="n">damType</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">feat</span></div>
+
 <div class="viewcode-block" id="BDLoG.setDamHeights"><a class="viewcode-back" href="../code.html#bdws.BDLoG.setDamHeights">[docs]</a>    <span class="k">def</span> <span class="nf">setDamHeights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set dam heights to be modeled for a dam.</span>
@@ -466,15 +516,15 @@
 
 <span class="sd">        :return: Updated OGR Feature of dam.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;ht_lo&quot;</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;ht_mid&quot;</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;ht_hi&quot;</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;ht_lo_mod&quot;</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;ht_mid_mod&quot;</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s">&quot;ht_hi_mod&quot;</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
-        <span class="c">#feat.SetField(&quot;ht_max&quot;, max)</span>
-        <span class="k">return</span> <span class="n">feat</span>
-</div>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;ht_lo&quot;</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;ht_mid&quot;</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;ht_hi&quot;</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;ht_lo_mod&quot;</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;ht_mid_mod&quot;</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;ht_hi_mod&quot;</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+        <span class="c1">#feat.SetField(&quot;ht_max&quot;, max)</span>
+        <span class="k">return</span> <span class="n">feat</span></div>
+
 <div class="viewcode-block" id="BDLoG.generateDamLocationsFromBRAT"><a class="viewcode-back" href="../code.html#bdws.BDLoG.generateDamLocationsFromBRAT">[docs]</a>    <span class="k">def</span> <span class="nf">generateDamLocationsFromBRAT</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate dam locations on rasterized stream network.</span>
@@ -486,23 +536,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sortByCapacity</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calculateDamsPerReach</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">createDams</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">moveDamsToFAC</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveDamsToFAC</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="BDLoG.writeDamLocationRaster"><a class="viewcode-back" href="../code.html#bdws.BDLoG.writeDamLocationRaster">[docs]</a>    <span class="k">def</span> <span class="nf">writeDamLocationRaster</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write dam locations to raster.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/damID.tif&quot;</span><span class="p">,</span> <span class="n">xsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterXSize</span><span class="p">,</span> <span class="n">ysize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterYSize</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/damID.tif&quot;</span><span class="p">,</span> <span class="n">xsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterXSize</span><span class="p">,</span> <span class="n">ysize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterYSize</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                     <span class="n">eType</span><span class="o">=</span><span class="n">gdal</span><span class="o">.</span><span class="n">GDT_Float32</span><span class="p">)</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">)</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">SetProjection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prj</span><span class="p">)</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">WriteArray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span><span class="p">)</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">FlushCache</span><span class="p">()</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">SetNoDataValue</span><span class="p">(</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">)</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="bp">None</span>
-</div>
+        <span class="n">ds</span> <span class="o">=</span> <span class="kc">None</span></div>
+
 <div class="viewcode-block" id="BDLoG.run"><a class="viewcode-back" href="../code.html#bdws.BDLoG.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate dam locations from BRAT and output as shapefile and raster.</span>
@@ -510,25 +560,25 @@
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generateDamLocationsFromBRAT</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeDamLocationRaster</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeDamLocationRaster</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="BDLoG.close"><a class="viewcode-back" href="../code.html#bdws.BDLoG.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Close all OGR and GDAL layers and datasets.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bratDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">facDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bratDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bratLyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">facDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outLyr</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">fac</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span>
-</div></div>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span></div></div>
+
 <div class="viewcode-block" id="BDSWEA"><a class="viewcode-back" href="../code.html#bdws.BDSWEA">[docs]</a><span class="k">class</span> <span class="nc">BDSWEA</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dem</span><span class="p">,</span> <span class="n">fdir</span><span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">modPoints</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -547,9 +597,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setConstants</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setVars</span><span class="p">(</span><span class="n">dem</span><span class="p">,</span> <span class="n">fdir</span><span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">modPoints</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">createOutputArrays</span><span class="p">()</span>
-        <span class="c"># self.origrecursion = sys.getrecursionlimit()</span>
-        <span class="c"># if self.origrecursion &lt; 1500:</span>
-        <span class="c">#     sys.setrecursionlimit(1500)</span>
+        <span class="c1"># self.origrecursion = sys.getrecursionlimit()</span>
+        <span class="c1"># if self.origrecursion &lt; 1500:</span>
+        <span class="c1">#     sys.setrecursionlimit(1500)</span>
 
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -564,9 +614,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR_TAUDEM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ROW_OFFSET</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">COL_OFFSET</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MAX_POND_AREA</span> <span class="o">=</span> <span class="mi">100000</span> <span class="c">#in square meters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MAX_HEIGHT</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="c">#in meters</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MAX_POND_AREA</span> <span class="o">=</span> <span class="mi">100000</span> <span class="c1">#in square meters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MAX_HEIGHT</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="c1">#in meters</span></div>
+
 <div class="viewcode-block" id="BDSWEA.setVars"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.setVars">[docs]</a>    <span class="k">def</span> <span class="nf">setVars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dem</span><span class="p">,</span> <span class="n">fdir</span><span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">shp</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set class variables.</span>
@@ -594,13 +644,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">geot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">GetGeoTransform</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">GetProjection</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">MAX_COUNT</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MAX_POND_AREA</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&quot;GTiff&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;GTiff&quot;</span><span class="p">)</span>
         <span class="nb">max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fdir</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">max</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR_ESRI</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR_TAUDEM</span>
-</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR_TAUDEM</span></div>
+
 <div class="viewcode-block" id="BDSWEA.createOutputArrays"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.createOutputArrays">[docs]</a>    <span class="k">def</span> <span class="nf">createOutputArrays</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create arrays which will be written to rasters.</span>
@@ -615,43 +665,43 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDSWEA.getDamId"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.getDamId">[docs]</a>    <span class="k">def</span> <span class="nf">getDamId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return: Numpy array of original dam ID raster.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
+
 <div class="viewcode-block" id="BDSWEA.getDEM"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.getDEM">[docs]</a>    <span class="k">def</span> <span class="nf">getDEM</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return: Numpy array of DEM.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span></div>
+
 <div class="viewcode-block" id="BDSWEA.getFlowDirection"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.getFlowDirection">[docs]</a>    <span class="k">def</span> <span class="nf">getFlowDirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return: Numpy array of flow direction raster.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdir</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdir</span></div>
+
 <div class="viewcode-block" id="BDSWEA.getHeightAbove"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.getHeightAbove">[docs]</a>    <span class="k">def</span> <span class="nf">getHeightAbove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return: Numpy array of the height of cells above a beaver dam.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span></div>
+
 <div class="viewcode-block" id="BDSWEA.getPondID"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.getPondID">[docs]</a>    <span class="k">def</span> <span class="nf">getPondID</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return: Numpy array of the dam ID associated with each beaver pond.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span></div>
+
 <div class="viewcode-block" id="BDSWEA.drainsToMe"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.drainsToMe">[docs]</a>    <span class="k">def</span> <span class="nf">drainsToMe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">fdir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Determine if a neighboring cell drains to a target cell.</span>
@@ -662,26 +712,26 @@
 <span class="sd">        :return: True if cell drains to center of 3x3, False if it does not</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">8</span> <span class="ow">and</span> <span class="n">fdir</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">FLOW_DIR</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
-</div>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
 <div class="viewcode-block" id="BDSWEA.backwardHAND"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.backwardHAND">[docs]</a>    <span class="k">def</span> <span class="nf">backwardHAND</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startX</span><span class="p">,</span> <span class="n">startY</span><span class="p">,</span> <span class="n">startE</span><span class="p">,</span> <span class="n">pondID</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recursively identify all cells draining to a dam location and the height of each cell above the dam.</span>
@@ -711,8 +761,8 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="n">newY</span><span class="p">,</span> <span class="n">newX</span><span class="p">]</span> <span class="o">=</span> <span class="n">htAbove</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-                        <span class="bp">self</span><span class="o">.</span><span class="n">backwardHAND</span><span class="p">(</span><span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">,</span> <span class="n">startE</span><span class="p">,</span> <span class="n">pondID</span><span class="p">)</span>
-</div>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">backwardHAND</span><span class="p">(</span><span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">,</span> <span class="n">startE</span><span class="p">,</span> <span class="n">pondID</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDSWEA.heightAboveDams"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.heightAboveDams">[docs]</a>    <span class="k">def</span> <span class="nf">heightAboveDams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For each cell draining to a beaver dam, calculate the height of cell above the dam location.</span>
@@ -726,8 +776,8 @@
                 <span class="k">if</span> <span class="n">idVal</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">demVal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">backwardHAND</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">demVal</span><span class="p">,</span> <span class="n">idVal</span><span class="p">)</span>
-</div>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">backwardHAND</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">demVal</span><span class="p">,</span> <span class="n">idVal</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDSWEA.calculateWaterDepth"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.calculateWaterDepth">[docs]</a>    <span class="k">def</span> <span class="nf">calculateWaterDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the depth of each beaver pond cell for each modeled dam height.</span>
@@ -738,17 +788,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">htOut</span> <span class="o">==</span> <span class="o">-</span><span class="mf">9999.0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">GetFeatureCount</span><span class="p">()):</span>
             <span class="n">feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">GetFeature</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">depLo</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s">&quot;ht_lo_mod&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s">&quot;ht_mid_mod&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s">&quot;ht_hi_mod&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">depLo</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s2">&quot;ht_lo_mod&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s2">&quot;ht_mid_mod&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">GetFieldAsDouble</span><span class="p">(</span><span class="s2">&quot;ht_hi_mod&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idOut</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dem</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">htOut</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">depLo</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">depLo</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">depLo</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">depLo</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span>
-</div>
-<div class="viewcode-block" id="BDSWEA.writeArrayToRaster"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.writeArrayToRaster">[docs]</a>    <span class="k">def</span> <span class="nf">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">lowernd</span><span class="p">,</span> <span class="n">uppernd</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">depLo</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span></div>
+
+<div class="viewcode-block" id="BDSWEA.writeArrayToRaster"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.writeArrayToRaster">[docs]</a>    <span class="k">def</span> <span class="nf">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">lowernd</span><span class="p">,</span> <span class="n">uppernd</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save numpy array as a GeoTiff raster concurrent with the input DEM.</span>
 
@@ -760,7 +810,7 @@
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-            <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">xsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterXSize</span><span class="p">,</span> <span class="n">ysize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterYSize</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eType</span><span class="o">=</span><span class="n">gdal</span><span class="o">.</span><span class="n">GDT_Float32</span><span class="p">)</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driverTiff</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">xsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterXSize</span><span class="p">,</span> <span class="n">ysize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demDS</span><span class="o">.</span><span class="n">RasterYSize</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eType</span><span class="o">=</span><span class="n">gdal</span><span class="o">.</span><span class="n">GDT_Float32</span><span class="p">)</span>
             <span class="n">ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geot</span><span class="p">)</span>
             <span class="n">ds</span><span class="o">.</span><span class="n">SetProjection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prj</span><span class="p">)</span>
             <span class="n">array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">array</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span>
@@ -769,22 +819,22 @@
             <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">WriteArray</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
             <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">FlushCache</span><span class="p">()</span>
             <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">SetNoDataValue</span><span class="p">(</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">)</span>
-            <span class="n">ds</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;output shape different from input DEM&quot;</span>
-</div>
+            <span class="nb">print</span> <span class="s2">&quot;output shape different from input DEM&quot;</span></div>
+
 <div class="viewcode-block" id="BDSWEA.saveOutputs"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.saveOutputs">[docs]</a>    <span class="k">def</span> <span class="nf">saveOutputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save BDSWEA results to rasters.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/pondID.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">50000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/htAbove.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">,</span> <span class="o">-</span><span class="mf">500.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/depLo.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">depLo</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/depMid.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/depHi.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/pondID.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">50000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/htAbove.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">htOut</span><span class="p">,</span> <span class="o">-</span><span class="mf">500.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/depLo.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">depLo</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/depMid.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/depHi.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDSWEA.run"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run BDSWEA and save outputs.</span>
@@ -793,8 +843,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heightAboveDams</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calculateWaterDepth</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">saveOutputs</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saveOutputs</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="BDSWEA.writeSurfaceWSE"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.writeSurfaceWSE">[docs]</a>    <span class="k">def</span> <span class="nf">writeSurfaceWSE</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update DEM to reflect water surface elevation of modeled beaver ponds and save as GeoTiff.</span>
@@ -807,10 +857,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">wseLo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">depLo</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wseMid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">depMid</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">depHi</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/WSESurf_lo.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseLo</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/WSESurf_mid.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseMid</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/WSESurf_hi.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/WSESurf_lo.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseLo</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/WSESurf_mid.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseMid</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/WSESurf_hi.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDSWEA.writeHead"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.writeHead">[docs]</a>    <span class="k">def</span> <span class="nf">writeHead</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate water surface elevation of cells inundated by modeld beaver ponds or represented by the rasterized stream network and save as GeoTiff.</span>
@@ -835,11 +885,11 @@
         <span class="n">pondhi</span><span class="p">[</span><span class="n">pondhi</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">pondhi</span> <span class="o">=</span> <span class="n">pondhi</span> <span class="o">+</span> <span class="n">stream</span>
         <span class="n">pondhi</span><span class="p">[</span><span class="n">pondhi</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/head_start.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">*</span><span class="n">stream</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/head_lo.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseLo</span><span class="o">*</span><span class="n">pondlo</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/head_mid.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseMid</span><span class="o">*</span><span class="n">pondmid</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s">&quot;/head_hi.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span><span class="o">*</span><span class="n">pondhi</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/head_start.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span><span class="o">*</span><span class="n">stream</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/head_lo.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseLo</span><span class="o">*</span><span class="n">pondlo</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/head_mid.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseMid</span><span class="o">*</span><span class="n">pondmid</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeArrayToRaster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">+</span> <span class="s2">&quot;/head_hi.tif&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span><span class="o">*</span><span class="n">pondhi</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="BDSWEA.writeModflowFiles"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.writeModflowFiles">[docs]</a>    <span class="k">def</span> <span class="nf">writeModflowFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save files to be used with BDflopy for MODFLOW parameterization.</span>
@@ -850,20 +900,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">writeHead</span><span class="p">()</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseLo</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseMid</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span>
-</div>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">wseHi</span></div>
+
 <div class="viewcode-block" id="BDSWEA.close"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Close all GDAL and OGR datasets.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># sys.setrecursionlimit(self.origrecursion)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fdirDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">idDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pointDS</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c1"># sys.setrecursionlimit(self.origrecursion)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">demDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fdirDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointDS</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">dem</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdir</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">fac</span>
@@ -874,6 +924,10 @@
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">idOut</span></div></div>
 </pre></div>
 
+           </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -883,12 +937,13 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Konrad Hafen.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  
 </footer>
+
         </div>
       </div>
 
@@ -906,7 +961,8 @@
             VERSION:'0.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

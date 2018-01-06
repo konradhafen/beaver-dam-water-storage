@@ -3,8 +3,6 @@ import flopy.utils.binaryfile as bf
 import os
 import numpy as np
 from osgeo import gdal
-import csv
-from scipy import ndimage
 
 class BDflopy:
     def __init__(self, modflowexe, indir, modeldir, outdir, demfilename):
