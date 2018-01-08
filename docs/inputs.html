@@ -5,18 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input Prep &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
+  <title>Preparing input data &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
   
 
   
   
-  
-  
 
   
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -32,46 +30,26 @@
   
 
   
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Beaver Dam Water Storage 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Code Documentation" href="code.html"/>
-        <link rel="prev" title="Example" href="example.html"/> 
+        <link rel="next" title="Code Description" href="code.html"/>
+        <link rel="prev" title="Tutorials" href="example.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
-            <a href="index.html" class="icon icon-home"> Beaver Dam Water Storage
-          
-
-          
-          </a>
-
-          
-            
-            
-              <div class="version">
-                0.0.1
-              </div>
-            
-          
-
-          
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Beaver Dam Water Storage</a>
+        
+        
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -79,102 +57,104 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+      </div>
 
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
           
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-            
-            
-              
-            
-            
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Input Prep</a></li>
-<li class="toctree-l1"><a class="reference internal" href="code.html">Code Documentation</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#operating-systems">Operating systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-python">Installing python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-modules">Installing modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-modflow-2005">Installing MODFLOW-2005</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Preparing input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-guidelines">General guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdlog-class">BDLoG Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdswea-class">BDSWEA Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdflopy-class">BDflopy Class</a></li>
+</ul>
+</li>
 </ul>
 
-            
           
-        </div>
+        
       </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Beaver Dam Water Storage</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Beaver Dam Water Storage</a>
       </nav>
 
 
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
-      <li>Input Prep</li>
-    
-    
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Preparing input data</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="_sources/inputs.rst.txt" rel="nofollow"> View page source</a>
-          
+          <a href="_sources/inputs.txt" rel="nofollow"> View page source</a>
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+          <div role="main" class="document">
             
-  <div class="section" id="input-prep">
-<h1>Input Prep<a class="headerlink" href="#input-prep" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="preparing-input-data">
+<h1>Preparing input data<a class="headerlink" href="#preparing-input-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-guidelines">
+<h2>General guidelines<a class="headerlink" href="#general-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Adherence to the following guidelines will greatly improve your experience while using BDWS.</p>
+<ol class="arabic simple">
+<li>All geographic layers must have a projected coordinate system with linear units represented in meters (to be safe use a NAD83 UTM projection).</li>
+<li>All input rasters must be concurrent (same extent and cell resolution) with the input DEM. Problems will arise if input rasters differ in projection, cell resolution, the number of columns, or the number of rows.</li>
+<li>Features of input line shapefiles (from BRAT) must be single-part. <code class="code docutils literal"><span class="pre">BDLoG</span></code> will not place dam locations on multipart features.</li>
+<li>When creating dam capacity estimates follow <a class="reference external" href="http://brat.joewheaton.org/home">BRAT</a> directions exactly. Use of <a class="reference external" href="http://brat.joewheaton.org/home/documentation/manual-implementation/the-beaver-restoration-assessment-tool-brat---v-2-0">pyBRAT</a> is recommended (ArcGIS is required for pyBRAT)</li>
+<li>Computation time will be decreased if all inputs are clipped to the valley-bottom extent. The <a class="reference external" href="http://etal.joewheaton.org/nhd-network-builder-and-vbet">V-BET tool</a> can be used to generate valley-bottom polygons.</li>
+</ol>
+</div>
 </div>
 
 
-           </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="code.html" class="btn btn-neutral float-right" title="Code Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="code.html" class="btn btn-neutral float-right" title="Code Description">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="example.html" class="btn btn-neutral" title="Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral" title="Tutorials"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -184,13 +164,12 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Konrad Hafen.
-
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
-
         </div>
       </div>
 
@@ -208,8 +187,7 @@
             VERSION:'0.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

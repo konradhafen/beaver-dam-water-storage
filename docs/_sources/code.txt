@@ -1,4 +1,4 @@
-Code Documentation
+Code Description
 ==================
 
 BDLoG Class

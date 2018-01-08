@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Beaver Dam Water Storage 0.0.1 documentation" href="index.html"/>
+        <link rel="next" title="Tutorials" href="example.html"/>
+        <link rel="prev" title="What is BDWS?" href="intro.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Beaver Dam Water Storage</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#operating-systems">Operating systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-python">Installing python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-modules">Installing modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-modflow-2005">Installing MODFLOW-2005</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Preparing input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#general-guidelines">General guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdlog-class">BDLoG Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdswea-class">BDSWEA Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdflopy-class">BDflopy Class</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Beaver Dam Water Storage</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/install.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>BDWS is hosted on github and publically available at <a class="reference external" href="https://github.com/konradhafen/beaver-dam-water-storage">https://github.com/konradhafen/beaver-dam-water-storage</a>.
+The entire repository can be cloned to your machine directly from github, downloaded as a compressed folder,
+or individual files can be downloaded.</p>
+<ul class="simple">
+<li><code class="code docutils literal"><span class="pre">/docs</span></code> contains the pages for this documentation website</li>
+<li><code class="code docutils literal"><span class="pre">/sphinx</span></code> contains the source code for building documentation website pages with the <code class="code docutils literal"><span class="pre">sphinx</span></code> module</li>
+<li><code class="code docutils literal"><span class="pre">/tutorials</span></code> contains data for use in the BDWS tutorials</li>
+<li><code class="code docutils literal"><span class="pre">bdws.py</span></code> is source code for the <code class="code docutils literal"><span class="pre">BDLoG</span></code> and <code class="code docutils literal"><span class="pre">BDSWEA</span></code> classes</li>
+<li><code class="code docutils literal"><span class="pre">bdflopy.py</span></code> is source code for the <code class="code docutils literal"><span class="pre">BDflopy</span></code> class</li>
+<li><code class="code docutils literal"><span class="pre">run.py</span></code> is an example script for usage of BDWS</li>
+</ul>
+<p>To clone the github repository, enter the following from a terminal.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd /path/to/project
+$ git clone https://github.com/konradhafen/beaver-dam-water-storage
+</pre></div>
+</div>
+<p>This will create a new directory containin everyting in the repository at the location:</p>
+<div class="highlight-python"><div class="highlight"><pre>/path/to/project/beaver-dam-water-storage
+</pre></div>
+</div>
+<div class="section" id="operating-systems">
+<h2>Operating systems<a class="headerlink" href="#operating-systems" title="Permalink to this headline">¶</a></h2>
+<p>The BDWS python code is cross platform (Windows, Mac, Linux), and code for the <code class="code docutils literal"><span class="pre">BDLoG</span></code> and <code class="code docutils literal"><span class="pre">BDSWEA</span></code> packages has been
+tested on both Windows (10) and Linux operating (16.04) systems.
+However, for use of the <code class="code docutils literal"><span class="pre">BDflopy</span></code> class Microsoft Windows is recommended as the USGS only provides compiled MODFLOW-2005
+executables for this platform. USGS does provide source code that can be compiled on Unix platforms.
+Code for the <code class="code docutils literal"><span class="pre">BDflopy</span></code> class is cross platform but has only been tested on Windows.</p>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Python version 2.7.x is recommended.</li>
+<li>Python modules: <code class="code docutils literal"><span class="pre">gdal</span></code> <code class="code docutils literal"><span class="pre">numpy</span></code> <code class="code docutils literal"><span class="pre">flopy</span></code></li>
+<li>Executable programs: <code class="code docutils literal"><span class="pre">MODFLOW-2005</span></code></li>
+</ol>
+</div>
+<div class="section" id="installing-python">
+<h2>Installing python<a class="headerlink" href="#installing-python" title="Permalink to this headline">¶</a></h2>
+<p>Python can be installed from a number of sources, including <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>. Anaconda is another option which
+provides additional tools for python <a class="reference external" href="https://www.anaconda.com/download/">https://www.anaconda.com/download/</a>. This is a recommended option for novice users.
+Python version 2.7.x is recommended.</p>
+</div>
+<div class="section" id="installing-modules">
+<h2>Installing modules<a class="headerlink" href="#installing-modules" title="Permalink to this headline">¶</a></h2>
+<p>Python modules can be installed with <code class="code docutils literal"><span class="pre">pip</span></code>.</p>
+<p>1. Make sure <code class="code docutils literal"><span class="pre">pip</span></code> is up-to-date. From a terminal or the Anaconda command prompt enter the following.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>
+</pre></div>
+</div>
+<p>2. Install any dependencies as follows.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pip</span> <span class="n">install</span> <span class="n">gdal</span>
+</pre></div>
+</div>
+<p>Full documentation for module dependencies can be found at the following sources.</p>
+<ul class="simple">
+<li>gdal <a class="reference external" href="http://gdal.org/python/">http://gdal.org/python/</a></li>
+<li>numpy <a class="reference external" href="https://docs.scipy.org/doc/">https://docs.scipy.org/doc/</a></li>
+<li>flopy <a class="reference external" href="https://modflowpy.github.io/flopydoc">https://modflowpy.github.io/flopydoc</a></li>
+</ul>
+<p>Only the :code: <cite>BDflopy</cite> class depends on the :code: <cite>flopy</cite> module</p>
+</div>
+<div class="section" id="installing-modflow-2005">
+<h2>Installing MODFLOW-2005<a class="headerlink" href="#installing-modflow-2005" title="Permalink to this headline">¶</a></h2>
+<p>MODFLOW-2005 executables and documentation can be found at <a class="reference external" href="https://water.usgs.gov/ogw/modflow/mf2005.html">https://water.usgs.gov/ogw/modflow/mf2005.html</a>. Download and
+unpack the .zip file for your operating system. Unix users will need to compile the source code.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example.html" class="btn btn-neutral float-right" title="Tutorials">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral" title="What is BDWS?"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Konrad Hafen.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

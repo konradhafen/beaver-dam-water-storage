@@ -5,18 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Code Documentation &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
+  <title>Code Description &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
   
 
   
   
-  
-  
 
   
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -32,45 +30,25 @@
   
 
   
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Beaver Dam Water Storage 0.0.1 documentation" href="index.html"/>
-        <link rel="prev" title="Input Prep" href="inputs.html"/> 
+        <link rel="prev" title="Preparing input data" href="inputs.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
-            <a href="index.html" class="icon icon-home"> Beaver Dam Water Storage
-          
-
-          
-          </a>
-
-          
-            
-            
-              <div class="version">
-                0.0.1
-              </div>
-            
-          
-
-          
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Beaver Dam Water Storage</a>
+        
+        
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -78,21 +56,39 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+      </div>
 
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
           
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-            
-            
-              
-            
-            
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inputs.html">Input Prep</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Code Documentation</a><ul>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#operating-systems">Operating systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-python">Installing python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-modules">Installing modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-modflow-2005">Installing MODFLOW-2005</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Preparing input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#general-guidelines">General guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Code Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#bdlog-class">BDLoG Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bdswea-class">BDSWEA Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bdflopy-class">BDflopy Class</a></li>
@@ -100,69 +96,41 @@
 </li>
 </ul>
 
-            
           
-        </div>
+        
       </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Beaver Dam Water Storage</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Beaver Dam Water Storage</a>
       </nav>
 
 
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
-      <li>Code Documentation</li>
-    
-    
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Code Description</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="_sources/code.rst.txt" rel="nofollow"> View page source</a>
-          
+          <a href="_sources/code.txt" rel="nofollow"> View page source</a>
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+          <div role="main" class="document">
             
-  <div class="section" id="code-documentation">
-<h1>Code Documentation<a class="headerlink" href="#code-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="code-description">
+<h1>Code Description<a class="headerlink" href="#code-description" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="bdlog-class">
 <h2>BDLoG Class<a class="headerlink" href="#bdlog-class" title="Permalink to this headline">¶</a></h2>
 <p>Generate beaver dam locations and beaver dam heights along a stream network according to beaver dam capacities estimated by the Beaver Restoration Assessment Tool (BRAT). Information about BRAT is available at <a class="reference external" href="http://brat.joewheaton.org/home">http://brat.joewheaton.org/home</a>.</p>
@@ -248,8 +216,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> – X coordinate (meters).</li>
-<li><strong>y</strong> – Y coordinate (meters).</li>
+<li><strong>x</strong> &#8211; X coordinate (meters).</li>
+<li><strong>y</strong> &#8211; Y coordinate (meters).</li>
 </ul>
 </td>
 </tr>
@@ -269,8 +237,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>row</strong> – Row index of raster.</li>
-<li><strong>col</strong> – Column index of raster.</li>
+<li><strong>row</strong> &#8211; Row index of raster.</li>
+<li><strong>col</strong> &#8211; Column index of raster.</li>
 </ul>
 </td>
 </tr>
@@ -289,7 +257,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array (2, n) with stream cell addresses (array[[row, col],[row, col],…]).</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Numpy array (2, n) with stream cell addresses (array[[row, col],[row, col],...]).</td>
 </tr>
 </tbody>
 </table>
@@ -346,8 +314,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>feat</strong> – OGR Feature of dam.</li>
-<li><strong>damType</strong> – String describing dam type (‘primary’ or ‘secondary’).</li>
+<li><strong>feat</strong> &#8211; OGR Feature of dam.</li>
+<li><strong>damType</strong> &#8211; String describing dam type (&#8216;primary&#8217; or &#8216;secondary&#8217;).</li>
 </ul>
 </td>
 </tr>
@@ -367,10 +335,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>feat</strong> – OGR Feature of dam.</li>
-<li><strong>low</strong> – Lower interval of dam height.</li>
-<li><strong>mid</strong> – Median dam height.</li>
-<li><strong>high</strong> – Upper interval of dam height.</li>
+<li><strong>feat</strong> &#8211; OGR Feature of dam.</li>
+<li><strong>low</strong> &#8211; Lower interval of dam height.</li>
+<li><strong>mid</strong> &#8211; Median dam height.</li>
+<li><strong>high</strong> &#8211; Upper interval of dam height.</li>
 </ul>
 </td>
 </tr>
@@ -441,10 +409,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>startX</strong> – Column of dam location.</li>
-<li><strong>startY</strong> – Row of dam location.</li>
-<li><strong>startE</strong> – DEM elevation at dam location.</li>
-<li><strong>pondID</strong> – ID number of dam.</li>
+<li><strong>startX</strong> &#8211; Column of dam location.</li>
+<li><strong>startY</strong> &#8211; Row of dam location.</li>
+<li><strong>startE</strong> &#8211; DEM elevation at dam location.</li>
+<li><strong>pondID</strong> &#8211; ID number of dam.</li>
 </ul>
 </td>
 </tr>
@@ -506,8 +474,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> – Location of flow direction value in array.</li>
-<li><strong>fdir</strong> – Flow direction value.</li>
+<li><strong>index</strong> &#8211; Location of flow direction value in array.</li>
+<li><strong>fdir</strong> &#8211; Flow direction value.</li>
 </ul>
 </td>
 </tr>
@@ -648,11 +616,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>dem</strong> – Path to DEM.</li>
-<li><strong>fdir</strong> – Path to flow direction raster.</li>
-<li><strong>fac</strong> – Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).</li>
-<li><strong>id</strong> – Path to dam ID raster.</li>
-<li><strong>shp</strong> – Path to shapefile of dam locations.</li>
+<li><strong>dem</strong> &#8211; Path to DEM.</li>
+<li><strong>fdir</strong> &#8211; Path to flow direction raster.</li>
+<li><strong>fac</strong> &#8211; Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).</li>
+<li><strong>id</strong> &#8211; Path to dam ID raster.</li>
+<li><strong>shp</strong> &#8211; Path to shapefile of dam locations.</li>
 </ul>
 </td>
 </tr>
@@ -672,10 +640,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>file</strong> – Path to save file.</li>
-<li><strong>array</strong> – Numpy array of data.</li>
-<li><strong>lowernd</strong> – Lowest data value.</li>
-<li><strong>uppernd</strong> – Highest data value.</li>
+<li><strong>file</strong> &#8211; Path to save file.</li>
+<li><strong>array</strong> &#8211; Numpy array of data.</li>
+<li><strong>lowernd</strong> &#8211; Lowest data value.</li>
+<li><strong>uppernd</strong> &#8211; Highest data value.</li>
 </ul>
 </td>
 </tr>
@@ -745,7 +713,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frac</strong> – Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frac</strong> &#8211; Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
@@ -775,7 +743,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> – List of paths where raster datasets will be created.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> &#8211; List of paths where raster datasets will be created.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of GDAL datasets</td>
 </tr>
@@ -847,7 +815,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> – List of raster files to read as numpy arrays.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> &#8211; List of raster files to read as numpy arrays.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of numpy arrays</td>
 </tr>
@@ -863,7 +831,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – Float, numpy.ndarray, or file path to raster.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; Float, numpy.ndarray, or file path to raster.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Numpy array</td>
 </tr>
@@ -880,10 +848,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hksat</strong> – Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
-<li><strong>vksat</strong> – Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
-<li><strong>kconv</strong> – Factor to convert khsat and kvsat to meters per second. Default = 1.0.</li>
-<li><strong>frac</strong> – Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.</li>
+<li><strong>hksat</strong> &#8211; Horizontal saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
+<li><strong>vksat</strong> &#8211; Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
+<li><strong>kconv</strong> &#8211; Factor to convert khsat and kvsat to meters per second. Default = 1.0.</li>
+<li><strong>frac</strong> &#8211; Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.</li>
 </ul>
 </td>
 </tr>
@@ -959,9 +927,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>khsat</strong> – Horizontal hydraulic conductivity.</li>
-<li><strong>kvsat</strong> – Vertical hydraulic conductivity.</li>
-<li><strong>kconv</strong> – Factor to convert hksat and vksat to meters per second.</li>
+<li><strong>khsat</strong> &#8211; Horizontal hydraulic conductivity.</li>
+<li><strong>kvsat</strong> &#8211; Vertical hydraulic conductivity.</li>
+<li><strong>kconv</strong> &#8211; Factor to convert hksat and vksat to meters per second.</li>
 </ul>
 </td>
 </tr>
@@ -1008,7 +976,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>demfilename</strong> – Name of DEM raster file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>demfilename</strong> &#8211; Name of DEM raster file.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
@@ -1050,17 +1018,13 @@
 </div>
 
 
-           </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="inputs.html" class="btn btn-neutral" title="Input Prep" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="inputs.html" class="btn btn-neutral" title="Preparing input data"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1070,13 +1034,12 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Konrad Hafen.
-
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
-
         </div>
       </div>
 
@@ -1094,8 +1057,7 @@
             VERSION:'0.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
