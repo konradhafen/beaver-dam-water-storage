@@ -1,50 +1,53 @@
-from bdflopy import BDflopy
-from bdws import *
-import time
+from bdws import * #import BDLoG and BDSWEA classes
+from bdflopy import * #import BDflopy class
+
+#######################################################################
+###################### TUTORIAL 1 - SINGLE HUC12 ######################
+#######################################################################
+
+#NOTE: use ctrl + / to comment/uncomment multiple lines
+
 #run beaver dam location generator (BDLoG)
 print "start"
-start = time.time()
+basedir = "tutorials/tutorial1" #folder containing inputs, and where output directories will be created
+bratPath = basedir + "/inputs/brat.shp" #shapefile of beaver dam capacities from BRAT
+demPath = basedir + "/inputs/dem.tif" #DEM of study area (ideally clipped to valley-bottom)
+facPath = basedir + "/inputs/fac.tif" #Thresholded flow accumulation raster representing stream network
+outDir = basedir + "/out" #directory where BDLoG outputs will be generated
+bratCap = 1.0 #proportion (0-1) of maximum estimted dam capacity (from BRAT) for scenario
 
-basedir = "C:/temp/test"
-bratPath = basedir + "/01_shpIn/brat_cap_20170224.shp"
-demPath = basedir + "/02_rasIn/dem_vbfac.tif"
-facPath = basedir + "/02_rasIn/fac_01km_vbfac.tif"
-outDir = basedir + "/out"
-
-model = BDLoG(bratPath, demPath, facPath, outDir, 1.0)
-#model.generateDamLocationsFromBRAT()
-model.run()
-model.close()
+model = BDLoG(bratPath, demPath, facPath, outDir, bratCap) #initialize BDLoG, sets varibles and loads inputs
+model.run() #run BDLoG algorithms
+model.close() #close any files left open by BDLoG
 print "bdlog done"
-end = time.time()
-print (end - start)
 
 #run surface water storage estimation (BDSWEA)
-# basedir = "/home/konrad/temp"
-fdirPath = basedir + "/02_rasIn/fdird_vbfac.tif"
-idPath = basedir + "/out/damID.tif"
-modPoints = basedir + "/out/ModeledDamPoints.shp"
+fdirPath = basedir + "/inputs/fdir.tif" #flow direction raster
+idPath = basedir + "/out/damID.tif" #ouput from BDLoG
+modPoints = basedir + "/out/ModeledDamPoints.shp" #output from BDLoG
 
-model = BDSWEA(demPath, fdirPath, facPath, idPath, outDir, modPoints)
-model.run()
-model.writeModflowFiles()
-model.close()
-end = time.time()
+model = BDSWEA(demPath, fdirPath, facPath, idPath, outDir, modPoints) #initialize BDSWEA object, sets variables and loads inputs
+model.run() #run BDSWEA algorithm
+model.writeModflowFiles() #generate files needed to parameterize MODFLOW
+model.close() #close any files left open by BDLoG
 print "bdswea done"
-print (end - start)
 
 #run groundwater storage estimation (MODFLOW)
-modflowexe = "C:/WRDAPP/MF2005.1_11/bin/mf2005"
-indir = basedir + "/02_rasIn"
-modeldir = outDir
-outdir = basedir + "/modflow"
-demfilename = "dem_vbfac.tif"
-hkfn = ""
-vkfn = ""
-fracfn = ""
-gwmodel = BDflopy(modflowexe, indir, modeldir, outdir, demfilename)
-gwmodel.run(0.0001, 0.0001)
-gwmodel.close()
-end = time.time()
+modflowexe = "C:/WRDAPP/MF2005.1_11/bin/mf2005" #path to MODFLOW-2005 executable
+indir = basedir + "/inputs" #location of input raste files
+modeldir = "tutorials/tutorial1/out" #BDSWEA output directory
+outdir = basedir + "/modflow" #directory to output MODFLOW results
+demfilename = "dem.tif" #name of input DEM
+hkfn = "/inputs/ksat.tif" #horizontal ksat in micrometers per second
+vkfn = "/inputs/kv.tif" #vertical ksat in micrometers per second
+fracfn = "/inputs/fc.tif" #field capacity as percentage
+kconv = 0.000001 #conversion of hkfn and vkfn to meters per second
+fconv = 0.01 #conversion of fracfn to a proportion
+gwmodel = BDflopy(modflowexe, indir, modeldir, outdir, demfilename) #initialize BDflopy, sets variables and loads inputs
+gwmodel.run(hkfn, vkfn, kconv, fracfn, fconv) #run BDflopy, this will write inputs for MODFLOW and then run MODFLOW
+gwmodel.close() #close any open files
 print "done"
-print (end - start)
+
+##########################################################################
+###################### TUTORIAL 2 - MULTIPLE HUC12s ######################
+##########################################################################

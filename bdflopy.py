@@ -237,7 +237,7 @@ class BDflopy:
             flopy.modflow.ModflowOc(self.mf[i])
             flopy.modflow.ModflowPcg(self.mf[i])
             self.mf[i].write_input()
-            print self.mfnames[i] + " input written"
+            print "MODFLOW " + self.mfnames[i] + " input written"
 
     def runModflow(self):
         """
@@ -295,15 +295,18 @@ class BDflopy:
         outdata[outdata < 0.0] = np.nan
         return outdata
 
-    def calculateHeadDifference(self, frac = 1.0):
+    def calculateHeadDifference(self, frac = 1.0, fconv = 1.0):
         """
         Calculate the head difference between MODFLOW runs.
 
         :param frac: Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.
+        :param fconv: Factor to convert frac to a proportion. Default = 1.0.
 
         :return: None
         """
         frac = self.loadSoilData(frac)
+        fracconv = frac*fconv
+        frac[frac > 0.0] = fracconv[frac > 0.0]
         for i in range(0, len(self.pondData)):
             self.pondData[i][self.pondData[i] < 0.0] = 0.0
         for i in range(0, len(self.pondData)):
@@ -313,6 +316,7 @@ class BDflopy:
                 diff = np.where(np.isnan(diff), -9999.0, diff)
                 diff[diff < -10.0] = -9999.0
                 diff_frac = np.multiply(frac, diff)
+                diff_frac[diff_frac < -10.0] = -9999.0
                 self.hdchds[i].GetRasterBand(1).WriteArray(diff)
                 self.hdchds[i].GetRasterBand(1).FlushCache()
                 self.hdchds[i].GetRasterBand(1).SetNoDataValue(-9999.0)
@@ -320,7 +324,7 @@ class BDflopy:
                 self.hdchFracDs[i].GetRasterBand(1).FlushCache()
                 self.hdchFracDs[i].GetRasterBand(1).SetNoDataValue(-9999.0)
 
-    def run(self, hksat, vksat, kconv = 1.0, frac = 1.0):
+    def run(self, hksat, vksat, kconv = 1.0, frac = 1.0, fconv = 1.0):
         """
         Run MODFLOW to calculate water surface elevation changes from beaver dam construction.
 
@@ -328,6 +332,7 @@ class BDflopy:
         :param vksat: Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.
         :param kconv: Factor to convert khsat and kvsat to meters per second. Default = 1.0.
         :param frac: Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.
+        :param fconv: Factor to convert frac to a proportion. Default = 1.0.
 
         :return: None
         """
@@ -338,7 +343,7 @@ class BDflopy:
         self.writeModflowInput()
         self.runModflow()
         self.saveResultsToRaster()
-        self.calculateHeadDifference(frac)
+        self.calculateHeadDifference(frac, fconv)
 
     def close(self):
         """

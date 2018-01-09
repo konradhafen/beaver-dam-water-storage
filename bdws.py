@@ -317,7 +317,7 @@ class BDLoG:
         i=0
 
         while i < nDams:
-            print str(i) + " of " + str(nDams)
+            #print str(i) + " of " + str(nDams)
             damFt = self.outLyr.GetFeature(i)
             damPt = damFt.GetGeometryRef()
             damAddress = self.getCellAddressOfPoint(damPt.GetX(), damPt.GetY())
