@@ -83,6 +83,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../example.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example.html#output-files">Output files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
 </ul>
@@ -141,7 +142,7 @@
 <span class="kn">import</span> <span class="nn">math</span>
 
 <div class="viewcode-block" id="BDLoG"><a class="viewcode-back" href="../code.html#bdws.BDLoG">[docs]</a><span class="k">class</span> <span class="nc">BDLoG</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brat</span><span class="p">,</span> <span class="n">dem</span> <span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">bratCap</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BDLoG.__init__"><a class="viewcode-back" href="../code.html#bdws.BDLoG.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brat</span><span class="p">,</span> <span class="n">dem</span> <span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">bratCap</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialization of the Beaver Dam Location Generator class.</span>
 
@@ -151,6 +152,7 @@
 <span class="sd">        :param outDir: Path to directory where output files will be generated.</span>
 <span class="sd">        :param bratCap: Proportion (0 - 1) of capacity for which to generate beaver dams.</span>
 <span class="sd">        :param stat: (Optional) Estimated pond volumes and prediction intervals as a function of reach slope and dam height (not yet implemented).</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bratPath</span> <span class="o">=</span> <span class="n">brat</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">demPath</span> <span class="o">=</span> <span class="n">dem</span>
@@ -160,7 +162,7 @@
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bratCap</span> <span class="o">=</span> <span class="n">bratCap</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">statPath</span> <span class="o">=</span> <span class="n">stat</span>
-
+</div>
 <div class="viewcode-block" id="BDLoG.setVariables"><a class="viewcode-back" href="../code.html#bdws.BDLoG.setVariables">[docs]</a>    <span class="k">def</span> <span class="nf">setVariables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets class variables for location generation.</span>
@@ -558,7 +560,7 @@
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">capRank</span>
 </div></div>
 <div class="viewcode-block" id="BDSWEA"><a class="viewcode-back" href="../code.html#bdws.BDSWEA">[docs]</a><span class="k">class</span> <span class="nc">BDSWEA</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dem</span><span class="p">,</span> <span class="n">fdir</span><span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">modPoints</span><span class="p">):</span>
+<div class="viewcode-block" id="BDSWEA.__init__"><a class="viewcode-back" href="../code.html#bdws.BDSWEA.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dem</span><span class="p">,</span> <span class="n">fdir</span><span class="p">,</span> <span class="n">fac</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">modPoints</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialization of the Beaver Dam Surface Water Estimation Algorithm class.</span>
 
@@ -568,6 +570,7 @@
 <span class="sd">        :param id: Path to raster of pond ID, calculated with BDLoG class.</span>
 <span class="sd">        :param outDir: Path where output files will be generated.</span>
 <span class="sd">        :param modPoints: Path to shapefile of modeled dam locations from BDLoG.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outDir</span> <span class="o">=</span> <span class="n">outDir</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outDir</span><span class="p">):</span>
@@ -578,7 +581,7 @@
         <span class="c"># self.origrecursion = sys.getrecursionlimit()</span>
         <span class="c"># if self.origrecursion &lt; 1500:</span>
         <span class="c">#     sys.setrecursionlimit(1500)</span>
-
+</div>
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 

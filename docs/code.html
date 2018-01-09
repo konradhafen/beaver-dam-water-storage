@@ -83,6 +83,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="example.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#output-files">Output files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
 </ul>
@@ -143,6 +144,28 @@
 <dt id="bdws.BDLoG">
 <em class="property">class </em><code class="descclassname">bdws.</code><code class="descname">BDLoG</code><span class="sig-paren">(</span><em>brat</em>, <em>dem</em>, <em>fac</em>, <em>outDir</em>, <em>bratCap</em>, <em>stat=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
+<dt id="bdws.BDLoG.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>brat</em>, <em>dem</em>, <em>fac</em>, <em>outDir</em>, <em>bratCap</em>, <em>stat=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization of the Beaver Dam Location Generator class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>brat</strong> &#8211; Path to BRAT shapefile.</li>
+<li><strong>dem</strong> &#8211; Path to DEM for area of interest.</li>
+<li><strong>fac</strong> &#8211; Binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).</li>
+<li><strong>outDir</strong> &#8211; Path to directory where output files will be generated.</li>
+<li><strong>bratCap</strong> &#8211; Proportion (0 - 1) of capacity for which to generate beaver dams.</li>
+<li><strong>stat</strong> &#8211; (Optional) Estimated pond volumes and prediction intervals as a function of reach slope and dam height (not yet implemented).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="bdws.BDLoG.calculateDamsPerReach">
 <code class="descname">calculateDamsPerReach</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDLoG.calculateDamsPerReach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDLoG.calculateDamsPerReach" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine the number of beaver dams and beaver dam complexes to place on each BRAT reach.</p>
@@ -406,6 +429,28 @@
 <dt id="bdws.BDSWEA">
 <em class="property">class </em><code class="descclassname">bdws.</code><code class="descname">BDSWEA</code><span class="sig-paren">(</span><em>dem</em>, <em>fdir</em>, <em>fac</em>, <em>id</em>, <em>outDir</em>, <em>modPoints</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
+<dt id="bdws.BDSWEA.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dem</em>, <em>fdir</em>, <em>fac</em>, <em>id</em>, <em>outDir</em>, <em>modPoints</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization of the Beaver Dam Surface Water Estimation Algorithm class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dem</strong> &#8211; Path of DEM for area of interest.</li>
+<li><strong>fdir</strong> &#8211; Path to flow direction raster, should be concurrent with DEM.</li>
+<li><strong>fac</strong> &#8211; Path to binary raster representing the stream network with a value of 1 (generally a thresholded flow accumulation).</li>
+<li><strong>id</strong> &#8211; Path to raster of pond ID, calculated with BDLoG class.</li>
+<li><strong>outDir</strong> &#8211; Path where output files will be generated.</li>
+<li><strong>modPoints</strong> &#8211; Path to shapefile of modeled dam locations from BDLoG.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="bdws.BDSWEA.backwardHAND">
 <code class="descname">backwardHAND</code><span class="sig-paren">(</span><em>startX</em>, <em>startY</em>, <em>startE</em>, <em>pondID</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdws.html#BDSWEA.backwardHAND"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdws.BDSWEA.backwardHAND" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively identify all cells draining to a dam location and the height of each cell above the dam.</p>
@@ -711,6 +756,27 @@
 <dt id="bdflopy.BDflopy">
 <em class="property">class </em><code class="descclassname">bdflopy.</code><code class="descname">BDflopy</code><span class="sig-paren">(</span><em>modflowexe</em>, <em>indir</em>, <em>modeldir</em>, <em>outdir</em>, <em>demfilename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
+<dt id="bdflopy.BDflopy.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>modflowexe</em>, <em>indir</em>, <em>modeldir</em>, <em>outdir</em>, <em>demfilename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize BDflopy class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>modflowexe</strong> &#8211; Path to MODFLOW executable file.</li>
+<li><strong>indir</strong> &#8211; Path to directory of raster inputs for BDSWEA.</li>
+<li><strong>modeldir</strong> &#8211; Path to directory of outputs from BDSWEA.</li>
+<li><strong>outdir</strong> &#8211; Path to directory where output files will be genearted.</li>
+<li><strong>demfilename</strong> &#8211; Name of DEM file in the input directory (e.g. &#8216;dem.tif&#8217;).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="bdflopy.BDflopy.calculateHeadDifference">
 <code class="descname">calculateHeadDifference</code><span class="sig-paren">(</span><em>frac=1.0</em>, <em>fconv=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.calculateHeadDifference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.calculateHeadDifference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the head difference between MODFLOW runs.</p>

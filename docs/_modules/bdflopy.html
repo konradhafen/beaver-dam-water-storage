@@ -83,6 +83,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../example.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example.html#output-files">Output files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
 </ul>
@@ -142,7 +143,7 @@
 <span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>
 
 <div class="viewcode-block" id="BDflopy"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy">[docs]</a><span class="k">class</span> <span class="nc">BDflopy</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modflowexe</span><span class="p">,</span> <span class="n">indir</span><span class="p">,</span> <span class="n">modeldir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">demfilename</span><span class="p">):</span>
+<div class="viewcode-block" id="BDflopy.__init__"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modflowexe</span><span class="p">,</span> <span class="n">indir</span><span class="p">,</span> <span class="n">modeldir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">demfilename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize BDflopy class.</span>
 
@@ -150,7 +151,8 @@
 <span class="sd">        :param indir: Path to directory of raster inputs for BDSWEA.</span>
 <span class="sd">        :param modeldir: Path to directory of outputs from BDSWEA.</span>
 <span class="sd">        :param outdir: Path to directory where output files will be genearted.</span>
-<span class="sd">        :param demfilename: Name of DEM file in the input directory (e.g. &#39;dem.tif&#39;)</span>
+<span class="sd">        :param demfilename: Name of DEM file in the input directory (e.g. &#39;dem.tif&#39;).</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modflowexe</span> <span class="o">=</span> <span class="n">modflowexe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">indir</span> <span class="o">=</span> <span class="n">indir</span>
@@ -161,7 +163,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setVariables</span><span class="p">(</span><span class="n">demfilename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPaths</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loadBdsweaData</span><span class="p">()</span>
-
+</div>
 <div class="viewcode-block" id="BDflopy.createDatasets"><a class="viewcode-back" href="../code.html#bdflopy.BDflopy.createDatasets">[docs]</a>    <span class="k">def</span> <span class="nf">createDatasets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filelist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create GDAL raster datasets.</span>
