@@ -3,3 +3,4 @@
 /sphinx/_build
 out/
 modflow/
+*.aux.xml
