@@ -13,15 +13,15 @@ location could potentially store. :code:`BDflopy` (Beaver Dam flopy), which uses
 estimate changes to groundwater storage resulting from beaver dam construction.
 
 Products
-========
+--------
 
 Publications
-------------
+~~~~~~~~~~~~
 
 Hafen, K. 2017. To what extent might beaver dam building buffer water storage losses associated with a declining snowpack? Master's Thesis. Utah State University, Logan, Utah. https://digitalcommons.usu.edu/etd/6503/.
 
 Presentations
--------------
+~~~~~~~~~~~~~
 
 Hafen, K., and J. M. Wheaton. 2017. Could beaver dams buffer a declining snowpack? Society of Wetland Scientists Pacific Northwest Chapter Meeting. Kelso, Washington. September 26.
 `Slides <https://docs.google.com/presentation/d/141XedAGbuG7foso-tV6LOS5rT3RdpNE_akrNhYz3Sj4/edit?usp=sharing>`_.
