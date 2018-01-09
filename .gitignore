@@ -4,3 +4,4 @@
 out/
 modflow/
 *.aux.xml
+outputs/

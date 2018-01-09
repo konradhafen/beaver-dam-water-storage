@@ -34,7 +34,7 @@ Operating systems
 -----------------
 
 The BDWS python code is cross platform (Windows, Mac, Linux), and code for the :code:`BDLoG` and :code:`BDSWEA` packages has been
-tested on both Windows (10) and Linux operating (16.04) systems.
+tested on both Windows (10) and Ubuntu (16.04) operating systems.
 However, for use of the :code:`BDflopy` class Microsoft Windows is recommended as the USGS only provides compiled MODFLOW-2005
 executables for this platform. USGS does provide source code that can be compiled on Unix platforms.
 Code for the :code:`BDflopy` class is cross platform but has only been tested on Windows.

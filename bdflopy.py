@@ -13,7 +13,8 @@ class BDflopy:
         :param indir: Path to directory of raster inputs for BDSWEA.
         :param modeldir: Path to directory of outputs from BDSWEA.
         :param outdir: Path to directory where output files will be genearted.
-        :param demfilename: Name of DEM file in the input directory (e.g. 'dem.tif')
+        :param demfilename: Name of DEM file in the input directory (e.g. 'dem.tif').
+
         """
         self.modflowexe = modflowexe
         self.indir = indir

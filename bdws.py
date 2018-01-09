@@ -14,6 +14,7 @@ class BDLoG:
         :param outDir: Path to directory where output files will be generated.
         :param bratCap: Proportion (0 - 1) of capacity for which to generate beaver dams.
         :param stat: (Optional) Estimated pond volumes and prediction intervals as a function of reach slope and dam height (not yet implemented).
+
         """
         self.bratPath = brat
         self.demPath = dem
@@ -431,6 +432,7 @@ class BDSWEA:
         :param id: Path to raster of pond ID, calculated with BDLoG class.
         :param outDir: Path where output files will be generated.
         :param modPoints: Path to shapefile of modeled dam locations from BDLoG.
+
         """
         self.outDir = outDir
         if not os.path.isdir(self.outDir):
