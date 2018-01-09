@@ -1,3 +1,5 @@
 /.idea
 *pyc
 /sphinx/_build
+out/
+modflow/
