@@ -65,6 +65,11 @@
           
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#products">Products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#publications">Publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#presentations">Presentations</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
@@ -134,9 +139,85 @@
 <h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="general-usage">
 <h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the general usage section: Mention some python IDEs and how to start a project in pycharm.</p>
 </div>
 <div class="section" id="tutorial-1-single-huc12">
 <h2>Tutorial 1: Single HUC12<a class="headerlink" href="#tutorial-1-single-huc12" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial assumes the user has downloaded the entire repository and maintained the respository file structure.
+Code is available in the file <cite>run.py</cite>.</p>
+<p>Import <code class="code docutils literal"><span class="pre">BDLoG</span></code>, <code class="code docutils literal"><span class="pre">BDSWEA</span></code>, and <code class="code docutils literal"><span class="pre">BDflopy</span></code> classes.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">bdws</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">bdflopy</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Set paths to input files. If you have setup a pycharm project in the same directory as the repository you can use the
+file paths exactly as shown below.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">basedir</span> <span class="o">=</span> <span class="s">&quot;tutorials/tutorial1&quot;</span> <span class="c">#folder containing inputs, and where output directories will be created</span>
+<span class="n">bratPath</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/inputs/brat.shp&quot;</span> <span class="c">#shapefile of beaver dam capacities from BRAT</span>
+<span class="n">demPath</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/inputs/dem.tif&quot;</span> <span class="c">#DEM of study area (ideally clipped to valley-bottom)</span>
+<span class="n">facPath</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/inputs/fac.tif&quot;</span> <span class="c">#Thresholded flow accumulation raster representing stream network</span>
+<span class="n">outDir</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/out&quot;</span>
+</pre></div>
+</div>
+<p>Set proportion of BRAT capacity at which to place dams. For the given study area, a value of 1.0 will sum the total
+number of dams estimated by BRAT and place them on the stream network. A value of 0.5 will place half of the total
+number of dams estimated by BRAT on the stream network.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bratCap</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c">#proportion (0-1) of maximum estimted dam capacity (from BRAT) for scenario</span>
+</pre></div>
+</div>
+<p>Now we&#8217;ll initialize <code class="code docutils literal"><span class="pre">BDLoG</span></code> and call the run function, which will automatically run the dam placement algorithm and
+create the necessary outputs to run <code class="code docutils literal"><span class="pre">BDSWEA</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">BDLoG</span><span class="p">(</span><span class="n">bratPath</span><span class="p">,</span> <span class="n">demPath</span><span class="p">,</span> <span class="n">facPath</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">bratCap</span><span class="p">)</span> <span class="c">#initialize BDLoG, sets varibles and loads inputs</span>
+<span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c">#run BDLoG algorithms</span>
+<span class="n">model</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c">#close any files left open by BDLoG</span>
+</pre></div>
+</div>
+<p>Set paths to files needed by <code class="code docutils literal"><span class="pre">BDSWEA</span></code> that we have not already specified. Namely, a flow direction raster, the shapefile
+of dam locations and dam attributes created by <code class="code docutils literal"><span class="pre">BDLoG</span></code>, and a raster marking the location of dams created by
+<code class="code docutils literal"><span class="pre">BDLoG</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fdirPath</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/inputs/fdir.tif&quot;</span> <span class="c">#flow direction raster</span>
+<span class="n">idPath</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/out/damID.tif&quot;</span> <span class="c">#ouput from BDLoG</span>
+<span class="n">modPoints</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/out/ModeledDamPoints.shp&quot;</span> <span class="c">#output from BDLoG</span>
+</pre></div>
+</div>
+<p>We&#8217;re now set to intialize the <code class="code docutils literal"><span class="pre">BDSWEA</span></code> class and run the algorithm to calculate beaver pond surface water storage.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">BDSWEA</span><span class="p">(</span><span class="n">demPath</span><span class="p">,</span> <span class="n">fdirPath</span><span class="p">,</span> <span class="n">facPath</span><span class="p">,</span> <span class="n">idPath</span><span class="p">,</span> <span class="n">outDir</span><span class="p">,</span> <span class="n">modPoints</span><span class="p">)</span> <span class="c">#initialize BDSWEA object, sets variables and loads inputs</span>
+<span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c">#run BDSWEA algorithm</span>
+</pre></div>
+</div>
+<p>Before we close the <code class="code docutils literal"><span class="pre">BDSWEA</span></code> object let&#8217;s also print the raster files we will need to automatically parameterize MODFLOW
+for calculation of changes to groundwater storage. Then close the <code class="code docutils literal"><span class="pre">BDSWEA</span></code> object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span><span class="o">.</span><span class="n">writeModflowFiles</span><span class="p">()</span> <span class="c">#generate files needed to parameterize MODFLOW</span>
+<span class="n">model</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c">#close any files left open by BDLoG</span>
+</pre></div>
+</div>
+<p>Now set the file paths and variables necessary to parameterize and run MODFLOW-2005 using <code class="code docutils literal"><span class="pre">BDflopy</span></code>. <strong>Note:</strong> the
+<code class="code docutils literal"><span class="pre">modflowexe</span></code> parameter may need to be changed if your MODFLOW-2005 executable file (.exe) is in a different
+location thatn this path indicates. Also, the <code class="code docutils literal"><span class="pre">hkfn</span></code>, <code class="code docutils literal"><span class="pre">vkfn</span></code>, and <code class="code docutils literal"><span class="pre">fracfn</span></code> can be represented by a
+raster, numpy array, or single value.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">modflowexe</span> <span class="o">=</span> <span class="s">&quot;C:/WRDAPP/MF2005.1_11/bin/mf2005&quot;</span> <span class="c">#path to MODFLOW-2005 executable</span>
+<span class="n">indir</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/inputs&quot;</span> <span class="c">#location of input raste files</span>
+<span class="n">modeldir</span> <span class="o">=</span> <span class="s">&quot;tutorials/tutorial1/out&quot;</span> <span class="c">#BDSWEA output directory</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="n">basedir</span> <span class="o">+</span> <span class="s">&quot;/modflow&quot;</span> <span class="c">#directory to output MODFLOW results</span>
+<span class="n">demfilename</span> <span class="o">=</span> <span class="s">&quot;dem.tif&quot;</span> <span class="c">#name of input DEM</span>
+<span class="n">hkfn</span> <span class="o">=</span> <span class="s">&quot;/inputs/ksat.tif&quot;</span> <span class="c">#horizontal ksat in micrometers per second</span>
+<span class="n">vkfn</span> <span class="o">=</span> <span class="s">&quot;/inputs/kv.tif&quot;</span> <span class="c">#vertical ksat in micrometers per second</span>
+<span class="n">fracfn</span> <span class="o">=</span> <span class="s">&quot;/inputs/fc.tif&quot;</span> <span class="c">#field capacity as percentage</span>
+<span class="n">kconv</span> <span class="o">=</span> <span class="mf">0.000001</span> <span class="c">#conversion of hkfn and vkfn to meters per second</span>
+<span class="n">fconv</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c">#conversion of fracfn to a proportion</span>
+</pre></div>
+</div>
+<p>With this information we are ready to parameterize and run MODFLOW-2005 with <code class="code docutils literal"><span class="pre">BDflopy</span></code>. This is done by
+initializing and running a <code class="code docutils literal"><span class="pre">BDflopy</span></code> object. <strong>Note:</strong> writing MODFLOW inputs will take a fair amount of time,
+depending on the size of the area you are modeling and your machine&#8217;s hardware. If you are running this from the
+pycharm IDE you will see printed messages indicating when inputs for a MODFLOW run have been completed. You will also
+likely see output from MODFLOW itself after all MODFLOW inputs have been written and the MODFLOW runs.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">gwmodel</span> <span class="o">=</span> <span class="n">BDflopy</span><span class="p">(</span><span class="n">modflowexe</span><span class="p">,</span> <span class="n">indir</span><span class="p">,</span> <span class="n">modeldir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">demfilename</span><span class="p">)</span> <span class="c">#initialize BDflopy, sets variables and loads inputs</span>
+<span class="n">gwmodel</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">hkfn</span><span class="p">,</span> <span class="n">vkfn</span><span class="p">,</span> <span class="n">kconv</span><span class="p">,</span> <span class="n">fracfn</span><span class="p">,</span> <span class="n">fconv</span><span class="p">)</span> <span class="c">#run BDflopy, this will write inputs for MODFLOW and then run MODFLOW</span>
+<span class="n">gwmodel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c">#close any open files</span>
+</pre></div>
+</div>
+<p>Congratulations! You have successfully estimated the amount of surface water and groundwater beaver dams could store!</p>
 </div>
 <div class="section" id="tutorial-2-multiple-huc12s">
 <h2>Tutorial 2: Multiple HUC12s<a class="headerlink" href="#tutorial-2-multiple-huc12s" title="Permalink to this headline">¶</a></h2>

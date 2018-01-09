@@ -5,12 +5,21 @@ BDWS is hosted on github and publically available at https://github.com/konradha
 The entire repository can be cloned to your machine directly from github, downloaded as a compressed folder,
 or individual files can be downloaded.
 
-- :code:`/docs` contains the pages for this documentation website
-- :code:`/sphinx` contains the source code for building documentation website pages with the :code:`sphinx` module
-- :code:`/tutorials` contains data for use in the BDWS tutorials
-- :code:`bdws.py` is source code for the :code:`BDLoG` and :code:`BDSWEA` classes
-- :code:`bdflopy.py` is source code for the :code:`BDflopy` class
-- :code:`run.py` is an example script for usage of BDWS
+docs/
+    contains the pages for this documentation website
+sphinx/
+    contains the source code for building documentation website pages with the :code:`sphinx` module
+tutorials/
+    contains data for use in the BDWS tutorials
+bdws.py
+    source code for the :code:`BDLoG` and :code:`BDSWEA` classes
+bdflopy.py
+    source code for the :code:`BDflopy` class
+run.py
+    example script for usage of BDWS
+
+:code:`BDflopy` code is in a separate file because it requires use of MODFLOW-2005 and the :code:`flopy` module.
+Some users may wish to use :code:`BDLoG` and/or :code:`BDSWEA` without :code:`BDflopy`.
 
 To clone the github repository, enter the following from a terminal.
 ::

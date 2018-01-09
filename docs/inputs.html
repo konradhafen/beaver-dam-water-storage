@@ -65,6 +65,11 @@
           
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#products">Products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#publications">Publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#presentations">Presentations</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
@@ -139,8 +144,8 @@
 <li>All geographic layers must have a projected coordinate system with linear units represented in meters (to be safe use a NAD83 UTM projection).</li>
 <li>All input rasters must be concurrent (same extent and cell resolution) with the input DEM. Problems will arise if input rasters differ in projection, cell resolution, the number of columns, or the number of rows.</li>
 <li>Features of input line shapefiles (from BRAT) must be single-part. <code class="code docutils literal"><span class="pre">BDLoG</span></code> will not place dam locations on multipart features.</li>
-<li>When creating dam capacity estimates follow <a class="reference external" href="http://brat.joewheaton.org/home">BRAT</a> directions exactly. Use of <a class="reference external" href="http://brat.joewheaton.org/home/documentation/manual-implementation/the-beaver-restoration-assessment-tool-brat---v-2-0">pyBRAT</a> is recommended (ArcGIS is required for pyBRAT)</li>
-<li>Computation time will be decreased if all inputs are clipped to the valley-bottom extent. The <a class="reference external" href="http://etal.joewheaton.org/nhd-network-builder-and-vbet">V-BET tool</a> can be used to generate valley-bottom polygons.</li>
+<li>When creating dam capacity estimates, follow <a class="reference external" href="http://brat.joewheaton.org/home">BRAT</a> directions exactly. Use of <a class="reference external" href="http://brat.joewheaton.org/home/documentation/manual-implementation/the-beaver-restoration-assessment-tool-brat---v-2-0">pyBRAT</a> is recommended (ArcGIS is required for pyBRAT)</li>
+<li>Computation time will be decreased if all inputs are clipped to the valley-bottom extent. The <a class="reference external" href="http://etal.joewheaton.org/nhd-network-builder-and-vbet">V-BET tool</a> can be used to generate valley-bottom polygons. This is highly recommended if MODFLOW outputs are desired, as the MODFLOW workflow implemented by <code class="code docutils literal"><span class="pre">BDflopy</span></code> has only been tested in valley-bottoms.</li>
 </ol>
 </div>
 </div>

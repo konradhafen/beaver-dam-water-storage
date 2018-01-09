@@ -65,6 +65,11 @@
           
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#products">Products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#publications">Publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#presentations">Presentations</a></li>
+</ul>
+</li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
@@ -135,14 +140,22 @@
 <p>BDWS is hosted on github and publically available at <a class="reference external" href="https://github.com/konradhafen/beaver-dam-water-storage">https://github.com/konradhafen/beaver-dam-water-storage</a>.
 The entire repository can be cloned to your machine directly from github, downloaded as a compressed folder,
 or individual files can be downloaded.</p>
-<ul class="simple">
-<li><code class="code docutils literal"><span class="pre">/docs</span></code> contains the pages for this documentation website</li>
-<li><code class="code docutils literal"><span class="pre">/sphinx</span></code> contains the source code for building documentation website pages with the <code class="code docutils literal"><span class="pre">sphinx</span></code> module</li>
-<li><code class="code docutils literal"><span class="pre">/tutorials</span></code> contains data for use in the BDWS tutorials</li>
-<li><code class="code docutils literal"><span class="pre">bdws.py</span></code> is source code for the <code class="code docutils literal"><span class="pre">BDLoG</span></code> and <code class="code docutils literal"><span class="pre">BDSWEA</span></code> classes</li>
-<li><code class="code docutils literal"><span class="pre">bdflopy.py</span></code> is source code for the <code class="code docutils literal"><span class="pre">BDflopy</span></code> class</li>
-<li><code class="code docutils literal"><span class="pre">run.py</span></code> is an example script for usage of BDWS</li>
-</ul>
+<dl class="docutils">
+<dt>docs/</dt>
+<dd>contains the pages for this documentation website</dd>
+<dt>sphinx/</dt>
+<dd>contains the source code for building documentation website pages with the <code class="code docutils literal"><span class="pre">sphinx</span></code> module</dd>
+<dt>tutorials/</dt>
+<dd>contains data for use in the BDWS tutorials</dd>
+<dt>bdws.py</dt>
+<dd>source code for the <code class="code docutils literal"><span class="pre">BDLoG</span></code> and <code class="code docutils literal"><span class="pre">BDSWEA</span></code> classes</dd>
+<dt>bdflopy.py</dt>
+<dd>source code for the <code class="code docutils literal"><span class="pre">BDflopy</span></code> class</dd>
+<dt>run.py</dt>
+<dd>example script for usage of BDWS</dd>
+</dl>
+<p><code class="code docutils literal"><span class="pre">BDflopy</span></code> code is in a separate file because it requires use of MODFLOW-2005 and the <code class="code docutils literal"><span class="pre">flopy</span></code> module.
+Some users may wish to use <code class="code docutils literal"><span class="pre">BDLoG</span></code> and/or <code class="code docutils literal"><span class="pre">BDSWEA</span></code> without <code class="code docutils literal"><span class="pre">BDflopy</span></code>.</p>
 <p>To clone the github repository, enter the following from a terminal.</p>
 <div class="highlight-python"><div class="highlight"><pre>$ cd /path/to/project
 $ git clone https://github.com/konradhafen/beaver-dam-water-storage

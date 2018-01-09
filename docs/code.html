@@ -64,6 +64,11 @@
           
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#products">Products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#publications">Publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#presentations">Presentations</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
@@ -707,15 +712,20 @@
 <em class="property">class </em><code class="descclassname">bdflopy.</code><code class="descname">BDflopy</code><span class="sig-paren">(</span><em>modflowexe</em>, <em>indir</em>, <em>modeldir</em>, <em>outdir</em>, <em>demfilename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="bdflopy.BDflopy.calculateHeadDifference">
-<code class="descname">calculateHeadDifference</code><span class="sig-paren">(</span><em>frac=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.calculateHeadDifference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.calculateHeadDifference" title="Permalink to this definition">¶</a></dt>
+<code class="descname">calculateHeadDifference</code><span class="sig-paren">(</span><em>frac=1.0</em>, <em>fconv=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.calculateHeadDifference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.calculateHeadDifference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the head difference between MODFLOW runs.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frac</strong> &#8211; Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>frac</strong> &#8211; Fraction of the soil that can hold water (e.g. field capacity, porosity). For calculating volumetric groundwater changes. Represented as numpy array concurrent with the input DEM. Default array is a single value of 1.0.</li>
+<li><strong>fconv</strong> &#8211; Factor to convert frac to a proportion. Default = 1.0.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -841,7 +851,7 @@
 
 <dl class="method">
 <dt id="bdflopy.BDflopy.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>hksat</em>, <em>vksat</em>, <em>kconv=1.0</em>, <em>frac=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><em>hksat</em>, <em>vksat</em>, <em>kconv=1.0</em>, <em>frac=1.0</em>, <em>fconv=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bdflopy.html#BDflopy.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdflopy.BDflopy.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run MODFLOW to calculate water surface elevation changes from beaver dam construction.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -852,6 +862,7 @@
 <li><strong>vksat</strong> &#8211; Vertical saturated hydraulic conductivity value(s). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM.</li>
 <li><strong>kconv</strong> &#8211; Factor to convert khsat and kvsat to meters per second. Default = 1.0.</li>
 <li><strong>frac</strong> &#8211; Fraction of the soil (0-1) that can hold water (e.g. field capacity, porosity). Single value, numpy array, or name of raster from input directory. Numpy arrays and rasters must be concurrent with input DEM. Default = 1.0.</li>
+<li><strong>fconv</strong> &#8211; Factor to convert frac to a proportion. Default = 1.0.</li>
 </ul>
 </td>
 </tr>
