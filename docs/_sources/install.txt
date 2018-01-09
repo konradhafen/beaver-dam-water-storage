@@ -3,7 +3,7 @@ Installation
 
 BDWS is hosted on github and publically available at https://github.com/konradhafen/beaver-dam-water-storage.
 The entire repository can be cloned to your machine directly from github, downloaded as a compressed folder,
-or individual files can be downloaded.
+or individual files can be downloaded. Repository directories and files are described below.
 
 docs/
     contains the pages for this documentation website

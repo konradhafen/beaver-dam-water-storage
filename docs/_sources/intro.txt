@@ -26,7 +26,7 @@ Presentations
 Hafen, K., and J. M. Wheaton. 2017. Could beaver dams buffer a declining snowpack? Society of Wetland Scientists Pacific Northwest Chapter Meeting. Kelso, Washington. September 26.
 `Slides <https://docs.google.com/presentation/d/141XedAGbuG7foso-tV6LOS5rT3RdpNE_akrNhYz3Sj4/edit?usp=sharing>`_.
 
-Wheaton, J. M., K. C. Hafen, W. W. Macfarlane, and N. Bouwes. 2017. Could beaver compete with a declining snowpack? American Water Resources Association Meeting. Snowbird, Utah. May. doi: 10.13140/RG.2.2.32406.86089.
+Wheaton, J. M., K. Hafen, W. W. Macfarlane, and N. Bouwes. 2017. Could beaver compete with a declining snowpack? American Water Resources Association Meeting. Snowbird, Utah. May. doi: 10.13140/RG.2.2.32406.86089.
 `Slides <https://www.researchgate.net/publication/318351273_Could_beaver_compete_with_a_declining_snowpack>`_.
 
 Hafen, K. 2017. To what extent might beaver dam building buffer water storage losses associated with a declining snowpack? Thesis Defense. Logan, Utah. April 21.
