@@ -5,7 +5,7 @@ Input files
 -----------
 
 Before using the BDWS classes, some input data are required. Below is a brief description of these input files.
-For more information visit the `preparing input data` page of the documentation. **Note:** it is recommended that all
+For more information visit the `preparing input data <inputs.html>`_ page of the documentation. **Note:** it is recommended that all
 inputs be clipped to the valley-bottom extent. This extent can be determined with the
 `V-BET tool <http://etal.joewheaton.org/nhd-network-builder-and-vbet>`_.
 
@@ -13,7 +13,7 @@ brat.shp
     Shapefile created by the `BRAT model <http://brat.joewheaton.org>`_. Must contain single-part features. Multi-part features will not be processed by :code:`BDLoG`.
 
 dem.tif
-    Digital Elevation Model (DEM) for area of interest.
+    Digital Elevation Model (DEM) for area of interest. Spatial resoultion of 10 meters or less is recommended.
 
 fac.tif
     Rasterized stream network raster. Generally created by applying a threshold to a flow accumulation raster. It is recommended to represent stream network cells with a value of 1 and all other cells with a value less than 1.
@@ -28,7 +28,7 @@ General usage
 Currently, it is recommended to use BDWS to create python scripts to model beaver dam water storage.
 BDWS has been developed and tested using the `PyCharm IDE <https://www.jetbrains.com/pycharm/>`_.
 Below are brief examples describing how to use BDWS classes. For more detailed examples of BDWS
-implementation visit the `tutorials` page of the documentation.
+implementation visit the `tutorials <example.html>`_ page of the documentation.
 
 BDWS code is hosted at https://github.com/konradhafen/beaver-dam-water-storage in the `bdws.py` and `bdflopy.py` files.
 Classes can be imported as follows.

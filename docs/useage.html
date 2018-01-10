@@ -145,14 +145,14 @@
 <div class="section" id="input-files">
 <h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
 <p>Before using the BDWS classes, some input data are required. Below is a brief description of these input files.
-For more information visit the <cite>preparing input data</cite> page of the documentation. <strong>Note:</strong> it is recommended that all
+For more information visit the <a class="reference external" href="inputs.html">preparing input data</a> page of the documentation. <strong>Note:</strong> it is recommended that all
 inputs be clipped to the valley-bottom extent. This extent can be determined with the
 <a class="reference external" href="http://etal.joewheaton.org/nhd-network-builder-and-vbet">V-BET tool</a>.</p>
 <dl class="docutils">
 <dt>brat.shp</dt>
 <dd>Shapefile created by the <a class="reference external" href="http://brat.joewheaton.org">BRAT model</a>. Must contain single-part features. Multi-part features will not be processed by <code class="code docutils literal"><span class="pre">BDLoG</span></code>.</dd>
 <dt>dem.tif</dt>
-<dd>Digital Elevation Model (DEM) for area of interest.</dd>
+<dd>Digital Elevation Model (DEM) for area of interest. Spatial resoultion of 10 meters or less is recommended.</dd>
 <dt>fac.tif</dt>
 <dd>Rasterized stream network raster. Generally created by applying a threshold to a flow accumulation raster. It is recommended to represent stream network cells with a value of 1 and all other cells with a value less than 1.</dd>
 <dt>fdir.tif</dt>
@@ -164,7 +164,7 @@ inputs be clipped to the valley-bottom extent. This extent can be determined wit
 <p>Currently, it is recommended to use BDWS to create python scripts to model beaver dam water storage.
 BDWS has been developed and tested using the <a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm IDE</a>.
 Below are brief examples describing how to use BDWS classes. For more detailed examples of BDWS
-implementation visit the <cite>tutorials</cite> page of the documentation.</p>
+implementation visit the <a class="reference external" href="example.html">tutorials</a> page of the documentation.</p>
 <p>BDWS code is hosted at <a class="reference external" href="https://github.com/konradhafen/beaver-dam-water-storage">https://github.com/konradhafen/beaver-dam-water-storage</a> in the <cite>bdws.py</cite> and <cite>bdflopy.py</cite> files.
 Classes can be imported as follows.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">bdws</span> <span class="kn">import</span><span class="o">*</span>
