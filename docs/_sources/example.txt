@@ -19,7 +19,7 @@ Import :code:`BDLoG`, :code:`BDSWEA`, and :code:`BDflopy` classes.
     from bdws import *
     from bdflopy import *
 
-Set paths to input files. If you have setup a pycharm project in the same directory as the repository you can use the
+Set paths to input files. If you have created a PyCharm project in the same directory as the repository you can use the
 file paths exactly as shown below.
 
 .. code-block:: python
@@ -38,7 +38,7 @@ number of dams estimated by BRAT on the stream network.
 
     bratCap = 1.0 #proportion (0-1) of maximum estimted dam capacity (from BRAT) for scenario
 
-Now we'll initialize :code:`BDLoG` and call the run function, which will automatically run the dam placement algorithm and
+Now we'll initialize :code:`BDLoG` and call the :code:`run` function, which will automatically run the dam placement algorithm and
 create the necessary outputs to run :code:`BDSWEA`.
 
 .. code-block:: python
@@ -93,8 +93,8 @@ raster, numpy array, or single value.
 With this information we are ready to parameterize and run MODFLOW-2005 with :code:`BDflopy`. This is done by
 initializing and running a :code:`BDflopy` object. **Note:** writing MODFLOW inputs will take a fair amount of time,
 depending on the size of the area you are modeling and your machine's hardware. If you are running this from the
-pycharm IDE you will see printed messages indicating when inputs for a MODFLOW run have been completed. You will also
-likely see output from MODFLOW itself after all MODFLOW inputs have been written and the MODFLOW runs.
+PyCharm IDE you will see printed messages indicating when inputs for a MODFLOW run have been completed. You will also
+likely see output from MODFLOW itself after all MODFLOW inputs have been written and the MODFLOW executable runs.
 
 .. code-block:: python
 
@@ -111,7 +111,7 @@ This tutorial gives an example of how to write a script that uses BDWS to proces
 We process two HUC12 watersheds from northern Utah, Left Hand Fork and Rock Creek.
 This tutorial assumes the user has downloaded the entire repository and maintained the respository file structure.
 Code is available in the file `run.py`. Note: Tutorial 1 gives detailed directions for implementing each class in BDWS.
-Tutorial 2 gives and example of how to batch process watershed with BDWS; refer to Tutorial 1 for specific directions
+Tutorial 2 gives an example of how to batch process watershed with BDWS; refer to Tutorial 1 for specific directions
 to call BDWS classes.
 
 If you are using `run.py` begin by uncommenting code for Tutorial 2 and commenting code for Tutorial 1.
@@ -120,9 +120,11 @@ Use ctrl + / to comment all selected lines of code.
 Prior to batch processing with BDWS, data must be organized as in the `tutorial2` folder. Each directory under the root
 directory (e.g. `tutorial2`) must have an inputs directory, all these input directories must have same name. All input
 files must also have the same name (e.g. all input DEMs must be named `dem.tif`).
+If you have created a PyCharm project in the same directory as the repository you can use the
+file paths exactly as shown below.
 
 After the :code:`BDLoG`, :code:`BDSWEA`, and :code:`BDflopy` classes are imported, begin by setting directory names, file names,
-and variables that will remain constant through the batch processing. We also set a variable for the current working directory.
+and variables that will remain constant throughout the batch processing. We also set a variable for the current working directory.
 MODFLOW writes output files to the working directory, knowing the directory in which we start allows us to later change the directory
 where MODFLOW files are written. Note: the :code:`basedir` variable is the root directory that contains a folder for each
 watershed we will model.
