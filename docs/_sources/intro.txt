@@ -1,6 +1,9 @@
 What is BDWS?
 =============
 
+.. image:: images/bdws.gif
+    :width: 100%
+
 Beaver Dam Water Storage (BDWS) is a collection of Python classes for estimating surface water and groundwater stored
 by beaver dams. BDWS uses beaver dam capacity estimates from the Beaver Restoration Assesment Tool
 `(BRAT) <http://brat.joewheaton.org>`_ to place beaver dams along stream reaches, flow direction algebra to determine the area
