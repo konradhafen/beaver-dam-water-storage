@@ -26,7 +26,7 @@ To clone the github repository, enter the following from a terminal.
     $ cd /path/to/project
     $ git clone https://github.com/konradhafen/beaver-dam-water-storage
 
-This will create a new directory containin everyting in the repository at the location:
+This will create a new directory containing everything in the repository at the location:
 ::
     /path/to/project/beaver-dam-water-storage
 
@@ -34,7 +34,7 @@ Operating systems
 -----------------
 
 The BDWS python code is cross platform (Windows, Mac, Linux), and code for the :code:`BDLoG` and :code:`BDSWEA` packages has been
-tested on both Windows (10) and Ubuntu (16.04) operating systems.
+tested on Windows (10) and Ubuntu (16.04) operating systems.
 However, for use of the :code:`BDflopy` class Microsoft Windows is recommended as the USGS only provides compiled MODFLOW-2005
 executables for this platform. USGS does provide source code that can be compiled on Unix platforms.
 Code for the :code:`BDflopy` class is cross platform but has only been tested on Windows.
@@ -73,7 +73,7 @@ Full documentation for module dependencies can be found at the following sources
 - numpy https://docs.scipy.org/doc/
 - flopy https://modflowpy.github.io/flopydoc
 
-Only the :code: `BDflopy` class depends on the :code: `flopy` module
+Only the :code:`BDflopy` class depends on the :code:`flopy` module
 
 Installing MODFLOW-2005
 -----------------------
