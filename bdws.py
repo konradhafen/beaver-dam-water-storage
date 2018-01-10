@@ -481,9 +481,9 @@ class BDSWEA:
         self.fac = self.facDS.GetRasterBand(1).ReadAsArray()
         self.idDS = gdal.Open(id)
         self.id = self.idDS.GetRasterBand(1).ReadAsArray()
-        self.pointDS = ogr.Open(shp)
+        self.pointDS = ogr.Open(shp, 1)
         self.points = self.pointDS.GetLayer()
-        self.nPoints = self.points.GetFeatureCount
+        self.nPoints = self.points.GetFeatureCount()
         self.geot = self.demDS.GetGeoTransform()
         self.prj = self.demDS.GetProjection()
         self.MAX_COUNT = math.ceil(self.MAX_POND_AREA / abs(self.geot[1] * self.geot[5]) / 1)
@@ -684,9 +684,42 @@ class BDSWEA:
 
         :return: None
         """
+
+        print "running BDSWEA"
         self.heightAboveDams()
         self.calculateWaterDepth()
         self.saveOutputs()
+        print "calculating pond statistics"
+        self.summarizePondStatistics()
+
+    def summarizePondStatistics(self):
+        """
+        Caclulate area and volume of each pond for each dam height scenario and write results to the input shapefile.
+
+        :return: None
+        """
+
+        for i in range(0, self.nPoints):
+            feature = self.points.GetFeature(i)
+            fid = feature.GetFID()
+            lo = np.where(self.idOut == fid, self.depLo, 0.0) #identify cells inundated by dam of FID and get pond depth
+            lo[lo == -9999.0] = 0.0
+            lo[lo < 0.0] = 0.0 #any pond depths less than 0 get changed to 0.0
+            mid = np.where(self.idOut == fid, self.depMid, 0.0)
+            mid[mid == -9999.0] = 0.0
+            mid[mid < 0.0] = 0.0
+            hi = np.where(self.idOut == fid, self.depHi, 0.0)
+            hi[hi == -9999.0] = 0.0
+            hi[hi <=0.0] = 0.0
+            feature.SetField("vol_lo", math.fabs(np.nansum(lo)*self.geot[1]*self.geot[5])) #volume of pond is sum of depths multiplied by cell width and cell height
+            feature.SetField("vol_mid", math.fabs(np.nansum(mid) * self.geot[1] * self.geot[5]))
+            feature.SetField("vol_hi", math.fabs(np.nansum(hi) * self.geot[1] * self.geot[5]))
+            feature.SetField("area_lo", math.fabs(len(np.where(lo != 0.0)[0]) * self.geot[1] * self.geot[5]))
+            feature.SetField("area_mid", math.fabs(len(np.where(mid != 0.0)[0]) * self.geot[1] * self.geot[5]))
+            feature.SetField("area_hi", math.fabs(len(np.where(hi != 0.0)[0]) * self.geot[1] * self.geot[5]))
+            self.points.SetFeature(feature)
+            self.points.SyncToDisk()
+
 
     def writeSurfaceWSE(self):
         """
