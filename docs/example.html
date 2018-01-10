@@ -32,7 +32,7 @@
   
     <link rel="top" title="Beaver Dam Water Storage 0.0.1 documentation" href="index.html"/>
         <link rel="next" title="Preparing input data" href="inputs.html"/>
-        <link rel="prev" title="Installation" href="install.html"/> 
+        <link rel="prev" title="How to use BDWS" href="useage.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -64,10 +64,8 @@
           
           
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html#products">Products</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#publications">Publications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#presentations">Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#products">Products</a></li>
 </ul>
 </li>
 </ul>
@@ -81,10 +79,16 @@
 </ul>
 </li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="useage.html">How to use BDWS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="useage.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="useage.html#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="useage.html#output-files">Output files</a></li>
+</ul>
+</li>
+</ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">Output files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
 </ul>
@@ -138,65 +142,6 @@
             
   <div class="section" id="tutorials">
 <h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="general-usage">
-<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
-<p>At the end of the general usage section: Mention some python IDEs and how to start a project in pycharm.</p>
-</div>
-<div class="section" id="output-files">
-<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="bdlog-generates-the-following-files">
-<h3>BDLoG generates the following files:<a class="headerlink" href="#bdlog-generates-the-following-files" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><cite>ModeledDamPoints.shp</cite></dt>
-<dd><p class="first">A shapefile containing generated beaver dam locations and information about each dam. This file is updated with estimated area and volume of resulting ponds by <code class="code docutils literal"><span class="pre">BDSWEA</span></code>.</p>
-<p><strong>Attributes</strong></p>
-<ul class="last simple">
-<li><cite>damType</cite>: If the dam is primary or secondary. Primary dams are taller than secondary, this classification determines which distirbution is used to model dam heights</li>
-<li><cite>ht_lo</cite>: The 0.025 quantile of the values selected from the dam height distribution. Modeled as the low dam height scenario.</li>
-<li><cite>ht_mid</cite>: The 0.5 quantile of the values selected from the dam height distribution. Modeled as the median dam height scenario.</li>
-<li><cite>ht_hi</cite>: The 0.975 quantile of the values selected from the dam height distribution. Modeled as the high dam height scenario.</li>
-<li><cite>area_*</cite>: Area of the pond created by modeling the dam under a given height scenario.</li>
-<li><cite>vol_*</cite>: Volume of the pond created by modeling the dam under a given height scenario.</li>
-<li><cite>Other fields</cite>: For use in adjusting dam heights to fit within the prediction intervals of an empirical model. This is not yet implemented in the python code version.</li>
-</ul>
-</dd>
-<dt><cite>damID.tif</cite></dt>
-<dd>Rasterized locations of generated beaver dams. Each beaver dam location is represented by a single cell with a number corresponding to the FID in <cite>ModeledDamPoints.shp</cite>.</dd>
-</dl>
-</div>
-<div class="section" id="bdswea-generates-the-following-files">
-<h3>BDSWEA generates the following files:<a class="headerlink" href="#bdswea-generates-the-following-files" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><cite>depLo.tif, depMid.tif, depHi.tif</cite></dt>
-<dd>Depths of modeded beaver ponds for low, median, and high dam heights.</dd>
-<dt><cite>htAbove.tif</cite></dt>
-<dd>The height of cell above the dam it drains to. Used for determining pond dephts.</dd>
-<dt><cite>pondID.tif</cite></dt>
-<dd>FID of the dam a cell drains to. Used to calculate area and volume of modeled ponds.</dd>
-<dt><cite>WSESurf_lo.tif, WSESurf_mid.tif, WSESurf_hi.tif</cite></dt>
-<dd>The sum of the input DEM and each pond depth raster. Used to parameterize the top of the MODFLOW modeling domain.</dd>
-<dt><cite>head_start.tif, head_lo.tif, head_mid.tif, head_hi.tif</cite></dt>
-<dd>The intersection of the rasterized stream network and each WSESurf_*.tif file. This represents the water surface elevation of the stream and beaver dams. Used for MODFLOW parameterization.</dd>
-</dl>
-</div>
-<div class="section" id="bdflopy-generates-the-following-files">
-<h3>BDflopy generates the following files:<a class="headerlink" href="#bdflopy-generates-the-following-files" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><cite>start.*, lo.*, mid.*, hi.*</cite></dt>
-<dd>Input files written by <code class="code docutils literal"><span class="pre">flopy</span></code> as inputs to MODFLOW, or output files written by MODFLOW.</dd>
-<dt><cite>ibound_start.tif, ibound_lo.tif, ibound_mid.tif, ibound_hi.tif</cite></dt>
-<dd>Definitions of the model domain (active, inactive, and constant head boundaries) for each MODFLOW simulation.</dd>
-<dt><cite>shead_start.tif, shead_lo.tif, shead_mid.tif, shead_hi.tif</cite></dt>
-<dd>Starting hydraulic head values for each MODFLOW simulation.</dd>
-<dt><cite>ehead_start.tif, ehead_lo.tif, ehead_mid.tif, ehead_hi.tif</cite></dt>
-<dd>Modeled hydraulic head values (water table elevation) for each MODFLOW simulation.</dd>
-<dt><cite>hdch_lo.tif, hdch_mid.tif, hdch_hi.tif</cite></dt>
-<dd>Estimated change in groundwater elevations from construction of beaver dams with low, median and height heights. Obtained by subtracting <cite>ehead_start.tif</cite> from water table elevations modeled with beaver pond influence.</dd>
-<dt><cite>hdch_lo_frac.tif, hdch_mid_frac.tif, hdch_hi_frac.tif</cite></dt>
-<dd><cite>hdch_*.tif</cite> multiplied by the water holding capacity of the soil (e.g. field capacity or porosity).</dd>
-</dl>
-</div>
-</div>
 <div class="section" id="tutorial-1-single-huc12">
 <h2>Tutorial 1: Single HUC12<a class="headerlink" href="#tutorial-1-single-huc12" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial gives an example of writing a script to use BDWS to estimate water that could be stored by beaver dams in
@@ -374,7 +319,7 @@ If there is we change the current working directory to the subdirectory.</p>
         <a href="inputs.html" class="btn btn-neutral float-right" title="Preparing input data">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install.html" class="btn btn-neutral" title="Installation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="useage.html" class="btn btn-neutral" title="How to use BDWS"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

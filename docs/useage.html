@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to use BDWS &mdash; Beaver Dam Water Storage 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Beaver Dam Water Storage 0.0.1 documentation" href="index.html"/>
+        <link rel="next" title="Tutorials" href="example.html"/>
+        <link rel="prev" title="Installation" href="install.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Beaver Dam Water Storage</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is BDWS?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#products">Products</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#operating-systems">Operating systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-python">Installing python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-modules">Installing modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-modflow-2005">Installing MODFLOW-2005</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">How to use BDWS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">Output files</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-1-single-huc12">Tutorial 1: Single HUC12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#tutorial-2-multiple-huc12s">Tutorial 2: Multiple HUC12s</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Preparing input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#general-guidelines">General guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdlog-class">BDLoG Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdswea-class">BDSWEA Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#bdflopy-class">BDflopy Class</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Beaver Dam Water Storage</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>How to use BDWS</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/useage.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="how-to-use-bdws">
+<h1>How to use BDWS<a class="headerlink" href="#how-to-use-bdws" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="input-files">
+<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
+<p>Before using the BDWS classes, some input data are required. Below is a brief description of these input files.
+For more information visit the <cite>preparing input data</cite> page of the documentation. <strong>Note:</strong> it is recommended that all
+inputs be clipped to the valley-bottom extent. This extent can be determined with the
+<a class="reference external" href="http://etal.joewheaton.org/nhd-network-builder-and-vbet">V-BET tool</a>.</p>
+<dl class="docutils">
+<dt>brat.shp</dt>
+<dd>Shapefile created by the <a class="reference external" href="http://brat.joewheaton.org">BRAT model</a>. Must contain single-part features. Multi-part features will not be processed by <code class="code docutils literal"><span class="pre">BDLoG</span></code>.</dd>
+<dt>dem.tif</dt>
+<dd>Digital Elevation Model (DEM) for area of interest.</dd>
+<dt>fac.tif</dt>
+<dd>Rasterized stream network raster. Generally created by applying a threshold to a flow accumulation raster. It is recommended to represent stream network cells with a value of 1 and all other cells with a value less than 1.</dd>
+<dt>fdir.tif</dt>
+<dd>Flow direction raster (D8) derived from the input DEM. Both <a class="reference external" href="http://pro.arcgis.com/en/pro-app/tool-reference/spatial-analyst/flow-direction.htm">ESRI</a> and <a class="reference external" href="http://hydrology.usu.edu/taudem/taudem5/help/D8FlowDirections.html">TauDEM</a> D8 flow direction rasters are supported.</dd>
+</dl>
+</div>
+<div class="section" id="general-usage">
+<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
+<p>Currently, it is recommended to use BDWS to create python scripts to model beaver dam water storage.
+BDWS has been developed and tested using the <a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm IDE</a>.
+Below are brief examples describing how to use BDWS classes. For more detailed examples of BDWS
+implementation visit the <cite>tutorials</cite> page of the documentation.</p>
+<p>BDWS code is hosted at <a class="reference external" href="https://github.com/konradhafen/beaver-dam-water-storage">https://github.com/konradhafen/beaver-dam-water-storage</a> in the <cite>bdws.py</cite> and <cite>bdflopy.py</cite> files.
+Classes can be imported as follows.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">bdws</span> <span class="kn">import</span><span class="o">*</span>
+<span class="kn">from</span> <span class="nn">bdflopy</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal"><span class="pre">BDLoG</span></code> takes a vector stream network created by <a class="reference external" href="http://brat.joewheaton.org">BRAT</a> and generates
+locations of individual dams on a raterized stream network.</p>
+<p>Initialization of <code class="code docutils literal"><span class="pre">BDLoG</span></code> requires a shapefile created by <a class="reference external" href="http://brat.joewheaton.org">BRAT</a>,
+a DEM, a rasterized stream network, path to output directory, and a proportion of maximum
+dam capacity to model. The following code will initialize <code class="code docutils literal"><span class="pre">BDLoG</span></code>, generate dam locations
+and dam heights, and save output files.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">BDLoG</span><span class="p">(</span><span class="s">&#39;path/to/brat.shp&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/dem.tif&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/fac.tif&#39;</span><span class="p">,</span> <span class="s">&#39;out/dir&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">modle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal"><span class="pre">BDSWEA</span></code> uses dam locations and dam heights generated by <code class="code docutils literal"><span class="pre">BDLoG</span></code> to estimate the area and surface volume
+created by beaver dam construction.</p>
+<p><code class="code docutils literal"><span class="pre">BDSWEA</span></code> requires <cite>output files</cite> from <code class="code docutils literal"><span class="pre">BDLoG</span></code> for initialization. <code class="code docutils literal"><span class="pre">BDSWEA</span></code> initialization requires
+a DEM, a flow direction raster derived from the DEM, a rasterized stream network, the dam ID raster created by
+<code class="code docutils literal"><span class="pre">BDLoG</span></code>, an output directory, the dam location and attribute shapefile created by <code class="code docutils literal"><span class="pre">BDLoG</span></code>. The following
+code will estimate beaver pond inundation and write files necessary for parameterization of MODFLOW.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">BDSWEA</span><span class="p">(</span><span class="s">&#39;path/to/dem.tif&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/fdir.tif&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/fac.tif&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/id.tif&#39;</span><span class="p">,</span>
+                <span class="s">&#39;out/dir&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/pts.shp&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">writeModflowFiles</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal"><span class="pre">BDflopy</span></code> implements the existing <a class="reference external" href="https://modflowpy.github.io/flopydoc/">FloPy module</a> to automatically
+parameterize MODFLOW-2005 to estimate changes to goundwater storage resulting from beaver dam construction.</p>
+<p><code class="code docutils literal"><span class="pre">BDflopy</span></code> requires the path to a MODFLOW-2005 executable, path to directory of input rasters, path to directory
+of <code class="code docutils literal"><span class="pre">BDSWEA</span></code> outputs, path to directory to write outputs, and name of DEM file in inputs directory for initialization.
+The following code initialized <code class="code docutils literal"><span class="pre">BDflopy</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">BDflopy</span><span class="p">(</span><span class="s">&#39;path/to/modflow.exe&#39;</span><span class="p">,</span> <span class="s">&#39;input/dir&#39;</span><span class="p">,</span> <span class="s">&#39;bdswea/out/dir&#39;</span><span class="p">,</span> <span class="s">&#39;out/dir&#39;</span><span class="p">,</span> <span class="s">&#39;dem.tif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal"><span class="pre">BDflopy.run()</span></code> requires additional parameters. Horizontal and vertical hydraulic conductivity (as a raster,
+numpy array, or single value), a factor to convert conductivity values to meters per second, the fraction of soil
+available for water storage (e.g. field capacity or porosity), and a factor to convert the soil fraction to a proportion.
+This will write MODFLOW&#8217;s input files, run MODFLOW, and generate output raster files.
+<code class="code docutils literal"><span class="pre">BDflopy.run()</span></code> can be implemented as follows.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&#39;path/to/hk.tif&#39;</span><span class="p">,</span> <span class="s">&#39;path/to/vk.tif&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s">&#39;path/to/frac.tif&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="c">#or</span>
+<span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.000001</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then close the class object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bdlog-generates-the-following-files">
+<h3>BDLoG generates the following files:<a class="headerlink" href="#bdlog-generates-the-following-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>ModeledDamPoints.shp</dt>
+<dd><p class="first">A shapefile containing generated beaver dam locations and information about each dam. This file is updated with estimated area and volume of resulting ponds by <code class="code docutils literal"><span class="pre">BDSWEA</span></code>.</p>
+<p><strong>Attributes</strong></p>
+<ul class="last simple">
+<li><cite>damType</cite>: If the dam is primary or secondary. Primary dams are taller than secondary, this classification determines which distirbution is used to model dam heights</li>
+<li><cite>ht_lo</cite>: The 0.025 quantile of the values selected from the dam height distribution. Modeled as the low dam height scenario.</li>
+<li><cite>ht_mid</cite>: The 0.5 quantile of the values selected from the dam height distribution. Modeled as the median dam height scenario.</li>
+<li><cite>ht_hi</cite>: The 0.975 quantile of the values selected from the dam height distribution. Modeled as the high dam height scenario.</li>
+<li><cite>area_*</cite>: Area of the pond created by modeling the dam under a given height scenario.</li>
+<li><cite>vol_*</cite>: Volume of the pond created by modeling the dam under a given height scenario.</li>
+<li><cite>Other fields</cite>: For use in adjusting dam heights to fit within the prediction intervals of an empirical model. This is not yet implemented in the python code version.</li>
+</ul>
+</dd>
+<dt>damID.tif</dt>
+<dd>Rasterized locations of generated beaver dams. Each beaver dam location is represented by a single cell with a number corresponding to the FID in <cite>ModeledDamPoints.shp</cite>.</dd>
+</dl>
+</div>
+<div class="section" id="bdswea-generates-the-following-files">
+<h3>BDSWEA generates the following files:<a class="headerlink" href="#bdswea-generates-the-following-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>depLo.tif, depMid.tif, depHi.tif</dt>
+<dd>Depths of modeded beaver ponds for low, median, and high dam heights.</dd>
+<dt>htAbove.tif</dt>
+<dd>The height of cell above the dam it drains to. Used for determining pond dephts.</dd>
+<dt>pondID.tif</dt>
+<dd>FID of the dam a cell drains to. Used to calculate area and volume of modeled ponds.</dd>
+<dt>WSESurf_lo.tif, WSESurf_mid.tif, WSESurf_hi.tif</dt>
+<dd>The sum of the input DEM and each pond depth raster. Used to parameterize the top of the MODFLOW modeling domain.</dd>
+<dt>head_start.tif, head_lo.tif, head_mid.tif, head_hi.tif</dt>
+<dd>The intersection of the rasterized stream network and each WSESurf_*.tif file. This represents the water surface elevation of the stream and beaver dams. Used for MODFLOW parameterization.</dd>
+</dl>
+</div>
+<div class="section" id="bdflopy-generates-the-following-files">
+<h3>BDflopy generates the following files:<a class="headerlink" href="#bdflopy-generates-the-following-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>start.*, lo.*, mid.*, hi.*</dt>
+<dd>Input files written by <code class="code docutils literal"><span class="pre">flopy</span></code> as inputs to MODFLOW, or output files written by MODFLOW.</dd>
+<dt>ibound_start.tif, ibound_lo.tif, ibound_mid.tif, ibound_hi.tif</dt>
+<dd>Definitions of the model domain (active, inactive, and constant head boundaries) for each MODFLOW simulation.</dd>
+<dt>shead_start.tif, shead_lo.tif, shead_mid.tif, shead_hi.tif</dt>
+<dd>Starting hydraulic head values for each MODFLOW simulation.</dd>
+<dt>ehead_start.tif, ehead_lo.tif, ehead_mid.tif, ehead_hi.tif</dt>
+<dd>Modeled hydraulic head values (water table elevation) for each MODFLOW simulation.</dd>
+<dt>hdch_lo.tif, hdch_mid.tif, hdch_hi.tif</dt>
+<dd>Estimated change in groundwater elevations from construction of beaver dams with low, median and height heights. Obtained by subtracting <cite>ehead_start.tif</cite> from water table elevations modeled with beaver pond influence.</dd>
+<dt>hdch_lo_frac.tif, hdch_mid_frac.tif, hdch_hi_frac.tif</dt>
+<dd><cite>hdch_*.tif</cite> multiplied by the water holding capacity of the soil (e.g. field capacity or porosity).</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example.html" class="btn btn-neutral float-right" title="Tutorials">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral" title="Installation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Konrad Hafen.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

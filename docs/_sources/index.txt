@@ -23,6 +23,14 @@ Installation
 
    install
 
+Usage
+-----
+
+.. toctree::
+   :maxdepth: 2
+
+   useage
+
 Tutorials
 ---------
 
