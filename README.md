@@ -1,6 +1,6 @@
-#BDWS (Beaver Dam Water Storage)
+# BDWS (Beaver Dam Water Storage)
 
-####[>>> Full documentation <<<](https://konradhafen.github.io/beaver-dam-water-storage/)
+#### [>>> Full documentation <<<](https://konradhafen.github.io/beaver-dam-water-storage/)
 
 See the [full documentation](https://konradhafen.github.io/beaver-dam-water-storage/) 
 for detailed [installation instructions](https://konradhafen.github.io/beaver-dam-water-storage/install.html),
@@ -8,7 +8,7 @@ for detailed [installation instructions](https://konradhafen.github.io/beaver-da
 [tutorials](https://konradhafen.github.io/beaver-dam-water-storage/example.html),
 and [code description](https://konradhafen.github.io/beaver-dam-water-storage/code.html).
 
-####[>>> Full documentation <<<](https://konradhafen.github.io/beaver-dam-water-storage/)
+#### [>>> Full documentation <<<](https://konradhafen.github.io/beaver-dam-water-storage/)
 
 BDWS is composed of three python classes which allow for spatial estimation of water 
 storage created from the construction of beaver dams. The `BDLoG` class uses results
@@ -21,15 +21,15 @@ each resulting pond might store. The `BDflopy` class uses the existing
 [MODFLOW-2005](https://water.usgs.gov/ogw/modflow/mf2005.html) to estimate how these dams 
 may also affect groundwater storage.
 
-##How to use BDWS
+## How to use BDWS
 
-###Dependencies
+### Dependencies
 
 **Python version:** 2.7.x <br>
 **Python modules:** gdal, numpy, flopy <br>
 **Programs:** MODFLOW-2005 
 
-###Installation
+### Installation
 
 The entire repository can be cloned to your machine directly from github, downloaded as 
 a compressed folder, or individual files can be downloaded. 
@@ -60,7 +60,7 @@ This will create a new directory containing everything in the repository at the 
 
     /path/to/project/beaver-dam-water-storage
     
-###General usage
+### General usage
 
 Currently, it is recommended to use BDWS to create python scripts to model beaver dam 
 water storage.BDWS has been developed and tested using the 
